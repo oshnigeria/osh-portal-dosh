@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 24 24" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<g id="Untitled" vectornator:layerName="Untitled">
+<g opacity="1" vectornator:layerName="g">
+<path d="M11 1L13 1L13 1L13 6L13 6L11 6L11 6L11 1L11 1Z" fill="#fff" fill-rule="nonzero" opacity="0.14" stroke="none" vectornator:layerName="rect"/>
+<path d="M16.634 1.97372L18.366 2.97372L18.366 2.97372L15.866 7.30385L15.866 7.30385L14.134 6.30385L14.134 6.30385L16.634 1.97372L16.634 1.97372Z" fill="#fff" fill-rule="nonzero" opacity="0.29" stroke="none" vectornator:layerName="rect"/>
+<path d="M21.0263 5.63397L22.0263 7.36603L22.0263 7.36603L17.6962 9.86603L17.6962 9.86603L16.6962 8.13397L16.6962 8.13397L21.0263 5.63397L21.0263 5.63397Z" fill="#fff" fill-rule="nonzero" opacity="0.43" stroke="none" vectornator:layerName="rect"/>
+<path d="M23 11L23 13L23 13L18 13L18 13L18 11L18 11L23 11L23 11Z" fill="#fff" fill-rule="nonzero" opacity="0.57" stroke="none" vectornator:layerName="rect"/>
+<path d="M22.0263 16.634L21.0263 18.366L21.0263 18.366L16.6962 15.866L16.6962 15.866L17.6962 14.134L17.6962 14.134L22.0263 16.634L22.0263 16.634Z" fill="#fff" fill-rule="nonzero" opacity="0.71" stroke="none" vectornator:layerName="rect"/>
+<path d="M18.366 21.0263L16.634 22.0263L16.634 22.0263L14.134 17.6962L14.134 17.6962L15.866 16.6962L15.866 16.6962L18.366 21.0263L18.366 21.0263Z" fill="#fff" fill-rule="nonzero" opacity="0.86" stroke="none" vectornator:layerName="rect"/>
+<path d="M13 23L11 23L11 23L11 18L11 18L13 18L13 18L13 23L13 23Z" fill="#fff" fill-rule="nonzero" opacity="1" stroke="none" vectornator:layerName="rect"/>
+  <animateTransform attributeName="transform" type="rotate" calcMode="discrete" dur="0.75s" values="0 12 12;30 12 12;60 12 12;90 12 12;120 12 12;150 12 12;180 12 12;210 12 12;240 12 12;270 12 12;300 12 12;330 12 12;360 12 12" repeatCount="indefinite"/>
+</g>
+</g>
+</svg>
