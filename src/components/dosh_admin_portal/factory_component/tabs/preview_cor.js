@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useForm } from "react-hook-form";
-import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import React, { useState, useContext, useRef } from "react";
 import axios from "axios";
@@ -17,10 +16,6 @@ import PDFComp from "./comps/certificate";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
 
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 const PreviewCorComp = () => {
   const [value, setValue] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);

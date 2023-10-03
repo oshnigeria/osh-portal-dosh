@@ -10,9 +10,25 @@ import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
 import DocumentUploadTab from "./tabs/document";
 import VerifyPaymentTab from "./tabs/verify_payment";
-import InspectionReportComp from "./tabs/inspection_report";
-import CorDraftComp from "./tabs/cor_draft";
-import PreviewCorComp from "./tabs/preview_cor";
+// import InspectionReportComp from "./tabs/inspection_report";
+// import CorDraftComp from "./tabs/cor_draft";
+// import PreviewCorComp from "./tabs/preview_cor";
+import dynamic from "next/dynamic";
+
+const InspectionReportComp = dynamic(import("./tabs/inspection_report"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
+const PreviewCorComp = dynamic(import("./tabs/preview_cor"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
+const CorDraftComp = dynamic(import("./tabs/cor_draft"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 const FactoryPageComp = () => {
   const router = useRouter();
   const fetcher = (url) =>

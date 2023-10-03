@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useForm } from "react-hook-form";
-import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import React, { useState, useContext } from "react";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
@@ -15,10 +14,6 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { FactoryContext } from "@/src/context/factoryContext";
 
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 const InspectionReportComp = () => {
   const [value, setValue] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);

@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useForm } from "react-hook-form";
-import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import React, { useState, useContext } from "react";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
@@ -11,10 +10,7 @@ import EmployeeInfoComp from "./regsitration_components/employee_info_comp";
 import { main_url, cookies_id } from "@/src/details";
 import DeclarationPopup from "./comps/declaration_popup";
 import { FactoryContext } from "@/src/context/factoryContext";
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+
 const CorDraftComp = () => {
   const [value, setValue] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);
