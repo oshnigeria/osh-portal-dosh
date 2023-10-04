@@ -275,7 +275,7 @@ const ReplacementComp = () => {
                         )
                         ?.map((factory) => (
                           <div
-                            key={factory._id}
+                            key={factory.factory._id}
                             css={(theme) => ({
                               display: "grid",
                               gridTemplateColumns: "repeat(3, 1fr)",
@@ -286,7 +286,9 @@ const ReplacementComp = () => {
                               padding: "24px 40px",
                             })}
                             onClick={() =>
-                              router.push(`/factory/${factory._id}`)
+                              router.push(
+                                `/factory/${factory.factory._id}?type=replacement`
+                              )
                             }
                           >
                             <div
@@ -298,7 +300,7 @@ const ReplacementComp = () => {
                                 lineHeight: "22px",
                               })}
                             >
-                              {factory.occupier_name}
+                              {factory.factory.occupier_name}
                             </div>
                             <div
                               css={(theme) => ({

@@ -286,7 +286,7 @@ const RenewalComp = () => {
                               padding: "24px 40px",
                             })}
                             onClick={() =>
-                              router.push(`/factory/${factory._id}`)
+                              router.push(`/factory/${factory.factory._id}`)
                             }
                           >
                             <div
@@ -298,7 +298,7 @@ const RenewalComp = () => {
                                 lineHeight: "22px",
                               })}
                             >
-                              {factory.occupier_name}
+                              {factory.factory.occupier_name}
                             </div>
                             <div
                               css={(theme) => ({

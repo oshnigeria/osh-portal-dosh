@@ -97,7 +97,7 @@ const SignInComp = () => {
                 fontWeight: 700,
               })}
             >
-              Factory registration portal
+              Dosh registration portal
             </div>
           </div>
           <div
