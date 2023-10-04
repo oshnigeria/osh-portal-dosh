@@ -11,6 +11,8 @@ import FactoryDocComp from "@/src/components/factoryDetailsComp";
 const VerifyPaymentTab = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
+  const [loading, setLoading] = useState(false);
+
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -42,6 +44,38 @@ const VerifyPaymentTab = () => {
 
   console.log(single_factory_doc);
   console.log(single_factory);
+
+  const update_progress = (progress) => {
+    setLoading(true);
+
+    axios
+      .patch(
+        `${main_url}/dosh/factory/progress`,
+        {
+          id: router.query.id,
+          progress: progress,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get(cookies_id)}`,
+          },
+        }
+      )
+      .then(function (response) {
+        // success_message(response?.data.message);
+        factory.set_tab("Inspection report");
+        console.log(response.data);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        // error_message(error?.response?.data?.message);
+
+        setLoading(false);
+      });
+
+    // console.log("ade");
+  };
   return (
     <div
       css={{
@@ -90,7 +124,7 @@ const VerifyPaymentTab = () => {
               }}
             >
               {single_factory_doc.data.docs
-                .filter((word) => word.doc_type === "payment_evidence")
+                .filter((word) => word.doc_type === "payment_reciept")
                 .map((doc) => (
                   <div key={doc._id}>
                     <FactoryDocComp name={doc.name} type={doc.file_type} />
@@ -127,7 +161,7 @@ const VerifyPaymentTab = () => {
               type="submit"
               onClick={() => {
                 // factory_details.add_factory_details(formData);
-                factory.set_tab("Inspection report");
+                update_progress(95);
               }}
             >
               <div

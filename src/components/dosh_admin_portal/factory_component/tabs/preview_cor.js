@@ -360,10 +360,10 @@ const PreviewCorComp = () => {
                               marginLeft: 24,
                             }}
                           >
-                            {
+                            {/* {
                               single_factory?.data?.factory
                                 ?.treasure_reciept_number
-                            }
+                            } */}
                           </span>
                         </div>
                         <div
@@ -483,6 +483,14 @@ const PreviewCorComp = () => {
                         >
                           Purpose or work in respect of which premises have been
                           registered :
+                          <span
+                            css={{
+                              fontWeight: 700,
+                              marginLeft: 24,
+                            }}
+                          >
+                            {single_factory?.data?.factory?.type}
+                          </span>
                         </div>
                         <div
                           css={{

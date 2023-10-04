@@ -40,27 +40,27 @@ const NewRegistrationComp = () => {
       route: "pending",
       state: () => {
         setProgress({
-          min: 0,
-          max: 50,
+          min: 90,
+          max: 94,
         });
       },
     },
-    {
-      title: "Ongoing",
-      route: "ongoing",
-      state: () => {
-        setProgress({
-          min: 50,
-          max: 60,
-        });
-      },
-    },
+    // {
+    //   title: "Ongoing",
+    //   route: "ongoing",
+    //   state: () => {
+    //     setProgress({
+    //       min: 70,
+    //       max: 79,
+    //     });
+    //   },
+    // },
     {
       title: "Completed",
       route: "completed",
       state: () => {
         setProgress({
-          min: 60,
+          min: 95,
           max: 101,
         });
       },
