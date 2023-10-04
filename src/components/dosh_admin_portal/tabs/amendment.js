@@ -31,7 +31,14 @@ const AmmendmentComp = () => {
 
     isLoading,
   } = useSWR(`${main_url}/dosh/factory/ammendments`, fetcher);
-  console.log(factory);
+
+  const {
+    data: completed,
+
+    isLoading: factory_isLoading,
+  } = useSWR(`${main_url}/dosh/factory/ammendments/completed`, fetcher);
+  console.log(completed);
+
   const router = useRouter();
   console.log(factory);
   const tabs = [
@@ -45,16 +52,16 @@ const AmmendmentComp = () => {
         });
       },
     },
-    {
-      title: "Ongoing",
-      route: "ongoing",
-      state: () => {
-        setProgress({
-          min: 50,
-          max: 60,
-        });
-      },
-    },
+    // {
+    //   title: "Ongoing",
+    //   route: "ongoing",
+    //   state: () => {
+    //     setProgress({
+    //       min: 50,
+    //       max: 60,
+    //     });
+    //   },
+    // },
     {
       title: "Completed",
       route: "completed",
@@ -229,122 +236,251 @@ const AmmendmentComp = () => {
               </div>
             ) : (
               <div>
-                {factory?.data?.ammendments?.filter(
-                  (item) =>
-                    item.progress >= progress.min &&
-                    item.progress <= progress.max
-                ).length >= 1 ? (
+                {router.query.tab === "completed" ? (
                   <div>
-                    <div
-                      css={{
-                        marginTop: 32,
-                        padding: "24px 40px",
-                      }}
-                    >
-                      <div
-                        css={{
-                          display: "grid",
-                          gridTemplateColumns: "repeat(3, 1fr)",
-
-                          rowGap: 0,
-                          columnGap: 64,
-                        }}
-                      >
-                        {table.map((tab) => (
+                    {completed?.data?.ammendments?.filter(
+                      (item) =>
+                        item.progress >= progress.min &&
+                        item.progress <= progress.max
+                    ).length >= 1 ? (
+                      <div>
+                        <div
+                          css={{
+                            marginTop: 32,
+                            padding: "24px 40px",
+                          }}
+                        >
                           <div
-                            css={(theme) => ({
-                              color: theme.colors.Gray_500,
-                              fontSize: 18,
-                              lineHeight: "22px",
-                            })}
-                          >
-                            {tab.title}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      {factory?.data?.ammendments
-                        .filter(
-                          (item) =>
-                            item.progress >= progress.min &&
-                            item.progress <= progress.max
-                        )
-                        ?.map((factory) => (
-                          <div
-                            key={factory._id}
-                            css={(theme) => ({
+                            css={{
                               display: "grid",
                               gridTemplateColumns: "repeat(3, 1fr)",
-                              cursor: "pointer",
+
                               rowGap: 0,
                               columnGap: 64,
-                              borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                              padding: "24px 40px",
-                            })}
-                            onClick={() =>
-                              router.push(`/factory/${factory._id}`)
-                            }
+                            }}
                           >
-                            <div
-                              css={(theme) => ({
-                                textAlign: "left",
-                                color: theme.colors.Gray_700,
-                                fontSize: 18,
-                                textTransform: "capitalize",
-                                lineHeight: "22px",
-                              })}
-                            >
-                              {factory.occupier_name}
-                            </div>
-                            <div
-                              css={(theme) => ({
-                                textAlign: "left",
-                                color: theme.colors.Gray_700,
-                                textTransform: "capitalize",
-                                fontSize: 18,
-                                lineHeight: "22px",
-                              })}
-                            >
-                              {factory.state}
-                            </div>
-                            <div
-                              css={(theme) => ({
-                                textAlign: "left",
-                                color: theme.colors.Gray_700,
-                                fontSize: 18,
-                                lineHeight: "22px",
-                              })}
-                            >
-                              {formatDateToCustom(factory.createdAt)}
-                            </div>
+                            {table.map((tab) => (
+                              <div
+                                css={(theme) => ({
+                                  color: theme.colors.Gray_500,
+                                  fontSize: 18,
+                                  lineHeight: "22px",
+                                })}
+                              >
+                                {tab.title}
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                    </div>
+                        </div>
+
+                        <div>
+                          {completed?.data?.ammendments
+                            .filter(
+                              (item) =>
+                                item.progress >= progress.min &&
+                                item.progress <= progress.max
+                            )
+                            ?.map((factory) => (
+                              <div
+                                key={factory._id}
+                                css={(theme) => ({
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(3, 1fr)",
+                                  cursor: "pointer",
+                                  rowGap: 0,
+                                  columnGap: 64,
+                                  borderBottom: `1px solid ${theme.colors.Gray_200}`,
+                                  padding: "24px 40px",
+                                })}
+                                onClick={() =>
+                                  router.push(
+                                    `/factory/${factory.factory._id}?type=ammendment`
+                                  )
+                                }
+                              >
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    textTransform: "capitalize",
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.factory.occupier_name}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    textTransform: "capitalize",
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.state}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {formatDateToCustom(factory.createdAt)}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div
+                          css={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {" "}
+                          <div
+                            css={{
+                              margin: "50px 0px",
+                            }}
+                          >
+                            <img
+                              css={{
+                                width: 100,
+                                height: 100,
+                              }}
+                              src="/svg/dashboard/empty.svg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div>
-                    <div
-                      css={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {" "}
-                      <div
-                        css={{
-                          margin: "50px 0px",
-                        }}
-                      >
-                        <img
+                    {factory?.data?.ammendments?.filter(
+                      (item) =>
+                        item.progress >= progress.min &&
+                        item.progress <= progress.max
+                    ).length >= 1 ? (
+                      <div>
+                        <div
                           css={{
-                            width: 100,
-                            height: 100,
+                            marginTop: 32,
+                            padding: "24px 40px",
                           }}
-                          src="/svg/dashboard/empty.svg"
-                        />
+                        >
+                          <div
+                            css={{
+                              display: "grid",
+                              gridTemplateColumns: "repeat(3, 1fr)",
+
+                              rowGap: 0,
+                              columnGap: 64,
+                            }}
+                          >
+                            {table.map((tab) => (
+                              <div
+                                css={(theme) => ({
+                                  color: theme.colors.Gray_500,
+                                  fontSize: 18,
+                                  lineHeight: "22px",
+                                })}
+                              >
+                                {tab.title}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          {factory?.data?.ammendments
+                            .filter(
+                              (item) =>
+                                item.progress >= progress.min &&
+                                item.progress <= progress.max
+                            )
+                            ?.map((factory) => (
+                              <div
+                                key={factory._id}
+                                css={(theme) => ({
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(3, 1fr)",
+                                  cursor: "pointer",
+                                  rowGap: 0,
+                                  columnGap: 64,
+                                  borderBottom: `1px solid ${theme.colors.Gray_200}`,
+                                  padding: "24px 40px",
+                                })}
+                                onClick={() =>
+                                  router.push(`/factory/${factory.factory._id}`)
+                                }
+                              >
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    textTransform: "capitalize",
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.factory.occupier_name}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    textTransform: "capitalize",
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.state}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {formatDateToCustom(factory.createdAt)}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div>
+                        <div
+                          css={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {" "}
+                          <div
+                            css={{
+                              margin: "50px 0px",
+                            }}
+                          >
+                            <img
+                              css={{
+                                width: 100,
+                                height: 100,
+                              }}
+                              src="/svg/dashboard/empty.svg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

@@ -34,7 +34,14 @@ const ReplacementComp = () => {
     `${main_url}/dosh/factory/certificate/mutations?event=replacement`,
     fetcher
   );
+  const {
+    data: completed,
 
+    isLoading: factory_isLoading,
+  } = useSWR(
+    `${main_url}/dosh/factory/certificate/mutations/completed?event=replacement`,
+    fetcher
+  );
   const router = useRouter();
   console.log(factory);
   const tabs = [
@@ -48,16 +55,16 @@ const ReplacementComp = () => {
         });
       },
     },
-    {
-      title: "Ongoing",
-      route: "ongoing",
-      state: () => {
-        setProgress({
-          min: 50,
-          max: 60,
-        });
-      },
-    },
+    // {
+    //   title: "Ongoing",
+    //   route: "ongoing",
+    //   state: () => {
+    //     setProgress({
+    //       min: 50,
+    //       max: 60,
+    //     });
+    //   },
+    // },
     {
       title: "Completed",
       route: "completed",
@@ -232,7 +239,7 @@ const ReplacementComp = () => {
               </div>
             ) : (
               <div>
-                {factory?.data?.replacements.filter(
+                {factory?.data?.replacements?.filter(
                   (item) =>
                     item.progress >= progress.min &&
                     item.progress <= progress.max
@@ -266,8 +273,10 @@ const ReplacementComp = () => {
                         ))}
                       </div>
                     </div>
+
                     <div>
                       {factory?.data?.replacements
+
                         .filter(
                           (item) =>
                             item.progress >= progress.min &&
@@ -275,7 +284,7 @@ const ReplacementComp = () => {
                         )
                         ?.map((factory) => (
                           <div
-                            key={factory.factory._id}
+                            key={factory._id}
                             css={(theme) => ({
                               display: "grid",
                               gridTemplateColumns: "repeat(3, 1fr)",
