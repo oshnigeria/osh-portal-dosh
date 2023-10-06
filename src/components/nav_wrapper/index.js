@@ -77,7 +77,8 @@ const DashboadWrapperComp = (props) => {
         mq({
           display: ["block", "block", "flex"],
           gridTemplateColumns: "repeat(2, 30% 70%)",
-          background: "#fff",
+          backgroundColor:
+            router.pathname === `/settings` ? theme.colors.Gray_200 : "#fff",
           justifyContent: "space-between",
           rowGap: 0,
           columnGap: 0,

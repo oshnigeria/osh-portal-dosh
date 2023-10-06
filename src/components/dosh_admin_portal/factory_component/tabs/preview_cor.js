@@ -67,6 +67,56 @@ const PreviewCorComp = () => {
       });
   };
 
+  const zonal_approve_ammendment = () => {
+    setLoading(true);
+
+    axios
+      .get(
+        `${main_url}/dosh/factory/ammendment/approve?factory=${router.query.id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get(cookies_id)}`,
+          },
+        }
+      )
+      .then(function (response) {
+        success_message(response?.data.message);
+        router.push("/");
+        setLoading(false);
+      })
+      .catch(function (error) {
+        error_message(error?.response?.data?.message);
+
+        setLoading(false);
+      });
+  };
+
+  const zonal_approve_replacements_renewals = (event) => {
+    setLoading(true);
+
+    axios
+      .get(
+        `${main_url}/dosh/factory/certificate/mutation/approve?event=${router.query.type}&factory=${router.query.id}
+        `,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get(cookies_id)}`,
+          },
+        }
+      )
+      .then(function (response) {
+        success_message(response?.data.message);
+        router.push("/");
+        setLoading(false);
+      })
+      .catch(function (error) {
+        error_message(error?.response?.data?.message);
+
+        setLoading(false);
+      });
+  };
   const {
     data: single_factory,
     error,
@@ -757,7 +807,19 @@ const PreviewCorComp = () => {
                 close={() => setWillAmmend(false)}
                 loading={isLoading}
                 ammend={() => {
-                  dosh_send_certificate();
+                  switch (router.query.type) {
+                    case "ammendment":
+                      zonal_approve_ammendment();
+                      break;
+                    case "renewal":
+                      zonal_approve_replacements_renewals(router.query.id);
+                      break;
+                    case "replacement":
+                      zonal_approve_replacements_renewals(router.query.id);
+                      break;
+                    default:
+                      dosh_send_certificate();
+                  }
                 }}
               />
             </motion.div>

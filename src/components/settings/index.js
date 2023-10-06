@@ -8,6 +8,7 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import DashboadWrapperComp from "../dosh_admin_portal/nav_wrapper";
+// import AddUserComp from "../manage_account_popup";
 const SettingsComp = () => {
   const [add_factory, setAdd_factory] = useState(false);
   const [search, setSearch] = useState("");
@@ -30,7 +31,7 @@ const SettingsComp = () => {
     data: users,
     error,
     isLoading,
-  } = useSWR(`${main_url}/account/repo/users`, fetcher);
+  } = useSWR(`${main_url}/dosh/account/users`, fetcher);
 
   console.log(users);
   function formatDateToCustom(inputDate) {
@@ -150,7 +151,7 @@ const SettingsComp = () => {
             })}
             onClick={() => {
               setAdd_factory(true);
-              router.push("/dashboard/account?tab=a");
+              // router.push("/dashboard/account?tab=a");
             }}
           >
             <img
@@ -184,13 +185,13 @@ const SettingsComp = () => {
                   margin: "50px 0px",
                 }}
               >
-                <img src="/svg/loader/loader.svg" />
+                <img src="/svg/loader/loader-green.svg" />
               </div>
             </div>
           ) : (
             <div css={{}}>
-              {users?.data.users
-                .filter((item) => item.username.toLowerCase().includes(search))
+              {users?.data?.users?.state_officers
+                ?.filter((item) => item.email.toLowerCase().includes(search))
                 .map((factory) => (
                   <div
                     key={factory._id}
@@ -215,7 +216,7 @@ const SettingsComp = () => {
                       lineHeight: "22px",
                     })}
                     onClick={() => {
-                      router.push(`/dashboard/profile/${factory._id}`);
+                      router.push(`/settings/user/${factory._id}`);
                     }}
                   >
                     <div
@@ -226,7 +227,7 @@ const SettingsComp = () => {
                         textTransform: "capitalize",
                       })}
                     >
-                      {factory.username}
+                      {factory.email}
                     </div>
                     <div
                       css={(theme) => ({
@@ -246,7 +247,80 @@ const SettingsComp = () => {
                         })}
                       >
                         {" "}
-                        Permission level: {factory.role}
+                        State officer
+                      </div>
+                    </div>
+                    <div
+                      css={(theme) => ({
+                        textAlign: "right",
+                        fontSize: 16,
+                        fontWeight: 500,
+                        color: theme.colors.Error_500,
+                      })}
+                    >
+                      Disable account
+                    </div>
+                  </div>
+                ))}
+
+              {users?.data?.users?.zonal_officers
+                ?.filter((item) => item.email.toLowerCase().includes(search))
+                .map((factory) => (
+                  <div
+                    key={factory._id}
+                    css={(theme) => ({
+                      display: "grid",
+                      backgroundColor: "#fff",
+                      marginBottom: 24,
+                      padding: "24px 24px",
+                      borderRadius: 16,
+                      borderRadius: 16,
+                      gridTemplateColumns: "repeat(3, 1fr)",
+
+                      justifyContent: "space-between",
+                      rowGap: 0,
+                      columnGap: 0,
+                      width: "100%",
+                      height: "auto",
+                      color: theme.colors.Gray_800,
+                      fontSize: 18,
+                      cursor: "pointer",
+                      fontWeight: 500,
+                      lineHeight: "22px",
+                    })}
+                    onClick={() => {
+                      router.push(`/settings/user/${factory._id}`);
+                    }}
+                  >
+                    <div
+                      css={(theme) => ({
+                        fontSize: 16,
+                        fontWeight: theme.font_weight.size_500,
+                        color: theme.colors.Gray_800,
+                        textTransform: "capitalize",
+                      })}
+                    >
+                      {factory.email}
+                    </div>
+                    <div
+                      css={(theme) => ({
+                        display: "flex",
+                        justifyContent: "center",
+                      })}
+                    >
+                      <div
+                        css={(theme) => ({
+                          textAlign: "center",
+                          fontSize: 16,
+                          fontWeight: 500,
+                          color: theme.colors.Primary_500,
+                          backgroundColor: theme.colors.Primary_50,
+                          borderRadius: 8,
+                          padding: "4px 12px",
+                        })}
+                      >
+                        {" "}
+                        Zonal officer
                       </div>
                     </div>
                     <div
@@ -321,9 +395,7 @@ const SettingsComp = () => {
                   backgroundColor: "#fff",
                 })}
               >
-                
                 <AddUserComp close={() => setAdd_factory(false)} />
-            
               </motion.div>
             </div>
           )}
