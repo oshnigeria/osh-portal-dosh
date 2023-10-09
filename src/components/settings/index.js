@@ -8,10 +8,12 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import DashboadWrapperComp from "../dosh_admin_portal/nav_wrapper";
-// import AddUserComp from "../manage_account_popup";
+
+import AddUserComp from "./manage_account_popup";
 const SettingsComp = () => {
   const [add_factory, setAdd_factory] = useState(false);
   const [search, setSearch] = useState("");
+  const [willAmmend, setWillAmmend] = useState(false);
 
   const router = useRouter();
   const fetcher = (url) =>
@@ -150,7 +152,7 @@ const SettingsComp = () => {
               cursor: "pointer",
             })}
             onClick={() => {
-              setAdd_factory(true);
+              setWillAmmend(true);
               // router.push("/dashboard/account?tab=a");
             }}
           >
@@ -216,7 +218,9 @@ const SettingsComp = () => {
                       lineHeight: "22px",
                     })}
                     onClick={() => {
-                      router.push(`/settings/user/${factory._id}`);
+                      router.push(
+                        `/settings/user/${factory._id}?type=state_officer`
+                      );
                     }}
                   >
                     <div
@@ -289,7 +293,9 @@ const SettingsComp = () => {
                       lineHeight: "22px",
                     })}
                     onClick={() => {
-                      router.push(`/settings/user/${factory._id}`);
+                      router.push(
+                        `/settings/user/${factory._id}?type=zonal_officer`
+                      );
                     }}
                   >
                     <div
@@ -338,8 +344,8 @@ const SettingsComp = () => {
             </div>
           )}
         </div>
-        {/* <AnimatePresence initial={false}>
-          {add_factory && (
+        <AnimatePresence initial={false}>
+          {willAmmend && (
             <div>
               <motion.div
                 initial={{ opacity: 0 }}
@@ -395,11 +401,13 @@ const SettingsComp = () => {
                   backgroundColor: "#fff",
                 })}
               >
-                <AddUserComp close={() => setAdd_factory(false)} />
+                {/* <CreateRiderAccount close={() => router.back()} /> */}
+                <AddUserComp close={() => setWillAmmend(false)} />
+                {/* <div>ade</div> */}
               </motion.div>
             </div>
           )}
-        </AnimatePresence> */}
+        </AnimatePresence>
       </div>
     </DashboadWrapperComp>
   );

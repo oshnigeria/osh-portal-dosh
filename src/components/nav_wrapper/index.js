@@ -66,6 +66,11 @@ const DashboadWrapperComp = (props) => {
       path: "state_admin_portal",
     },
     {
+      title: "Incident",
+      route: "/incident",
+      path: "incident",
+    },
+    {
       title: "Settings",
       route: "/settings",
       path: "settings",

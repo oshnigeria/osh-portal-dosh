@@ -4,7 +4,24 @@ const AmmendmentComp = dynamic(
   import("@/src/components/dosh_admin_portal/tabs/amendment"),
   {
     ssr: false,
-    loading: () => <p>Loading ...</p>,
+    loading: () => (
+      <div
+        css={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {" "}
+        <div
+          css={{
+            width: 24,
+            height: 24,
+          }}
+        >
+          <img src="/svg/loader/loader.svg" />
+        </div>
+      </div>
+    ),
   }
 );
 

@@ -34,7 +34,7 @@ const ProfileDetailsComp = (props) => {
     error,
     isLoading,
   } = useSWR(
-    `${main_url}/account/repo/user/${router.query.id}
+    `${main_url}/dosh/account/user?id=${router.query.id}&type=${router.query.type}
   `,
     fetcher
   );

@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { main_url, cookies_id } from "@/src/details";
+import { main_url, cookies_id, states } from "@/src/details";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { success_message, error_message } from "../../toasts";
@@ -14,8 +14,7 @@ const AddUserComp = (props) => {
   const [email, setEmail] = useState("");
   const [level, setLevel] = useState("");
 
-  const [position, setPosition] = useState("");
-  const [username, setUsername] = useState("");
+  const [state, setState] = useState("");
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_Password] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,14 +30,12 @@ const AddUserComp = (props) => {
     setLoading(true);
     axios
       .post(
-        `${main_url}/account/repo/create-user`,
+        `${main_url}/dosh/account`,
         {
-          username: username,
+          state: state,
           password: password,
 
-          name: name,
-
-          role: level,
+          type: level,
           email: email,
         },
         {
@@ -50,7 +47,7 @@ const AddUserComp = (props) => {
       )
       .then(function (response) {
         console.log(response.data);
-        success_message("User created");
+        success_message(response.data.message);
         mutate(`${main_url}/account/repo/users`);
         setLoading(false);
         props.close();
@@ -67,7 +64,7 @@ const AddUserComp = (props) => {
     <div
       css={{
         backgroundColor: "#fff",
-        padding: "30px 30px",
+        padding: "30px 80px",
       }}
     >
       <div
@@ -140,81 +137,44 @@ const AddUserComp = (props) => {
             <div
               css={{
                 marginTop: 40,
-                // display: "flex",
-                // justifyContent: "center",
               }}
             >
-              <input
+              <div
                 css={(theme) => ({
-                  padding: "12px 4px",
-                  width: "100%",
+                  colors: theme.colors.Gray_500,
+                  lineHeight: "20px",
                   fontSize: 20,
-                  color: theme.colors.Gray_500,
-                  border: "none",
-                  borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                  ":focus": {
-                    outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
-                  },
-                  ":placeholder ": {
-                    outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
-                  },
+                  marginBottom: 20,
                 })}
-                {...register("name", { required: true })}
-                placeholder="Name"
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-              />
-              {errors.name && (
-                <span
-                  css={{
-                    fontSize: 12,
-                    marginTop: 12,
-                    color: "red",
-                  }}
-                >
-                  * this field is required
-                </span>
-              )}
-            </div>
-            <div
-              css={{
-                marginTop: 40,
-              }}
-            >
+              >
+                Email
+              </div>
               <input
                 css={(theme) => ({
-                  padding: "12px 4px",
-                  width: "100%",
+                  padding: "12px 14px",
+                  width: "90%",
                   fontSize: 20,
-                  color: theme.colors.Gray_500,
-                  border: "none",
-                  borderBottom: `2px solid ${theme.colors.Gray_300}`,
+                  color: theme.colors.Gray_400,
+                  border: `1px solid ${theme.colors.Gray_200}`,
+                  borderRadius: 8,
+
                   ":focus": {
                     outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
+                    border: `1px solid ${theme.colors.Gray_200}`,
+
+                    padding: "12px 14px",
+                    color: theme.colors.Gray_400,
                   },
                   ":placeholder ": {
                     outline: "none",
                     border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
+
+                    padding: "12px 14px",
+                    color: theme.colors.Gray_400,
                   },
                 })}
                 {...register("email", { required: true })}
-                placeholder="Email"
+                placeholder=""
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
@@ -237,31 +197,42 @@ const AddUserComp = (props) => {
                 marginTop: 40,
               }}
             >
+              <div
+                css={(theme) => ({
+                  colors: theme.colors.Gray_500,
+                  lineHeight: "20px",
+                  fontSize: 20,
+                  marginBottom: 20,
+                })}
+              >
+                Permission level
+              </div>
               <select
                 css={(theme) => ({
-                  padding: "12px 4px",
+                  padding: "12px 14px",
                   width: "100%",
-                  fontSize: 16,
-                  color: theme.colors.Gray_500,
-                  border: "none",
-                  borderBottom: `2px solid ${theme.colors.Gray_300}`,
+                  fontSize: 20,
+                  color: theme.colors.Gray_400,
+                  border: `1px solid ${theme.colors.Gray_200}`,
+                  borderRadius: 8,
+
                   ":focus": {
                     outline: "none",
-                    border: "none",
-                    borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
+                    border: `1px solid ${theme.colors.Gray_200}`,
+
+                    padding: "12px 14px",
+                    color: theme.colors.Gray_400,
                   },
                   ":placeholder ": {
                     outline: "none",
                     border: "none",
-                    borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
+
+                    padding: "12px 14px",
+                    color: theme.colors.Gray_400,
                   },
                 })}
-                placeholder="Reported by"
-                defaultValue="lv-1"
+                placeholder=""
+                defaultValue="state_officer"
                 value={level}
                 onChange={(e) => {
                   setLevel(e.target.value);
@@ -270,9 +241,8 @@ const AddUserComp = (props) => {
                 }}
               >
                 {/* <option value={"victim"}>Victim</option> */}
-                <option value={"lv-1"}>LV 1</option>
-                <option value={"lv-2"}>LV 2</option>
-                <option value={"lv-3"}>LV 3</option>
+                <option value={"state_officer"}>State officer</option>
+                <option value={"zonal_officer"}>Zonal officer</option>
               </select>
             </div>
 
@@ -281,47 +251,66 @@ const AddUserComp = (props) => {
                 marginTop: 40,
               }}
             >
-              <div>
-                <input
+              <div
+                css={(theme) => ({
+                  colors: theme.colors.Gray_500,
+                  lineHeight: "20px",
+                  fontSize: 20,
+                  marginBottom: 20,
+                })}
+              >
+                State
+              </div>
+              <div
+                css={{
+                  marginTop: 20,
+                }}
+              >
+                <select
                   css={(theme) => ({
-                    padding: "12px 4px",
+                    padding: "12px 14px",
                     width: "100%",
-                    fontSize: 20,
-                    color: theme.colors.Gray_500,
-                    border: "none",
-                    borderBottom: `2px solid ${theme.colors.Gray_300}`,
+                    fontSize: 18,
+                    color: theme.colors.Gray_400,
+                    border: `1px solid ${theme.colors.Gray_200}`,
+                    borderRadius: 8,
+                    textTransform: "capitalize",
                     ":focus": {
                       outline: "none",
-                      border: "none",
-                      borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                      padding: "12px 4px",
-                      color: theme.colors.Gray_500,
+                      border: `1px solid ${theme.colors.Gray_400}`,
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_800,
                     },
                     ":placeholder ": {
                       outline: "none",
                       border: "none",
-                      borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                      padding: "12px 4px",
-                      color: theme.colors.Gray_500,
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
                     },
                   })}
-                  {...register("username", { required: true })}
-                  placeholder="Username"
+                  // {...register("state", { required: true })}
+                  placeholder=""
                   type="text"
-                  onChange={(e) => setUsername(e.target.value)}
-                  value={username}
-                />
-                {errors.username && (
-                  <span
-                    css={{
-                      fontSize: 12,
-                      marginTop: 12,
-                      color: "red",
-                    }}
-                  >
-                    * this field is required
-                  </span>
-                )}
+                  value={state}
+                  onChange={(e) => {
+                    setState(e.target.value);
+                    // console.log(e.target.value);
+                    // console.log(catId);
+                  }}
+                >
+                  {states.map((state) => (
+                    <option
+                      css={{
+                        textTransform: "capitalize",
+                      }}
+                      value={state}
+                    >
+                      {state}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div
@@ -329,35 +318,48 @@ const AddUserComp = (props) => {
                 marginTop: 40,
               }}
             >
-              <input
+              <div
                 css={(theme) => ({
-                  padding: "12px 4px",
-                  width: "100%",
+                  colors: theme.colors.Gray_500,
+                  lineHeight: "20px",
                   fontSize: 20,
-                  color: theme.colors.Gray_500,
-                  border: "none",
-                  borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                  ":focus": {
-                    outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
-                  },
-                  ":placeholder ": {
-                    outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
-                  },
+                  marginBottom: 20,
                 })}
-                {...register("password", { required: true })}
-                placeholder="Password"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
+              >
+                Password
+              </div>
+              <div>
+                <input
+                  css={(theme) => ({
+                    padding: "12px 14px",
+                    width: "90%",
+                    fontSize: 20,
+                    color: theme.colors.Gray_400,
+                    border: `1px solid ${theme.colors.Gray_200}`,
+                    borderRadius: 8,
+
+                    ":focus": {
+                      outline: "none",
+                      border: `1px solid ${theme.colors.Gray_200}`,
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
+                    },
+                    ":placeholder ": {
+                      outline: "none",
+                      border: "none",
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
+                    },
+                  })}
+                  {...register("password", { required: true })}
+                  placeholder=""
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                />
+              </div>
               {errors.password && (
                 <span
                   css={{
@@ -373,39 +375,50 @@ const AddUserComp = (props) => {
             <div
               css={{
                 marginTop: 40,
-                display: "flex",
-                justifyContent: "center",
               }}
             >
-              <input
+              <div
                 css={(theme) => ({
-                  padding: "12px 4px",
-                  width: "100%",
+                  colors: theme.colors.Gray_500,
+                  lineHeight: "20px",
                   fontSize: 20,
-                  color: theme.colors.Gray_500,
-                  border: "none",
-                  borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                  ":focus": {
-                    outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
-                  },
-                  ":placeholder ": {
-                    outline: "none",
-                    border: "none",
-                    borderBottom: `1px solid ${theme.colors.Gray_300}`,
-                    padding: "12px 4px",
-                    color: theme.colors.Gray_500,
-                  },
+                  marginBottom: 20,
                 })}
-                {...register("confirmpassword", { required: true })}
-                placeholder="Confirm Password"
-                type="password"
-                onChange={(e) => setConfirm_Password(e.target.value)}
-                value={confirm_password}
-              />
+              >
+                Confirm Password
+              </div>
+              <div>
+                <input
+                  css={(theme) => ({
+                    padding: "12px 14px",
+                    width: "90%",
+                    fontSize: 20,
+                    color: theme.colors.Gray_400,
+                    border: `1px solid ${theme.colors.Gray_200}`,
+                    borderRadius: 8,
+
+                    ":focus": {
+                      outline: "none",
+                      border: `1px solid ${theme.colors.Gray_200}`,
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
+                    },
+                    ":placeholder ": {
+                      outline: "none",
+                      border: "none",
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
+                    },
+                  })}
+                  {...register("confirmpassword", { required: true })}
+                  placeholder=""
+                  type="password"
+                  onChange={(e) => setConfirm_Password(e.target.value)}
+                  value={confirm_password}
+                />
+              </div>
               {errors.confirmpassword && (
                 <span
                   css={{
@@ -439,18 +452,32 @@ const AddUserComp = (props) => {
                   border: "none",
                   color: theme.colors.Gray_50,
                   backgroundColor:
-                    username &&
-                    password &&
-                    name &&
-                    level &&
-                    email &&
-                    confirm_password
+                    state && password && level && email && confirm_password
                       ? theme.colors.Primary_800
                       : theme.colors.Primary_300,
                 })}
                 type="submit"
               >
-                {loading ? "Creating account..." : "Create Account"}
+                {loading ? (
+                  <div
+                    css={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {" "}
+                    <div
+                      css={{
+                        width: 24,
+                        height: 24,
+                      }}
+                    >
+                      <img src="/svg/loader/loader.svg" />
+                    </div>
+                  </div>
+                ) : (
+                  <div>Create Account</div>
+                )}
               </button>
             </div>
           </div>

@@ -6,14 +6,15 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import useSWR, { useSWRConfig } from "swr";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import facepaint from "facepaint";
-
+import { AuthContext } from "@/src/context/authContext";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 
 const DashboadWrapperComp = (props) => {
   const router = useRouter();
+  const auth = useContext(AuthContext);
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -82,8 +83,7 @@ const DashboadWrapperComp = (props) => {
         mq({
           display: ["block", "block", "flex"],
           gridTemplateColumns: "repeat(2, 30% 70%)",
-          background:
-            router.pathname === `/settings` ? theme.colors.Gray_200 : "#fff",
+          background: "#fff",
           justifyContent: "space-between",
           rowGap: 0,
           columnGap: 0,
@@ -193,8 +193,7 @@ const DashboadWrapperComp = (props) => {
               cursor: "pointer",
             }}
             onClick={() => {
-              Cookies.remove(cookies_id);
-              router.push("/");
+              auth.remove_token();
             }}
           >
             <div>
