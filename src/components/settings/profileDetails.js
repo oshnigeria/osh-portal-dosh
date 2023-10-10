@@ -4,7 +4,7 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 
 import axios from "axios";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig, mutate } from "swr";
 import { main_url, cookies_id } from "@/src/details";
 import DashboadWrapperComp from "../nav_wrapper";
 import { useRouter } from "next/router";
@@ -14,6 +14,8 @@ import DisableAccountComp from "./manage_account_popup/disable_account";
 const ProfileDetailsComp = (props) => {
   const [change_password, setChange_password] = useState(false);
   const [disable_account, setDisable_account] = useState(false);
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("");
 
   const router = useRouter();
   const fetcher = (url) =>
@@ -165,7 +167,9 @@ const ProfileDetailsComp = (props) => {
                 </div>
                 <div
                   css={(theme) => ({
-                    color: theme.colors.Error_500,
+                    color: user.data.user.is_disabled
+                      ? theme.colors.Primary_500
+                      : theme.colors.Error_500,
                     fontSize: 20,
                     fontWeight: theme.font_weight.size_500,
                     lineHeight: "24px",
@@ -173,9 +177,13 @@ const ProfileDetailsComp = (props) => {
                   })}
                   onClick={() => {
                     setDisable_account(true);
+                    setEmail(user.data.user.email);
+                    setStatus(!user.data.user.is_disabled);
                   }}
                 >
-                  Disable account
+                  {user.data.user.is_disabled
+                    ? "Enable account"
+                    : "Disable account"}
                 </div>
               </div>
             </div>
@@ -297,40 +305,40 @@ const ProfileDetailsComp = (props) => {
                   >
                     <select
                       css={(theme) => ({
-                        padding: "12px 4px",
-                        width: 200,
-                        fontSize: 16,
-                        color: theme.colors.Gray_500,
-                        border: "none",
-                        borderBottom: `2px solid ${theme.colors.Gray_300}`,
+                        padding: "12px 14px",
+                        width: "100%",
+                        fontSize: 20,
+                        color: theme.colors.Gray_400,
+                        border: `1px solid ${theme.colors.Gray_200}`,
+                        borderRadius: 8,
+
                         ":focus": {
                           outline: "none",
-                          border: "none",
-                          borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                          padding: "12px 4px",
-                          color: theme.colors.Gray_500,
+                          border: `1px solid ${theme.colors.Gray_200}`,
+
+                          padding: "12px 14px",
+                          color: theme.colors.Gray_400,
                         },
                         ":placeholder ": {
                           outline: "none",
                           border: "none",
-                          borderBottom: `2px solid ${theme.colors.Gray_300}`,
-                          padding: "12px 4px",
-                          color: theme.colors.Gray_500,
+
+                          padding: "12px 14px",
+                          color: theme.colors.Gray_400,
                         },
                       })}
-                      placeholder="Reported by"
-                      defaultValue={user.data.user.role}
-                      // value={reported_by}
+                      placeholder=""
+                      defaultValue={router.query.type}
+                      // value={level}
                       // onChange={(e) => {
-                      //   setReported_by(e.target.value);
+                      //   setLevel(e.target.value);
                       //   // console.log(e.target.value);
                       //   // console.log(catId);
                       // }}
                     >
                       {/* <option value={"victim"}>Victim</option> */}
-                      <option value={"lv-1"}>LV 1</option>
-                      <option value={"lv-2"}>LV 2</option>
-                      <option value={"lv-3"}>LV 3</option>
+                      <option value={"state_officer"}>State officer</option>
+                      <option value={"zonal_officer"}>Zonal officer</option>
                     </select>
                   </div>
                 </div>
@@ -548,7 +556,15 @@ const ProfileDetailsComp = (props) => {
               {/* <CreateRiderAccount close={() => router.back()} /> */}
               <DisableAccountComp
                 id={router.query.id}
-                close={() => setDisable_account(false)}
+                close={() => {
+                  setDisable_account(false);
+                  mutate(
+                    `${main_url}/dosh/account/user?id=${router.query.id}&type=${router.query.type}`
+                  );
+                  router.push("/settings");
+                }}
+                status={status}
+                email={email}
               />
               {/* <div>ade</div> */}
             </motion.div>

@@ -25,11 +25,11 @@ const ChangePasswordComp = (props) => {
     if (password === confirm_password) {
       axios
         .patch(
-          `${main_url}/account/repo/user/password`,
+          `${main_url}/dosh/account/change-password`,
           {
-            id: props.id,
+            id: router.query.id,
             password: password,
-            old_password: old_password,
+            type: router.query.type,
           },
           {
             headers: {
@@ -45,6 +45,7 @@ const ChangePasswordComp = (props) => {
           setConfirm_Password("");
           setOld_password("");
           setPassword("");
+          props.close();
           // router.push("/signin");
         })
         .catch(function (error) {
@@ -296,7 +297,26 @@ const ChangePasswordComp = (props) => {
                 })}
                 type="submit"
               >
-                {loading ? "Changing password..." : "Change password"}
+                {loading ? (
+                  <div
+                    css={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {" "}
+                    <div
+                      css={{
+                        width: 24,
+                        height: 24,
+                      }}
+                    >
+                      <img src="/svg/loader/loader.svg" />
+                    </div>
+                  </div>
+                ) : (
+                  <div>Change password</div>
+                )}
               </button>
             </div>
           </div>
@@ -344,7 +364,26 @@ const ChangePasswordComp = (props) => {
                   change_password();
                 }}
               >
-                Yes, continue
+                {loading ? (
+                  <div
+                    css={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {" "}
+                    <div
+                      css={{
+                        width: 24,
+                        height: 24,
+                      }}
+                    >
+                      <img src="/svg/loader/loader.svg" />
+                    </div>
+                  </div>
+                ) : (
+                  <div> Yes, continue</div>
+                )}
               </button>
             </div>
             <div

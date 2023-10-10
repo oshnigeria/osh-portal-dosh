@@ -6,6 +6,8 @@ import { main_url, cookies_id } from "@/src/details";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { success_message, error_message } from "../../toasts";
+import useSWR, { useSWRConfig, mutate } from "swr";
+
 const DisableAccountComp = (props) => {
   const [old_password, setOld_password] = useState("");
   const [part, setPart] = useState("a");
@@ -25,12 +27,11 @@ const DisableAccountComp = (props) => {
     if (password === confirm_password) {
       axios
         .patch(
-          `${main_url}/account/repo/user`,
+          `${main_url}/dosh/account/priviledge`,
           {
-            id: props.id,
-            update: {
-              is_disabled: true,
-            },
+            email: props.email,
+            status: props.status,
+            type: router.query.type,
           },
           {
             headers: {
@@ -46,7 +47,10 @@ const DisableAccountComp = (props) => {
           setConfirm_Password("");
           setOld_password("");
           setPassword("");
+
           props.close();
+          //Time before execution
+
           // router.push("/signin");
         })
         .catch(function (error) {

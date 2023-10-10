@@ -256,13 +256,25 @@ const SettingsComp = () => {
                     </div>
                     <div
                       css={(theme) => ({
-                        textAlign: "right",
+                        color: factory.is_disabled
+                          ? theme.colors.Primary_500
+                          : theme.colors.Error_500,
                         fontSize: 16,
                         fontWeight: 500,
-                        color: theme.colors.Error_500,
+                        fontWeight: theme.font_weight.size_500,
+                        lineHeight: "24px",
+                        cursor: "pointer",
+                        textAlign: "right",
                       })}
+                      // onClick={() => {
+                      //   setDisable_account(true);
+                      //   setEmail(factory.email);
+                      //   setStatus(factory.is_disabled);
+                      // }}
                     >
-                      Disable account
+                      {factory.is_disabled
+                        ? "Enable account"
+                        : "Disable account"}
                     </div>
                   </div>
                 ))}
