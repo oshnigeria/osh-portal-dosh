@@ -8,6 +8,9 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
 import FactoryDocComp from "@/src/components/factoryDetailsComp";
+import AmmendedDocumentUploaded from "./comps/ammendment_info/document";
+import RenewalDocumentUploaded from "./comps/renewal_info/document";
+import ReplacementDocumentUploaded from "./comps/replacement_info/document";
 const DocumentUploadTab = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
@@ -42,6 +45,10 @@ const DocumentUploadTab = () => {
 
   console.log(single_factory_doc);
   console.log(single_factory);
+  if (router.query.type === "ammendment") return <AmmendedDocumentUploaded />;
+  if (router.query.type === "renewal") return <RenewalDocumentUploaded />;
+  if (router.query.type === "replacement")
+    return <ReplacementDocumentUploaded />;
   return (
     <div
       css={{

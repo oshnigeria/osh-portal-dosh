@@ -2,14 +2,12 @@
 import axios from "axios";
 import { main_url, cookies_id } from "@/src/details";
 import React, { useState, useContext } from "react";
-import EmployeeInfoComp from "./regsitration_components/employee_info_comp";
+import EmployeeInfoComp from "../../regsitration_components/employee_info_comp";
 import useSWR, { useSWRConfig, mutate } from "swr";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
-import AmmendmentRegistration from "./comps/ammendment_info/registration";
-
-const FactoryRegistration = () => {
+const AmmendmentRegistration = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
   const fetcher = (url) =>
@@ -41,12 +39,10 @@ const FactoryRegistration = () => {
     fetcher
   );
 
-  console.log(single_factory);
-  if (router.query.type === "ammendment") return <AmmendmentRegistration />;
-
+  console.log(single_factory?.data?.factory);
   return (
     <div>
-      {isLoading ? (
+      {isLoading || error ? (
         <div
           css={{
             display: "flex",
@@ -61,7 +57,7 @@ const FactoryRegistration = () => {
               margin: "50px 0px",
             }}
           >
-            <img src="/svg/loader/loader.svg" />
+            <img src="/svg/loader/loader-green.svg" />
           </div>
         </div>
       ) : (
@@ -123,7 +119,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory._occupier_name}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.occupier_name
+                      }
                     </div>
                   </div>
                   <div>
@@ -144,7 +143,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory.state}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.state
+                      }
                     </div>
                   </div>
                   <div>
@@ -165,7 +167,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory.phone_number}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.phone_number
+                      }
                     </div>
                   </div>
                   <div>
@@ -186,7 +191,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory._occupier_name}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?._occupier_name
+                      }
                     </div>
                   </div>
                   <div>
@@ -207,7 +215,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory.postal_address}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.postal_address
+                      }
                     </div>
                   </div>
                   <div>
@@ -228,7 +239,7 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory._occupier_name}
+                      {single_factory.data.factory?.ammendment?.status}
                     </div>
                   </div>
                   <div>
@@ -249,7 +260,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory.address}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.address
+                      }
                     </div>
                   </div>
                   <div>
@@ -270,7 +284,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory.company_registration_no}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.company_registration_no
+                      }
                     </div>
                   </div>
                   <div>
@@ -291,7 +308,10 @@ const FactoryRegistration = () => {
                         fontSize: 20,
                       })}
                     >
-                      {single_factory.data.factory._occupier_name}
+                      {
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.date_operations_started
+                      }
                     </div>
                   </div>
                   <div>
@@ -499,7 +519,8 @@ const FactoryRegistration = () => {
                     marginTop: 12,
                   })}
                 >
-                  {single_factory?.data?.factory?.use_mechanical_power
+                  {single_factory.data.factory?.ammendment?.ammendment
+                    ?.use_mechanical_power
                     ? "Yes"
                     : "No"}
                 </div>
@@ -526,38 +547,38 @@ const FactoryRegistration = () => {
                     marginTop: 12,
                   })}
                 >
-                  {single_factory?.data?.factory?.use_mechanical_power
+                  {single_factory.data.factory?.ammendment?.ammendment
+                    ?.use_mechanical_power
                     ? "Yes"
                     : "No"}
                 </div>
               </div>
-
-              <div
-                css={{
-                  marginTop: 48,
-                }}
-              >
+              {single_factory.data.factory?.ammendment?.ammendment
+                ?.mechanical_power && (
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={{
+                    marginTop: 48,
+                  }}
                 >
-                  What type of mechanical power is used/ intended to be used
-                </div>
-
-                {single_factory?.data?.factory?.mechanical_power && (
+                  <div
+                    css={(theme) => ({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: 20,
+                    })}
+                  >
+                    What type of mechanical power is used/ intended to be used
+                  </div>
                   <div>
                     <ul>
                       {Object.keys(
-                        single_factory?.data?.factory?.mechanical_power
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.mechanical_power
                       )
                         .filter(
                           (key) =>
-                            single_factory?.data?.factory?.mechanical_power[
-                              key
-                            ] === true
+                            single_factory.data.factory?.ammendment?.ammendment
+                              ?.mechanical_power[key] === true
                         )
                         .map((key) => (
                           <li
@@ -570,8 +591,8 @@ const FactoryRegistration = () => {
                           >
                             <div
                               css={{
-                                display: single_factory?.data?.factory
-                                  ?.mechanical_power[key]
+                                display: single_factory.data.factory?.ammendment
+                                  ?.ammendment?.mechanical_power[key]
                                   ? "block"
                                   : "none",
                                 marginTop: 12,
@@ -583,8 +604,8 @@ const FactoryRegistration = () => {
                         ))}
                     </ul>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               <div
                 css={{
                   marginTop: 48,
@@ -624,7 +645,10 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                   >
-                    {single_factory?.data?.factory?.use_boiler ? "Yes" : "No"}
+                    {single_factory.data.factory?.ammendment?.ammendment
+                      ?.use_boiler
+                      ? "Yes"
+                      : "No"}
                   </div>
                 </div>
                 <div
@@ -650,7 +674,9 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                     dangerouslySetInnerHTML={{
-                      __html: single_factory?.data?.factory?.boiler_description,
+                      __html:
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.boiler_description,
                     }}
                   ></div>
                 </div>
@@ -679,7 +705,7 @@ const FactoryRegistration = () => {
                     })}
                   >
                     {
-                      single_factory?.data?.factory
+                      single_factory.data.factory?.ammendment?.ammendment
                         ?.country_and_year_of_manufacture
                     }
                   </div>
@@ -709,7 +735,9 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                     dangerouslySetInnerHTML={{
-                      __html: single_factory?.data?.factory?.examination_report,
+                      __html:
+                        single_factory.data.factory?.ammendment?.ammendment
+                          ?.examination_report,
                     }}
                   ></div>
                 </div>
@@ -737,7 +765,10 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                   >
-                    {single_factory?.data?.factory?.working_pressure}
+                    {
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.working_pressure
+                    }
                   </div>
                 </div>
 
@@ -765,7 +796,10 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                   >
-                    {single_factory?.data?.factory?.address}
+                    {
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.pressure_location
+                    }
                   </div>
                 </div>
 
@@ -792,7 +826,10 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                   >
-                    {single_factory?.data?.factory?.fuel_type}
+                    {
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.fuel_type
+                    }
                   </div>
                 </div>
 
@@ -819,7 +856,10 @@ const FactoryRegistration = () => {
                       textTransform: "capitalize",
                     })}
                   >
-                    {single_factory?.data?.factory?.boiler_attendants}
+                    {
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.boiler_attendants
+                    }
                   </div>
                 </div>
               </div>
@@ -837,21 +877,21 @@ const FactoryRegistration = () => {
                   })}
                 ></div>
               </div>
-              <div
-                css={{
-                  marginTop: 48,
-                }}
-              >
+              {single_factory.data.factory?.ammendment?.ammendment?.tools && (
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={{
+                    marginTop: 48,
+                  }}
                 >
-                  Equipment available
-                </div>
-                {single_factory?.data?.factory?.tools && (
+                  <div
+                    css={(theme) => ({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: 20,
+                    })}
+                  >
+                    Equipment available
+                  </div>
                   <div>
                     <ul>
                       {Object.keys(single_factory?.data?.factory?.tools).map(
@@ -866,9 +906,8 @@ const FactoryRegistration = () => {
                           >
                             <div
                               css={{
-                                display: single_factory?.data?.factory?.tools[
-                                  key
-                                ]
+                                display: single_factory.data.factory?.ammendment
+                                  ?.ammendment?.tools[key]
                                   ? "block"
                                   : "none",
                                 marginTop: 12,
@@ -881,8 +920,8 @@ const FactoryRegistration = () => {
                       )}
                     </ul>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               <div
                 css={{
                   marginTop: 48,
@@ -906,7 +945,9 @@ const FactoryRegistration = () => {
                     textTransform: "capitalize",
                   })}
                   dangerouslySetInnerHTML={{
-                    __html: single_factory?.data?.factory?.particulars,
+                    __html:
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.particulars,
                   }}
                 ></div>
               </div>
@@ -948,7 +989,8 @@ const FactoryRegistration = () => {
                     textTransform: "capitalize",
                   })}
                 >
-                  {single_factory?.data?.factory?.previously_used_as_factory
+                  {single_factory.data.factory?.ammendment?.ammendment
+                    ?.previously_used_as_factory
                     ? "Yes"
                     : "No"}
                 </div>
@@ -978,7 +1020,9 @@ const FactoryRegistration = () => {
                     textTransform: "capitalize",
                   })}
                   dangerouslySetInnerHTML={{
-                    __html: single_factory?.data?.factory?.previous_occupier,
+                    __html:
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.previous_occupier,
                   }}
                 ></div>
               </div>
@@ -1020,7 +1064,9 @@ const FactoryRegistration = () => {
                     textTransform: "capitalize",
                   })}
                   dangerouslySetInnerHTML={{
-                    __html: single_factory?.data?.factory?.other_document,
+                    __html:
+                      single_factory.data.factory?.ammendment?.ammendment
+                        ?.other_document,
                   }}
                 ></div>
               </div>
@@ -1087,4 +1133,4 @@ const FactoryRegistration = () => {
   );
 };
 
-export default FactoryRegistration;
+export default AmmendmentRegistration;

@@ -8,14 +8,12 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
 import FactoryDocComp from "@/src/components/factoryDetailsComp";
-import AmmendmentVerifyPayment from "./comps/ammendment_info/verify_payment";
-import RenewalVerifyPayment from "./comps/renewal_info/verify_payment";
-import ReplacementVerifyPayment from "./comps/replacement_info/verify_payment";
-const VerifyPaymentTab = () => {
+
+const ReplacementVerifyPayment = () => {
   const router = useRouter();
-  const factory = useContext(FactoryContext);
   const [loading, setLoading] = useState(false);
 
+  const factory = useContext(FactoryContext);
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -34,6 +32,17 @@ const VerifyPaymentTab = () => {
     isLoading,
   } = useSWR(`${main_url}/dosh/factory/${router.query.id}`, fetcher);
 
+  // const {
+  //   data: single_factory_doc,
+  //   error: doc_error,
+  //   isLoading: doc_isLoading,
+  // } = useSWR(
+  //   isLoading
+  //     ? null
+  //     : `${main_url}/state-officer/factory/ammendment/files?factory=${router.query.id}`,
+  //   fetcher
+  // );
+
   const {
     data: single_factory_doc,
     error: doc_error,
@@ -41,13 +50,11 @@ const VerifyPaymentTab = () => {
   } = useSWR(
     isLoading
       ? null
-      : `${main_url}/dosh/factory-docs?factory_id=${single_factory.data.factory._id}`,
+      : `${main_url}/dosh/factory-docs?factory_id=${router.query.id}`,
     fetcher
   );
-
   console.log(single_factory_doc);
   console.log(single_factory);
-
   const update_progress = (progress) => {
     setLoading(true);
 
@@ -79,10 +86,6 @@ const VerifyPaymentTab = () => {
 
     // console.log("ade");
   };
-
-  if (router.query.type === "ammendment") return <AmmendmentVerifyPayment />;
-  if (router.query.type === "renewal") return <RenewalVerifyPayment />;
-  if (router.query.type === "replacement") return <ReplacementVerifyPayment />;
   return (
     <div
       css={{
@@ -105,7 +108,7 @@ const VerifyPaymentTab = () => {
               margin: "50px 0px",
             }}
           >
-            <img src="/svg/loader/loader.svg" />
+            <img src="/svg/loader/loader-green.svg" />
           </div>
         </div>
       ) : (
@@ -124,22 +127,56 @@ const VerifyPaymentTab = () => {
               borderRadius: 8,
             })}
           >
-            <div
-              css={{
-                display: "flex",
-                flexWrap: "wrap",
-              }}
-            >
-              {single_factory_doc.data.docs
-                .filter((word) => word.doc_type === "payment_reciept")
-                .map((doc) => (
-                  <div key={doc._id}>
-                    <FactoryDocComp name={doc.name} type={doc.file_type} />
+            {single_factory_doc.data.docs.filter(
+              (word) => word.doc_type === "replacement_payment_reciept"
+            ).length >= 1 ? (
+              <div
+                css={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                }}
+              >
+                {single_factory_doc.data.docs
+                  .filter(
+                    (word) => word.doc_type === "replacement_payment_reciept"
+                  )
+                  .map((doc) => (
+                    <div key={doc._id}>
+                      <FactoryDocComp
+                        name={doc.name}
+                        doc_type={doc.doc_type}
+                        factory_id={router.query.id}
+                        file_key={doc.src}
+                      />
+                    </div>
+                  ))}
+              </div>
+            ) : (
+              <div>
+                <div
+                  css={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  {" "}
+                  <div
+                    css={{
+                      margin: "50px 0px",
+                    }}
+                  >
+                    <img
+                      css={{
+                        width: 100,
+                        height: 100,
+                      }}
+                      src="/svg/dashboard/empty.svg"
+                    />
                   </div>
-                ))}
-            </div>
+                </div>
+              </div>
+            )}
           </div>
-
           <div
             css={{
               marginTop: 64,
@@ -168,7 +205,7 @@ const VerifyPaymentTab = () => {
               type="submit"
               onClick={() => {
                 // factory_details.add_factory_details(formData);
-                update_progress(95);
+                update_progress(60);
               }}
             >
               <div
@@ -200,4 +237,4 @@ const VerifyPaymentTab = () => {
   );
 };
 
-export default VerifyPaymentTab;
+export default ReplacementVerifyPayment;
