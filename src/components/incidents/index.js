@@ -36,7 +36,7 @@ const IncidentsComp = () => {
 
     isLoading: factory_isLoading,
   } = useSWR(
-    `${main_url}/dosh/factory/certificate/mutations/completed?event=renewal`,
+    `${main_url}/dosh/factory/certificate/mutations/completed?event=incident`,
     fetcher
   );
   const router = useRouter();
@@ -240,7 +240,8 @@ const IncidentsComp = () => {
               <div>
                 {router.query.tab === "completed" ? (
                   <div>
-                    {completed?.data?.renewals?.length >= 1 ? (
+                    {factory?.data?.incidents?.filter((_) => _.dosh_verified)
+                      .length >= 1 ? (
                       <div>
                         <div
                           css={{
@@ -272,58 +273,60 @@ const IncidentsComp = () => {
                         </div>
 
                         <div>
-                          {completed?.data?.renewals?.map((factory) => (
-                            <div
-                              key={factory.factory._id}
-                              css={(theme) => ({
-                                display: "grid",
-                                gridTemplateColumns: "repeat(3, 1fr)",
-                                cursor: "pointer",
-                                rowGap: 0,
-                                columnGap: 64,
-                                borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                                padding: "24px 40px",
-                              })}
-                              onClick={() =>
-                                router.push(
-                                  `/factory/${factory.factory._id}?type=renewal`
-                                )
-                              }
-                            >
+                          {factory?.data?.incidents
+                            ?.filter((_) => _.dosh_verified)
+                            .map((factory) => (
                               <div
+                                key={factory._id}
                                 css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  fontSize: 18,
-                                  textTransform: "capitalize",
-                                  lineHeight: "22px",
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(3, 1fr)",
+                                  cursor: "pointer",
+                                  rowGap: 0,
+                                  columnGap: 64,
+                                  borderBottom: `1px solid ${theme.colors.Gray_200}`,
+                                  padding: "24px 40px",
                                 })}
+                                onClick={() =>
+                                  router.push(
+                                    `/factory/${factory.factory._id}?type=incident`
+                                  )
+                                }
                               >
-                                {factory.factory.occupier_name}
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    textTransform: "capitalize",
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.victim_name}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    textTransform: "capitalize",
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.state}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {formatDateToCustom(factory.createdAt)}
+                                </div>
                               </div>
-                              <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  textTransform: "capitalize",
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
-                              >
-                                {factory.state}
-                              </div>
-                              <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
-                              >
-                                {formatDateToCustom(factory.createdAt)}
-                              </div>
-                            </div>
-                          ))}
+                            ))}
                         </div>
                       </div>
                     ) : (
@@ -354,7 +357,8 @@ const IncidentsComp = () => {
                   </div>
                 ) : (
                   <div>
-                    {factory?.data?.incidents?.length >= 1 ? (
+                    {factory?.data?.incidents?.filter((_) => !_.dosh_verified)
+                      ?.length >= 1 ? (
                       <div>
                         <div
                           css={{
@@ -386,56 +390,60 @@ const IncidentsComp = () => {
                         </div>
 
                         <div>
-                          {factory?.data?.incidents?.map((factory) => (
-                            <div
-                              key={factory._id}
-                              css={(theme) => ({
-                                display: "grid",
-                                gridTemplateColumns: "repeat(3, 1fr)",
-                                cursor: "pointer",
-                                rowGap: 0,
-                                columnGap: 64,
-                                borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                                padding: "24px 40px",
-                              })}
-                              onClick={() =>
-                                router.push(`/incident/${factory._id}`)
-                              }
-                            >
+                          {factory?.data?.incidents
+                            ?.filter((_) => !_.dosh_verified)
+                            .map((factory) => (
                               <div
+                                key={factory._id}
                                 css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  fontSize: 18,
-                                  textTransform: "capitalize",
-                                  lineHeight: "22px",
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(3, 1fr)",
+                                  cursor: "pointer",
+                                  rowGap: 0,
+                                  columnGap: 64,
+                                  borderBottom: `1px solid ${theme.colors.Gray_200}`,
+                                  padding: "24px 40px",
                                 })}
+                                onClick={() =>
+                                  router.push(
+                                    `/incident/${factory._id}?type=incident`
+                                  )
+                                }
                               >
-                                {factory.victim_name}
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    textTransform: "capitalize",
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.victim_name}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    textTransform: "capitalize",
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {factory.state}
+                                </div>
+                                <div
+                                  css={(theme) => ({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: 18,
+                                    lineHeight: "22px",
+                                  })}
+                                >
+                                  {formatDateToCustom(factory.createdAt)}
+                                </div>
                               </div>
-                              <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  textTransform: "capitalize",
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
-                              >
-                                {factory.state}
-                              </div>
-                              <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
-                              >
-                                {formatDateToCustom(factory.createdAt)}
-                              </div>
-                            </div>
-                          ))}
+                            ))}
                         </div>
                       </div>
                     ) : (

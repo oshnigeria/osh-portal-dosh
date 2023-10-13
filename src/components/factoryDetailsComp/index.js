@@ -103,7 +103,11 @@ const FactoryDocComp = (props) => {
                       }}
                     >
                       <a
-                        href={`${main_url}/inventory/factory/wr/file?factory_id=${props.factory_id}&file_key=${props.file_key}&doc_type=${props.doc_type}`}
+                        href={
+                          router.query.type === "incident"
+                            ? `${main_url}/inventory/incident/wr/file?incident_id=${props.factory_id}&file_key=${props.file_key}&doc_type=${props.doc_type}`
+                            : `${main_url}/inventory/factory/wr/file?factory_id=${props.factory_id}&file_key=${props.file_key}&doc_type=${props.doc_type}`
+                        }
                         target="blank"
                         css={(theme) => ({
                           display: "flex",
