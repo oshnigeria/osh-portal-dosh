@@ -52,6 +52,38 @@ const SettingsComp = () => {
   //     (item) => item.occupier_name.toLowerCase() === search.toLowerCase()
   //   )
   // );
+  const tabs = [
+    {
+      title: "Account settings",
+      route: "pending",
+      state: () => {
+        setProgress({
+          min: 90,
+          max: 94,
+        });
+      },
+    },
+    // {
+    //   title: "Ongoing",
+    //   route: "ongoing",
+    //   state: () => {
+    //     setProgress({
+    //       min: 70,
+    //       max: 79,
+    //     });
+    //   },
+    // },
+    {
+      title: "Certificate settings",
+      route: "completed",
+      state: () => {
+        setProgress({
+          min: 95,
+          max: 101,
+        });
+      },
+    },
+  ];
   return (
     <DashboadWrapperComp>
       <Toaster
