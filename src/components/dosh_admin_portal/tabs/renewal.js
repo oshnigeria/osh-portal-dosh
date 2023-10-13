@@ -241,11 +241,7 @@ const RenewalComp = () => {
               <div>
                 {router.query.tab === "completed" ? (
                   <div>
-                    {completed?.data?.renewals?.filter(
-                      (item) =>
-                        item.progress >= progress.min &&
-                        item.progress <= progress.max
-                    ).length >= 1 ? (
+                    {completed?.data?.renewals?.length >= 1 ? (
                       <div>
                         <div
                           css={{
@@ -277,65 +273,58 @@ const RenewalComp = () => {
                         </div>
 
                         <div>
-                          {completed?.data?.renewals
-
-                            .filter(
-                              (item) =>
-                                item.progress >= progress.min &&
-                                item.progress <= progress.max
-                            )
-                            ?.map((factory) => (
+                          {completed?.data?.renewals?.map((factory) => (
+                            <div
+                              key={factory.factory._id}
+                              css={(theme) => ({
+                                display: "grid",
+                                gridTemplateColumns: "repeat(3, 1fr)",
+                                cursor: "pointer",
+                                rowGap: 0,
+                                columnGap: 64,
+                                borderBottom: `1px solid ${theme.colors.Gray_200}`,
+                                padding: "24px 40px",
+                              })}
+                              onClick={() =>
+                                router.push(
+                                  `/factory/${factory.factory._id}?type=renewal`
+                                )
+                              }
+                            >
                               <div
-                                key={factory.factory._id}
                                 css={(theme) => ({
-                                  display: "grid",
-                                  gridTemplateColumns: "repeat(3, 1fr)",
-                                  cursor: "pointer",
-                                  rowGap: 0,
-                                  columnGap: 64,
-                                  borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                                  padding: "24px 40px",
+                                  textAlign: "left",
+                                  color: theme.colors.Gray_700,
+                                  fontSize: 18,
+                                  textTransform: "capitalize",
+                                  lineHeight: "22px",
                                 })}
-                                onClick={() =>
-                                  router.push(
-                                    `/factory/${factory.factory._id}?type=renewal`
-                                  )
-                                }
                               >
-                                <div
-                                  css={(theme) => ({
-                                    textAlign: "left",
-                                    color: theme.colors.Gray_700,
-                                    fontSize: 18,
-                                    textTransform: "capitalize",
-                                    lineHeight: "22px",
-                                  })}
-                                >
-                                  {factory.factory.occupier_name}
-                                </div>
-                                <div
-                                  css={(theme) => ({
-                                    textAlign: "left",
-                                    color: theme.colors.Gray_700,
-                                    textTransform: "capitalize",
-                                    fontSize: 18,
-                                    lineHeight: "22px",
-                                  })}
-                                >
-                                  {factory.state}
-                                </div>
-                                <div
-                                  css={(theme) => ({
-                                    textAlign: "left",
-                                    color: theme.colors.Gray_700,
-                                    fontSize: 18,
-                                    lineHeight: "22px",
-                                  })}
-                                >
-                                  {formatDateToCustom(factory.createdAt)}
-                                </div>
+                                {factory.factory.occupier_name}
                               </div>
-                            ))}
+                              <div
+                                css={(theme) => ({
+                                  textAlign: "left",
+                                  color: theme.colors.Gray_700,
+                                  textTransform: "capitalize",
+                                  fontSize: 18,
+                                  lineHeight: "22px",
+                                })}
+                              >
+                                {factory.state}
+                              </div>
+                              <div
+                                css={(theme) => ({
+                                  textAlign: "left",
+                                  color: theme.colors.Gray_700,
+                                  fontSize: 18,
+                                  lineHeight: "22px",
+                                })}
+                              >
+                                {formatDateToCustom(factory.createdAt)}
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     ) : (
@@ -366,11 +355,7 @@ const RenewalComp = () => {
                   </div>
                 ) : (
                   <div>
-                    {factory?.data?.renewals?.filter(
-                      (item) =>
-                        item.progress >= progress.min &&
-                        item.progress <= progress.max
-                    ).length >= 1 ? (
+                    {factory?.data?.renewals?.length >= 1 ? (
                       <div>
                         <div
                           css={{
@@ -402,65 +387,58 @@ const RenewalComp = () => {
                         </div>
 
                         <div>
-                          {factory?.data?.renewals
-
-                            .filter(
-                              (item) =>
-                                item.progress >= progress.min &&
-                                item.progress <= progress.max
-                            )
-                            ?.map((factory) => (
+                          {factory?.data?.renewals?.map((factory) => (
+                            <div
+                              key={factory._id}
+                              css={(theme) => ({
+                                display: "grid",
+                                gridTemplateColumns: "repeat(3, 1fr)",
+                                cursor: "pointer",
+                                rowGap: 0,
+                                columnGap: 64,
+                                borderBottom: `1px solid ${theme.colors.Gray_200}`,
+                                padding: "24px 40px",
+                              })}
+                              onClick={() =>
+                                router.push(
+                                  `/factory/${factory.factory._id}?type=renewal`
+                                )
+                              }
+                            >
                               <div
-                                key={factory._id}
                                 css={(theme) => ({
-                                  display: "grid",
-                                  gridTemplateColumns: "repeat(3, 1fr)",
-                                  cursor: "pointer",
-                                  rowGap: 0,
-                                  columnGap: 64,
-                                  borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                                  padding: "24px 40px",
+                                  textAlign: "left",
+                                  color: theme.colors.Gray_700,
+                                  fontSize: 18,
+                                  textTransform: "capitalize",
+                                  lineHeight: "22px",
                                 })}
-                                onClick={() =>
-                                  router.push(
-                                    `/factory/${factory.factory._id}?type=renewal`
-                                  )
-                                }
                               >
-                                <div
-                                  css={(theme) => ({
-                                    textAlign: "left",
-                                    color: theme.colors.Gray_700,
-                                    fontSize: 18,
-                                    textTransform: "capitalize",
-                                    lineHeight: "22px",
-                                  })}
-                                >
-                                  {factory.factory.occupier_name}
-                                </div>
-                                <div
-                                  css={(theme) => ({
-                                    textAlign: "left",
-                                    color: theme.colors.Gray_700,
-                                    textTransform: "capitalize",
-                                    fontSize: 18,
-                                    lineHeight: "22px",
-                                  })}
-                                >
-                                  {factory.state}
-                                </div>
-                                <div
-                                  css={(theme) => ({
-                                    textAlign: "left",
-                                    color: theme.colors.Gray_700,
-                                    fontSize: 18,
-                                    lineHeight: "22px",
-                                  })}
-                                >
-                                  {formatDateToCustom(factory.createdAt)}
-                                </div>
+                                {factory.factory.occupier_name}
                               </div>
-                            ))}
+                              <div
+                                css={(theme) => ({
+                                  textAlign: "left",
+                                  color: theme.colors.Gray_700,
+                                  textTransform: "capitalize",
+                                  fontSize: 18,
+                                  lineHeight: "22px",
+                                })}
+                              >
+                                {factory.state}
+                              </div>
+                              <div
+                                css={(theme) => ({
+                                  textAlign: "left",
+                                  color: theme.colors.Gray_700,
+                                  fontSize: 18,
+                                  lineHeight: "22px",
+                                })}
+                              >
+                                {formatDateToCustom(factory.createdAt)}
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     ) : (
