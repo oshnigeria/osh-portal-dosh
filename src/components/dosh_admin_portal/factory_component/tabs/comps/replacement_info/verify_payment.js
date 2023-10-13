@@ -205,7 +205,7 @@ const ReplacementVerifyPayment = () => {
               type="submit"
               onClick={() => {
                 // factory_details.add_factory_details(formData);
-                update_progress(60);
+                factory.set_tab("Inspection report");
               }}
             >
               <div
