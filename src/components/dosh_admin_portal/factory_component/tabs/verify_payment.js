@@ -11,6 +11,10 @@ import FactoryDocComp from "@/src/components/factoryDetailsComp";
 import AmmendmentVerifyPayment from "./comps/ammendment_info/verify_payment";
 import RenewalVerifyPayment from "./comps/renewal_info/verify_payment";
 import ReplacementVerifyPayment from "./comps/replacement_info/verify_payment";
+import toast, { Toaster } from "react-hot-toast";
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const VerifyPaymentTab = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
@@ -90,6 +94,12 @@ const VerifyPaymentTab = () => {
         justifyContent: "center",
       }}
     >
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+        }}
+      />
       {doc_isLoading ? (
         <div
           css={{
@@ -148,23 +158,25 @@ const VerifyPaymentTab = () => {
             }}
           >
             <button
-              css={(theme) => ({
-                height: 56,
-                borderRadius: 30,
-                width: 356,
-                //   padding: ["10px 16px", "10px 16px", "16px 24px"],
-                padding: "16px 24px",
-                fontSize: 20,
-                cursor: "pointer",
-                marginRight: 20,
-                fontWeight: 600,
-                lineHeight: "17px",
-                border: "none",
-                display: "flex",
-                justifyContent: "center",
-                color: "#fff",
-                backgroundColor: theme.colors.Primary_500,
-              })}
+              css={(theme) =>
+                mq({
+                  height: [40, 40, 56],
+                  borderRadius: 30,
+                  width: [140, 140, 356],
+                  //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                  padding: "16px 24px",
+                  fontSize: [12, 12, 20],
+                  cursor: "pointer",
+                  marginRight: 20,
+                  fontWeight: 600,
+                  lineHeight: "17px",
+                  border: "none",
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#fff",
+                  backgroundColor: theme.colors.Primary_500,
+                })
+              }
               type="submit"
               onClick={() => {
                 // factory_details.add_factory_details(formData);

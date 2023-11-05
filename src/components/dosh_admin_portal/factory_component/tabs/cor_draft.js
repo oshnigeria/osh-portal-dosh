@@ -10,7 +10,9 @@ import EmployeeInfoComp from "./regsitration_components/employee_info_comp";
 import { main_url, cookies_id } from "@/src/details";
 import DeclarationPopup from "./comps/declaration_popup";
 import { FactoryContext } from "@/src/context/factoryContext";
-
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const CorDraftComp = () => {
   const [value, setValue] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);
@@ -128,44 +130,52 @@ const CorDraftComp = () => {
             })}
           >
             <div
-              css={{
-                fontSize: 32,
-              }}
+              css={(theme) =>
+                mq({
+                  fontSize: [16, 16, 32],
+                  color: theme.colors.Gray_700,
+                  textTransform: "capitalize",
+                })
+              }
             >
               CoR draft
             </div>
             <div
-              css={{
-                marginTop: 80,
-              }}
+              css={mq({
+                marginTop: [40, 40, 80],
+              })}
             >
               <div>
                 <div
                   css={{
                     display: "grid",
                     gridTemplateColumns: `repeat(2, 1fr)`,
-                    rowGap: 48,
-                    columnGap: 50,
+                    rowGap: [10, 10, 48],
+                    columnGap: [8, 8, 50],
                     marginTop: 24,
                   }}
                 >
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Name of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {single_factory.data.factory._occupier_name}
                     </div>
@@ -173,21 +183,25 @@ const CorDraftComp = () => {
 
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Postal address of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {single_factory.data.factory.phone_number}
                     </div>
@@ -195,64 +209,79 @@ const CorDraftComp = () => {
 
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Nature of work
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
-                      {single_factory.data.factory.type}
+                      {
+                        single_factory?.data?.factory?.inspection_report
+                          ?.nature_of_work_done
+                      }
                     </div>
                   </div>
 
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Phone number of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {single_factory.data.factory.postal_address}
                     </div>
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Period of validity of certificate
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory.inspection_report
@@ -262,21 +291,25 @@ const CorDraftComp = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Location of Factory
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {single_factory.data.factory.address}
                     </div>
@@ -294,12 +327,12 @@ const CorDraftComp = () => {
           >
             <button
               css={(theme) => ({
-                height: 56,
+                height: [40, 40, 56],
                 borderRadius: 30,
-                width: 356,
+                width: [140, 140, 356],
                 //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                 padding: "16px 24px",
-                fontSize: 20,
+                fontSize: [12, 12, 20],
                 cursor: "pointer",
                 marginRight: 20,
                 fontWeight: 600,
@@ -329,10 +362,10 @@ const CorDraftComp = () => {
                   }}
                 >
                   <img
-                    css={{
-                      width: 24,
-                      height: 24,
-                    }}
+                    css={mq({
+                      width: [12, 12, 24],
+                      height: [16, 16, 24],
+                    })}
                     src="/svg/registration/left_arrow.svg"
                   />
                 </div>

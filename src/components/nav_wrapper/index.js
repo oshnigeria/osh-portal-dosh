@@ -6,14 +6,16 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import useSWR, { useSWRConfig } from "swr";
-import { useEffect } from "react";
-import facepaint from "facepaint";
 
+import { useEffect, useContext } from "react";
+import facepaint from "facepaint";
+import { AuthContext } from "@/src/context/authContext";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 
 const DashboadWrapperComp = (props) => {
   const router = useRouter();
+  const auth = useContext(AuthContext);
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -49,38 +51,50 @@ const DashboadWrapperComp = (props) => {
       title: "New Registration",
       route: "/",
       path: "",
+      icon: "register",
+      active_icon: "register_active",
     },
     {
       title: "Renewal",
-      route: "/",
-      path: "state_admin_portal",
+      route: "/renewal",
+      path: "renewal",
+      icon: "renewal",
+      active_icon: "renewal_active",
     },
     {
       title: "Amendment",
-      route: "/",
-      path: "state_admin_portal",
+      route: "/amendment",
+      path: "amendment",
+      icon: "ammendments",
+      active_icon: "ammendments_active",
     },
     {
       title: "Replacement",
-      route: "/",
-      path: "state_admin_portal",
+      route: "/replacement",
+      path: "replacement",
+      icon: "replacement",
+      active_icon: "replacement_active",
     },
     {
       title: "Incident",
       route: "/incident",
       path: "incident",
+      icon: "incident",
+      active_icon: "incident_active",
     },
     {
       title: "Settings",
       route: "/settings",
       path: "settings",
+      icon: "settings",
+      active_icon: "settings_active",
     },
   ];
   return (
     <div
       css={(theme) =>
         mq({
-          display: ["block", "block", "flex"],
+          display: ["block", "block", "grid"],
           gridTemplateColumns: "repeat(2, 30% 70%)",
           backgroundColor:
             router.pathname === `/settings` ? theme.colors.Gray_200 : "#fff",
@@ -220,17 +234,53 @@ const DashboadWrapperComp = (props) => {
             </div>
           </div>
         </div>
+        <div
+          css={mq({
+            marginLeft: [0, 0, 430],
+            // width: "100%",
+            minHeight: "100vh",
+            padding: [0, 0, "36px 0px"],
+            paddingRight: [0, 0, 70],
+          })}
+        >
+          {props.children}
+        </div>
       </div>
       <div
-        css={mq({
-          marginLeft: [0, 0, 430],
-          width: "100%",
-          minHeight: "100vh",
-          padding: [0, 0, "36px 0px"],
-          paddingRight: [0, 0, 70],
-        })}
+        css={(theme) =>
+          mq({
+            display: ["flex", "flex", "none"],
+            justifyContent: "space-around",
+            backgroundColor: theme.colors.Primary_500,
+            position: "fixed",
+            bottom: 0,
+            width: "100%",
+            padding: "16px 0px",
+          })
+        }
       >
-        {props.children}
+        {tabs.map(
+          (tab) =>
+            tab.title !== "Settings" && (
+              <div
+                css={{
+                  color: "#fff",
+                  fontSize: 8,
+                  fontWeight: 400,
+                }}
+                onClick={() => router.push(`/${tab.path}`)}
+              >
+                <img
+                  src={`/svg/tabs/${
+                    router.pathname == `/${tab.path}`
+                      ? tab.active_icon
+                      : tab.icon
+                  }.svg`}
+                />
+                {/* {tab.icon} */}
+              </div>
+            )
+        )}
       </div>
     </div>
   );

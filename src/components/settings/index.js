@@ -8,8 +8,13 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import DashboadWrapperComp from "../dosh_admin_portal/nav_wrapper";
-
+import AccountComp from "./comps/accounts";
 import AddUserComp from "./manage_account_popup";
+import CertificateComp from "./comps/certificate";
+
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const SettingsComp = () => {
   const [add_factory, setAdd_factory] = useState(false);
   const [search, setSearch] = useState("");
@@ -55,7 +60,7 @@ const SettingsComp = () => {
   const tabs = [
     {
       title: "Account settings",
-      route: "pending",
+      route: "account",
       state: () => {
         setProgress({
           min: 90,
@@ -75,7 +80,7 @@ const SettingsComp = () => {
     // },
     {
       title: "Certificate settings",
-      route: "completed",
+      route: "certificate",
       state: () => {
         setProgress({
           min: 95,
@@ -84,6 +89,10 @@ const SettingsComp = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    router.push("?tab=account");
+  }, []);
   return (
     <DashboadWrapperComp>
       <Toaster
@@ -92,302 +101,75 @@ const SettingsComp = () => {
           duration: 3000,
         }}
       />
+
       <div>
         <div
-          css={(theme) => ({
-            color: theme.colors.Gray_800,
-            fontSize: 32,
-            fontWeight: 700,
+          css={mq({
+            display: "flex",
+            // justifyContent: "right",
+            marginTop: [32, 32, 72],
+            width: ["100%", "100%", "50%"],
           })}
         >
-          Accounts
-        </div>
-        <div
-          css={{
-            marginTop: 64,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <div
-            css={{
-              display: "flex",
-            }}
-          >
+          {tabs.map((tab) => (
             <div
+              key={tab.title}
               css={{
-                position: "relative",
+                width: "100%",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                router.push(`?tab=${tab.route}`);
               }}
             >
-              <input
-                css={(theme) => ({
-                  padding: "16px 16px",
-                  paddingLeft: 42,
-                  marginRight: 32,
-                  width: 252,
-                  fontSize: 16,
-                  color: theme.colors.Primary_500,
-                  backgroundColor: "transparent",
-                  outline: "none",
-                  borderRadius: 30,
-                  border: `1px solid ${theme.colors.Primary_500}`,
-                  ":focus": {
-                    padding: "16px 16px",
-                    paddingLeft: 42,
+              <div
+                css={(theme) =>
+                  mq({
+                    color:
+                      router.query.tab === tab.route
+                        ? theme.colors.Primary_500
+                        : theme.colors.Gray_800,
+                    fontSize: [12, 12, 20],
+                    fontWeight: 600,
 
-                    border: `1px solid ${theme.colors.Primary_500}`,
-
-                    color: theme.colors.Gray_500,
-                  },
-                  ":placeholder ": {
-                    padding: "16px 16px",
-                    paddingLeft: 42,
-                    border: "none",
-                    border: `1px solid ${theme.colors.Primary_500}`,
-
-                    color: theme.colors.Gray_500,
-                  },
-                })}
-                placeholder="Search files"
-                onChange={(e) => setSearch(e.target.value)}
-                value={search}
-              />
-              <img
-                css={{
-                  position: "absolute",
-                  bottom: 16,
-                  left: 16,
-                  width: 24,
-                  height: 24,
-                }}
-                src="/svg/dashboard/search.svg"
-              />
-            </div>
-          </div>
-          <button
-            css={(theme) => ({
-              width: 224,
-              height: 56,
-              borderRadius: 30,
-              padding: "16px 24px",
-              fontSize: 16,
-              fontWeight: 600,
-              lineHeight: "17px",
-              border: "none",
-              color: theme.colors.Gray_50,
-              backgroundColor: theme.colors.Primary_500,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-            })}
-            onClick={() => {
-              setWillAmmend(true);
-              // router.push("/dashboard/account?tab=a");
-            }}
-          >
-            <img
-              css={{
-                width: 24,
-                height: 24,
-                marginRight: 16,
-              }}
-              src="/svg/dashboard/plus.svg"
-            />
-            <div> Add new account</div>
-          </button>
-        </div>
-        <div
-          css={{
-            marginTop: 40,
-          }}
-        >
-          {isLoading ? (
-            <div
-              css={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              {" "}
+                    textAlign: "center",
+                  })
+                }
+              >
+                {tab.title}
+              </div>
               <div
                 css={{
-                  width: 64,
-                  height: 64,
-                  margin: "50px 0px",
+                  // position: "absolute",
+                  // bottom: -16,
+                  // left: 0,
+                  // right: 0,
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
                 }}
               >
-                <img src="/svg/loader/loader-green.svg" />
+                <div
+                  css={(theme) => ({
+                    display: "block",
+                    height: 4,
+                    width: 72,
+                    marginTop: 8,
+                    borderRadius: "4px 4px 0px 0px",
+
+                    backgroundColor: theme.colors.Primary_500,
+                  })}
+                ></div>
               </div>
             </div>
-          ) : (
-            <div css={{}}>
-              {users?.data?.users?.state_officers
-                ?.filter((item) => item.email.toLowerCase().includes(search))
-                .map((factory) => (
-                  <div
-                    key={factory._id}
-                    css={(theme) => ({
-                      display: "grid",
-                      backgroundColor: "#fff",
-                      marginBottom: 24,
-                      padding: "24px 24px",
-                      borderRadius: 16,
-                      borderRadius: 16,
-                      gridTemplateColumns: "repeat(3, 1fr)",
-
-                      justifyContent: "space-between",
-                      rowGap: 0,
-                      columnGap: 0,
-                      width: "100%",
-                      height: "auto",
-                      color: theme.colors.Gray_800,
-                      fontSize: 18,
-                      cursor: "pointer",
-                      fontWeight: 500,
-                      lineHeight: "22px",
-                    })}
-                    onClick={() => {
-                      router.push(
-                        `/settings/user/${factory._id}?type=state_officer`
-                      );
-                    }}
-                  >
-                    <div
-                      css={(theme) => ({
-                        fontSize: 16,
-                        fontWeight: theme.font_weight.size_500,
-                        color: theme.colors.Gray_800,
-                        textTransform: "capitalize",
-                      })}
-                    >
-                      {factory.email}
-                    </div>
-                    <div
-                      css={(theme) => ({
-                        display: "flex",
-                        justifyContent: "center",
-                      })}
-                    >
-                      <div
-                        css={(theme) => ({
-                          textAlign: "center",
-                          fontSize: 16,
-                          fontWeight: 500,
-                          color: theme.colors.Primary_500,
-                          backgroundColor: theme.colors.Primary_50,
-                          borderRadius: 8,
-                          padding: "4px 12px",
-                        })}
-                      >
-                        {" "}
-                        State officer
-                      </div>
-                    </div>
-                    <div
-                      css={(theme) => ({
-                        color: factory.is_disabled
-                          ? theme.colors.Primary_500
-                          : theme.colors.Error_500,
-                        fontSize: 16,
-                        fontWeight: 500,
-                        fontWeight: theme.font_weight.size_500,
-                        lineHeight: "24px",
-                        cursor: "pointer",
-                        textAlign: "right",
-                      })}
-                      // onClick={() => {
-                      //   setDisable_account(true);
-                      //   setEmail(factory.email);
-                      //   setStatus(factory.is_disabled);
-                      // }}
-                    >
-                      {factory.is_disabled
-                        ? "Enable account"
-                        : "Disable account"}
-                    </div>
-                  </div>
-                ))}
-
-              {users?.data?.users?.zonal_officers
-                ?.filter((item) => item.email.toLowerCase().includes(search))
-                .map((factory) => (
-                  <div
-                    key={factory._id}
-                    css={(theme) => ({
-                      display: "grid",
-                      backgroundColor: "#fff",
-                      marginBottom: 24,
-                      padding: "24px 24px",
-                      borderRadius: 16,
-                      borderRadius: 16,
-                      gridTemplateColumns: "repeat(3, 1fr)",
-
-                      justifyContent: "space-between",
-                      rowGap: 0,
-                      columnGap: 0,
-                      width: "100%",
-                      height: "auto",
-                      color: theme.colors.Gray_800,
-                      fontSize: 18,
-                      cursor: "pointer",
-                      fontWeight: 500,
-                      lineHeight: "22px",
-                    })}
-                    onClick={() => {
-                      router.push(
-                        `/settings/user/${factory._id}?type=zonal_officer`
-                      );
-                    }}
-                  >
-                    <div
-                      css={(theme) => ({
-                        fontSize: 16,
-                        fontWeight: theme.font_weight.size_500,
-                        color: theme.colors.Gray_800,
-                        textTransform: "capitalize",
-                      })}
-                    >
-                      {factory.email}
-                    </div>
-                    <div
-                      css={(theme) => ({
-                        display: "flex",
-                        justifyContent: "center",
-                      })}
-                    >
-                      <div
-                        css={(theme) => ({
-                          textAlign: "center",
-                          fontSize: 16,
-                          fontWeight: 500,
-                          color: theme.colors.Primary_500,
-                          backgroundColor: theme.colors.Primary_50,
-                          borderRadius: 8,
-                          padding: "4px 12px",
-                        })}
-                      >
-                        {" "}
-                        Zonal officer
-                      </div>
-                    </div>
-                    <div
-                      css={(theme) => ({
-                        textAlign: "right",
-                        fontSize: 16,
-                        fontWeight: 500,
-                        color: theme.colors.Error_500,
-                      })}
-                    >
-                      Disable account
-                    </div>
-                  </div>
-                ))}
-            </div>
-          )}
+          ))}
         </div>
+
+        <div>
+          {router.query.tab === "account" && <AccountComp />}
+          {router.query.tab === "certificate" && <CertificateComp />}
+        </div>
+
         <AnimatePresence initial={false}>
           {willAmmend && (
             <div>

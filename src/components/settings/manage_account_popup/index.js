@@ -12,7 +12,8 @@ const AddUserComp = (props) => {
   const [option, setOption] = useState("a");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [level, setLevel] = useState("");
+  const [level, setLevel] = useState("state_officer");
+  const [zone, setZone] = useState("lagos");
 
   const [state, setState] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +35,7 @@ const AddUserComp = (props) => {
         {
           state: state,
           password: password,
-
+          zone: zone ?? undefined,
           type: level,
           email: email,
         },
@@ -60,6 +61,8 @@ const AddUserComp = (props) => {
       });
     // console.log("ade");
   };
+
+  const zones = ["lagos", "nc", "nw", "sw", "se", "ss", "ne"];
   return (
     <div
       css={{
@@ -246,6 +249,62 @@ const AddUserComp = (props) => {
               </select>
             </div>
 
+            {level === "zonal_officer" && (
+              <div
+                css={{
+                  marginTop: 40,
+                }}
+              >
+                <div
+                  css={(theme) => ({
+                    colors: theme.colors.Gray_500,
+                    lineHeight: "20px",
+                    fontSize: 20,
+                    marginBottom: 20,
+                  })}
+                >
+                  Zone
+                </div>
+                <select
+                  css={(theme) => ({
+                    padding: "12px 14px",
+                    width: "100%",
+                    fontSize: 20,
+                    color: theme.colors.Gray_400,
+                    border: `1px solid ${theme.colors.Gray_200}`,
+                    borderRadius: 8,
+
+                    ":focus": {
+                      outline: "none",
+                      border: `1px solid ${theme.colors.Gray_200}`,
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
+                    },
+                    ":placeholder ": {
+                      outline: "none",
+                      border: "none",
+
+                      padding: "12px 14px",
+                      color: theme.colors.Gray_400,
+                    },
+                  })}
+                  placeholder=""
+                  defaultValue="lagos"
+                  value={level}
+                  onChange={(e) => {
+                    setLevel(e.target.value);
+                    // console.log(e.target.value);
+                    // console.log(catId);
+                  }}
+                >
+                  {zones.map((zon) => (
+                    <option>{zon}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             <div
               css={{
                 marginTop: 40,
@@ -256,6 +315,7 @@ const AddUserComp = (props) => {
                   colors: theme.colors.Gray_500,
                   lineHeight: "20px",
                   fontSize: 20,
+
                   marginBottom: 20,
                 })}
               >
@@ -451,10 +511,7 @@ const AddUserComp = (props) => {
                   lineHeight: "17px",
                   border: "none",
                   color: theme.colors.Gray_50,
-                  backgroundColor:
-                    state && password && level && email && confirm_password
-                      ? theme.colors.Primary_800
-                      : theme.colors.Primary_300,
+                  backgroundColor: theme.colors.Primary_800,
                 })}
                 type="submit"
               >

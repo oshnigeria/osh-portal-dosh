@@ -15,6 +15,10 @@ import VerifyPaymentTab from "./tabs/verify_payment";
 // import PreviewCorComp from "./tabs/preview_cor";
 import dynamic from "next/dynamic";
 
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
+
 const InspectionReportComp = dynamic(import("./tabs/inspection_report"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -83,35 +87,38 @@ const FactoryPageComp = () => {
         ) : (
           <div>
             <div
-              css={{
+              css={mq({
                 display: "flex",
                 alignItems: "center",
-              }}
+                marginTop: [30, 30, 0],
+                padding: ["16px 16px", "16px 16px", 0],
+              })}
+              onClick={() => router.back()}
             >
               <div>
                 {" "}
                 <div
-                  css={{
+                  css={mq({
                     cursor: "pointer",
-                    marginRight: 38,
-                  }}
-                  onClick={() => router.back()}
+                    marginRight: [16, 16, 38],
+                  })}
                 >
                   <img
-                    css={{
-                      width: 24,
-                      height: 20,
-                    }}
+                    css={mq({
+                      width: [8, 8, 24],
+                      height: [12, 12, 20],
+                    })}
                     src="/svg/dashboard/arrow_left.svg"
                   />
                 </div>
               </div>
               <div
-                css={{
-                  fontSize: 24,
+                css={mq({
+                  fontSize: [12, 12, 24],
+
                   color: "#000",
                   textTransform: "capitalize",
-                }}
+                })}
               >
                 {single_factory?.data?.factory?._occupier_name}
               </div>
@@ -121,33 +128,35 @@ const FactoryPageComp = () => {
                 display: "flex",
                 justifyContent: "center",
                 width: "100%",
-                marginTop: 60,
+                marginTop: [16, 16, 60],
               })}
             >
               <div
-                css={{
+                css={mq({
                   display: "grid",
                   gridTemplateColumns: `repeat(${steps.length}, 1fr)`,
                   alignItems: "center",
                   justifyContent: "space-between",
                   rowGap: 0,
-                  columnGap: 10,
-                }}
+                  columnGap: [2, 2, 10],
+                })}
               >
                 {steps.map((step) => (
                   <div
                     key={step}
-                    css={(theme) => ({
-                      padding: "14px 28px",
-                      backgroundColor:
-                        factory.tab === step
-                          ? theme.colors.Primary_500
-                          : theme.colors.Primary_50,
-                      fontSize: 12,
-                      textAlign: "center",
-                      cursor: "pointer",
-                      color: factory.tab === step ? "#fff" : "#000",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        padding: ["4px 4px", "4px 4px", "14px 28px"],
+                        backgroundColor:
+                          factory.tab === step
+                            ? theme.colors.Primary_500
+                            : theme.colors.Primary_50,
+                        fontSize: [10, 10, 12],
+                        textAlign: "center",
+                        cursor: "pointer",
+                        color: factory.tab === step ? "#fff" : "#000",
+                      })
+                    }
                     onClick={() => factory.set_tab(step)}
                   >
                     {step}

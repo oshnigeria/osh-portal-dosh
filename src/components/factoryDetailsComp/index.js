@@ -2,11 +2,50 @@
 import { useState, useEffect, useContext } from "react";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import { main_url } from "@/src/details";
+import { cookies_id } from "@/src/details";
+import { success_message, error_message } from "../toasts";
 import { useRouter } from "next/router";
+import facepaint from "facepaint";
+import axios from "axios";
+import Cookies from "js-cookie";
 
+import { FactoryContext } from "@/src/context/factoryContext";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const FactoryDocComp = (props) => {
   const [options, setOptions] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
+
+  const flag_document = () => {
+    setLoading(true);
+    axios
+      .patch(
+        `${main_url}/dosh/factory-docs?id=${router.query.id}&is_flagged=false`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get(cookies_id)}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+
+        success_message(response?.data.message);
+        setTimeout(function () {
+          router.push("/");
+        }, 2000);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        error_message(error?.response?.data?.message);
+        console.log(error);
+        setLoading(false);
+      });
+  };
 
   return (
     <div>
@@ -46,14 +85,16 @@ const FactoryDocComp = (props) => {
                 />
               </div>
               <div
-                css={{
+                css={mq({
                   marginLeft: 16,
-                }}
+                  fontSize: [12, 12, 16],
+                })}
               >
                 {props.name}.{props.type}
               </div>
             </div>
           </div>
+
           <div
             css={{
               position: "relative",
@@ -154,6 +195,82 @@ const FactoryDocComp = (props) => {
             </AnimatePresence>
           </div>
         </div>
+      </div>
+      <div
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <button
+          css={(theme) =>
+            mq({
+              height: [40, 56],
+              borderRadius: 30,
+              width: [140, 356],
+              //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+              padding: "16px 24px",
+              fontSize: [12, 14],
+              alignItems: "center",
+              cursor: "pointer",
+              marginRight: 20,
+              fontWeight: 600,
+              lineHeight: "17px",
+              border: `1px solid ${theme.colors.Primary_500}`,
+              display: "flex",
+              justifyContent: "center",
+              color: theme.colors.Primary_500,
+              backgroundColor: "#fff",
+            })
+          }
+          onClick={() => {
+            flag_document();
+          }}
+        >
+          <div
+            css={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <div>Flag</div>
+          </div>
+        </button>
+
+        {/* <button
+          css={(theme) =>
+            mq({
+              height: [40, 56],
+              borderRadius: 30,
+              width: [140, 356],
+              //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+              padding: "16px 24px",
+              fontSize: [12, 14],
+              alignItems: "center",
+              cursor: "pointer",
+              marginRight: 20,
+              fontWeight: 600,
+              lineHeight: "17px",
+              border: 0,
+              display: "flex",
+              justifyContent: "center",
+              color: "#fff",
+              backgroundColor: theme.colors.Primary_500,
+            })
+          }
+          onClick={() => {
+            factory_details.set_tab("Upload document");
+          }}
+        >
+          <div
+            css={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <div>Approve</div>
+          </div>
+        </button> */}
       </div>
     </div>
   );

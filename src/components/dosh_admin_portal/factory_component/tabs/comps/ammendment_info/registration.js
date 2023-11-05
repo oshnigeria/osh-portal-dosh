@@ -7,6 +7,11 @@ import useSWR, { useSWRConfig, mutate } from "swr";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
+
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
+
 const AmmendmentRegistration = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
@@ -68,30 +73,34 @@ const AmmendmentRegistration = () => {
           }}
         >
           <div
-            css={(theme) => ({
-              marginTop: 54,
+            css={(theme) =>
+              mq({
+                marginTop: [24, 24, 54],
 
-              border: `1px solid ${theme.colors.Primary_100}`,
-              padding: "50px 32px",
-              width: "90%",
-              borderRadius: 8,
-            })}
+                border: [0, 0, `1px solid ${theme.colors.Primary_100}`],
+                padding: [0, 0, "50px 32px"],
+                width: "90%",
+                borderRadius: 8,
+              })
+            }
           >
             <div
-              css={(theme) => ({
-                fontSize: 32,
-                color: theme.colors.Gray_700,
-                textTransform: "capitalize",
-              })}
+              css={(theme) =>
+                mq({
+                  fontSize: [16, 16, 32],
+                  color: theme.colors.Gray_700,
+                  textTransform: "capitalize",
+                })
+              }
             >
               Factory information
             </div>
 
             <div>
               <div
-                css={{
-                  marginTop: 48,
-                }}
+                css={mq({
+                  marginTop: [24, 24, 48],
+                })}
               >
                 <div
                   css={{
@@ -103,21 +112,25 @@ const AmmendmentRegistration = () => {
                 >
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Occupier name
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -127,21 +140,25 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       State of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -151,21 +168,25 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Phone number of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -175,21 +196,25 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Date of Expiration of CoR
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -199,21 +224,25 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Postal address of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -223,42 +252,50 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Registration Status
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {single_factory.data.factory?.ammendment?.status}
                     </div>
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Precise address of occupier
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -268,21 +305,25 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Company Registration number
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -292,21 +333,25 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Date of occupation
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       {
                         single_factory.data.factory?.ammendment?.ammendment
@@ -316,23 +361,30 @@ const AmmendmentRegistration = () => {
                   </div>
                   <div>
                     <div
-                      css={(theme) => ({
-                        color: theme.colors.Gray_400,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
                       Nature of work
                     </div>
                     <div
-                      css={(theme) => ({
-                        marginTop: 12,
-                        color: theme.colors.Gray_700,
-                        lineHeight: "20px",
-                        fontSize: 20,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
                     >
-                      {single_factory.data.factory.type}
+                      {
+                        single_factory?.data?.factory?.inspection_report
+                          ?.nature_of_work_done
+                      }
                     </div>
                   </div>
                 </div>
@@ -346,11 +398,13 @@ const AmmendmentRegistration = () => {
             ></div>
             <div>
               <div
-                css={(theme) => ({
-                  color: theme.colors.Gray_400,
-                  lineHeight: "20px",
-                  fontSize: 20,
-                })}
+                css={(theme) =>
+                  mq({
+                    color: theme.colors.Gray_400,
+                    lineHeight: "20px",
+                    fontSize: [14, 14, 20],
+                  })
+                }
               >
                 Employee Information
               </div>
@@ -376,11 +430,13 @@ const AmmendmentRegistration = () => {
               }}
             >
               <div
-                css={(theme) => ({
-                  color: theme.colors.Gray_400,
-                  lineHeight: "20px",
-                  fontSize: 20,
-                })}
+                css={(theme) =>
+                  mq({
+                    color: theme.colors.Gray_400,
+                    lineHeight: "20px",
+                    fontSize: [14, 14, 20],
+                  })
+                }
               >
                 Employee shift Information
               </div>
@@ -391,11 +447,13 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Morning shift
                 </div>
@@ -425,11 +483,13 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Afternoon shift
                 </div>
@@ -459,11 +519,13 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Evening shift
                 </div>
@@ -503,21 +565,25 @@ const AmmendmentRegistration = () => {
             <div>
               <div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Will mechanical power machine be used?
                 </div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_700,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                    marginTop: 12,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_700,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                      marginTop: 12,
+                    })
+                  }
                 >
                   {single_factory.data.factory?.ammendment?.ammendment
                     ?.use_mechanical_power
@@ -531,21 +597,25 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   What type of mechanical power is used/ intended to be used
                 </div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_700,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                    marginTop: 12,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_700,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                      marginTop: 12,
+                    })
+                  }
                 >
                   {single_factory.data.factory?.ammendment?.ammendment
                     ?.use_mechanical_power
@@ -561,11 +631,13 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     What type of mechanical power is used/ intended to be used
                   </div>
@@ -583,11 +655,13 @@ const AmmendmentRegistration = () => {
                         .map((key) => (
                           <li
                             key={key}
-                            css={(theme) => ({
-                              fontSize: 20,
-                              color: theme.colors.Gray_700,
-                              textTransform: "capitalize",
-                            })}
+                            css={(theme) =>
+                              mq({
+                                fontSize: [14, 14, 20],
+                                color: theme.colors.Gray_700,
+                                textTransform: "capitalize",
+                              })
+                            }
                           >
                             <div
                               css={{
@@ -628,22 +702,26 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Are boilers going to be used?
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                   >
                     {single_factory.data.factory?.ammendment?.ammendment
                       ?.use_boiler
@@ -657,22 +735,26 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Type, description and distinctive number
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                     dangerouslySetInnerHTML={{
                       __html:
                         single_factory.data.factory?.ammendment?.ammendment
@@ -687,22 +769,26 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Country and year of manufacture
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                   >
                     {
                       single_factory.data.factory?.ammendment?.ammendment
@@ -717,23 +803,27 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Date of last thorough test and examination and name &
                     address of the examiner
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                     dangerouslySetInnerHTML={{
                       __html:
                         single_factory.data.factory?.ammendment?.ammendment
@@ -748,22 +838,26 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Maximum permissible working pressure in kg/sq Cm
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                   >
                     {
                       single_factory.data.factory?.ammendment?.ammendment
@@ -778,23 +872,27 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Location in the factory (indicate also the linear distance
                     to the nearest workroom)
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                   >
                     {
                       single_factory.data.factory?.ammendment?.ammendment
@@ -809,22 +907,26 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Type of fuel to be used
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                   >
                     {
                       single_factory.data.factory?.ammendment?.ammendment
@@ -839,22 +941,26 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Particulars of boiler attendants
                   </div>
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_700,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                      marginTop: 12,
-                      textTransform: "capitalize",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        marginTop: 12,
+                        textTransform: "capitalize",
+                      })
+                    }
                   >
                     {
                       single_factory.data.factory?.ammendment?.ammendment
@@ -884,11 +990,13 @@ const AmmendmentRegistration = () => {
                   }}
                 >
                   <div
-                    css={(theme) => ({
-                      color: theme.colors.Gray_500,
-                      lineHeight: "20px",
-                      fontSize: 20,
-                    })}
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
                   >
                     Equipment available
                   </div>
@@ -898,11 +1006,13 @@ const AmmendmentRegistration = () => {
                         (key) => (
                           <li
                             key={key}
-                            css={(theme) => ({
-                              fontSize: 20,
-                              color: theme.colors.Gray_700,
-                              textTransform: "capitalize",
-                            })}
+                            css={(theme) =>
+                              mq({
+                                fontSize: [14, 14, 20],
+                                color: theme.colors.Gray_700,
+                                textTransform: "capitalize",
+                              })
+                            }
                           >
                             <div
                               css={{
@@ -928,22 +1038,26 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Give brief particulars
                 </div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_700,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                    marginTop: 12,
-                    textTransform: "capitalize",
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_700,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                      marginTop: 12,
+                      textTransform: "capitalize",
+                    })
+                  }
                   dangerouslySetInnerHTML={{
                     __html:
                       single_factory.data.factory?.ammendment?.ammendment
@@ -972,22 +1086,26 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Has the premises previously been used as a factory?
                 </div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_700,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                    marginTop: 12,
-                    textTransform: "capitalize",
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_700,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                      marginTop: 12,
+                      textTransform: "capitalize",
+                    })
+                  }
                 >
                   {single_factory.data.factory?.ammendment?.ammendment
                     ?.previously_used_as_factory
@@ -1002,23 +1120,27 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   State the name of previous occupier, nature of processes
                   carried out and CoR number
                 </div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_700,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                    marginTop: 12,
-                    textTransform: "capitalize",
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_700,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                      marginTop: 12,
+                      textTransform: "capitalize",
+                    })
+                  }
                   dangerouslySetInnerHTML={{
                     __html:
                       single_factory.data.factory?.ammendment?.ammendment
@@ -1046,23 +1168,27 @@ const AmmendmentRegistration = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_500,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                    })
+                  }
                 >
                   Other documents/ information submitted in support of this
                   application
                 </div>
                 <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_700,
-                    lineHeight: "20px",
-                    fontSize: 20,
-                    marginTop: 12,
-                    textTransform: "capitalize",
-                  })}
+                  css={(theme) =>
+                    mq({
+                      color: theme.colors.Gray_700,
+                      lineHeight: "20px",
+                      fontSize: [14, 14, 20],
+                      marginTop: 12,
+                      textTransform: "capitalize",
+                    })
+                  }
                   dangerouslySetInnerHTML={{
                     __html:
                       single_factory.data.factory?.ammendment?.ammendment
@@ -1084,12 +1210,12 @@ const AmmendmentRegistration = () => {
       >
         <button
           css={(theme) => ({
-            height: 56,
+            height: [40, 40, 56],
             borderRadius: 30,
-            width: 356,
+            width: [140, 140, 356],
             //   padding: ["10px 16px", "10px 16px", "16px 24px"],
             padding: "16px 24px",
-            fontSize: 20,
+            fontSize: [12, 12, 20],
             cursor: "pointer",
             marginRight: 20,
             fontWeight: 600,
@@ -1119,10 +1245,10 @@ const AmmendmentRegistration = () => {
               }}
             >
               <img
-                css={{
-                  width: 24,
-                  height: 24,
-                }}
+                css={mq({
+                  width: [12, 12, 24],
+                  height: [16, 16, 24],
+                })}
                 src="/svg/registration/left_arrow.svg"
               />
             </div>

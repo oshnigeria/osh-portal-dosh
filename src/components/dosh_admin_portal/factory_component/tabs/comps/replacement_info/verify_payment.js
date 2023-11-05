@@ -118,14 +118,28 @@ const ReplacementVerifyPayment = () => {
           }}
         >
           <div
-            css={(theme) => ({
-              marginTop: 54,
+            css={(theme) =>
+              mq({
+                display: ["block", "block", "none"],
+                fontSize: 16,
+                marginTop: 24,
+                color: theme.colors.Gray_700,
+              })
+            }
+          >
+            Uploaded Documents
+          </div>
+          <div
+            css={(theme) =>
+              mq({
+                marginTop: 54,
 
-              border: `1px solid ${theme.colors.Primary_100}`,
-              padding: "50px 32px",
+                border: [0, 0, `1px solid ${theme.colors.Primary_100}`],
+                padding: "50px 32px",
 
-              borderRadius: 8,
-            })}
+                borderRadius: 8,
+              })
+            }
           >
             {single_factory_doc.data.docs.filter(
               (word) => word.doc_type === "replacement_payment_reciept"
@@ -166,10 +180,10 @@ const ReplacementVerifyPayment = () => {
                     }}
                   >
                     <img
-                      css={{
-                        width: 100,
-                        height: 100,
-                      }}
+                      css={mq({
+                        width: [50, 50, 100],
+                        height: [50, 50, 100],
+                      })}
                       src="/svg/dashboard/empty.svg"
                     />
                   </div>
@@ -186,12 +200,12 @@ const ReplacementVerifyPayment = () => {
           >
             <button
               css={(theme) => ({
-                height: 56,
+                height: [40, 40, 56],
                 borderRadius: 30,
-                width: 356,
+                width: [140, 140, 356],
                 //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                 padding: "16px 24px",
-                fontSize: 20,
+                fontSize: [12, 12, 20],
                 cursor: "pointer",
                 marginRight: 20,
                 fontWeight: 600,

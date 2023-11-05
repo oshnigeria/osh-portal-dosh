@@ -7,7 +7,10 @@ import { useRouter } from "next/router";
 import DashboadWrapperComp from "../nav_wrapper";
 import { main_url, cookies_id } from "@/src/details";
 import React, { useState, useContext, useEffect } from "react";
+import facepaint from "facepaint";
 
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const RenewalComp = () => {
   const [progress, setProgress] = useState({
     min: 0,
@@ -105,50 +108,59 @@ const RenewalComp = () => {
   return (
     <DashboadWrapperComp>
       <div
-        css={{
+        css={mq({
           display: "flex",
           alignItems: "center",
-        }}
+          marginTop: [22, 22, 0],
+          marginLeft: [22, 22, 0],
+        })}
       >
         <div
-          css={(theme) => ({
-            color: theme.colors.Gray_700,
-            fontSize: 32,
-            lineHeight: "28px",
-            fontWeight: 700,
-          })}
+          css={(theme) =>
+            mq({
+              color: theme.colors.Gray_700,
+              fontSize: [16, 16, 32],
+              lineHeight: "28px",
+              fontWeight: 700,
+            })
+          }
         >
           Welcome, Director
         </div>
         <div>
           <img
-            css={{
-              width: 34,
-              height: 32,
+            css={mq({
+              width: [14, 14, 34],
+              height: [14, 14, 32],
+
               marginLeft: 8,
-            }}
+            })}
             src="/svg/state_admin_portal/waving_hand_sign.svg"
           />
         </div>
       </div>
 
       <div
-        css={(theme) => ({
-          marginTop: 82,
-          border: `1px solid ${theme.colors.Gray_200}`,
-          //   padding: "42px 66px",
-          borderRadius: 8,
-          width: "100%",
-        })}
-      >
-        <div
-          css={(theme) => ({
-            marginTop: 62,
+        css={(theme) =>
+          mq({
+            marginTop: [28, 28, 62],
             border: "none",
-            borderBottom: `1px solid ${theme.colors.Gray_200}`,
+            borderBottom: [0, 0, `1px solid ${theme.colors.Gray_200}`],
             padding: "0px 66px",
             paddingBottom: 16,
-          })}
+          })
+        }
+      >
+        <div
+          css={(theme) =>
+            mq({
+              marginTop: [28, 28, 62],
+              border: "none",
+              borderBottom: [0, 0, `1px solid ${theme.colors.Gray_200}`],
+              padding: "0px 66px",
+              paddingBottom: 16,
+            })
+          }
         >
           <div
             css={{
@@ -175,18 +187,20 @@ const RenewalComp = () => {
                 }}
               >
                 <div
-                  css={(theme) => ({
-                    fontSize: 20,
-                    fontWeight: 600,
-                    display: "flex",
-                    alignItems: "end",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    color:
-                      router.query.tab == `${tab.route}`
-                        ? theme.colors.Primary_500
-                        : theme.colors.Primary_50,
-                  })}
+                  css={(theme) =>
+                    mq({
+                      fontSize: [10, 10, 20],
+                      fontWeight: 600,
+                      display: "flex",
+                      alignItems: "end",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      color:
+                        router.query.tab == `${tab.route}`
+                          ? theme.colors.Primary_500
+                          : theme.colors.Primary_50,
+                    })
+                  }
                 >
                   {tab.title}
                 </div>
@@ -374,11 +388,14 @@ const RenewalComp = () => {
                           >
                             {table.map((tab) => (
                               <div
-                                css={(theme) => ({
-                                  color: theme.colors.Gray_500,
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
+                                css={(theme) =>
+                                  mq({
+                                    color: theme.colors.Gray_500,
+                                    fontSize: [12, 12, 18],
+                                    lineHeight: ["14px", "14px", "22px"],
+                                    fontWeight: [600, 600, 400],
+                                  })
+                                }
                               >
                                 {tab.title}
                               </div>
@@ -406,34 +423,45 @@ const RenewalComp = () => {
                               }
                             >
                               <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  fontSize: 18,
-                                  textTransform: "capitalize",
-                                  lineHeight: "22px",
-                                })}
+                                css={(theme) =>
+                                  mq({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+
+                                    textTransform: "capitalize",
+
+                                    fontSize: [12, 12, 18],
+                                    lineHeight: ["14px", "14px", "22px"],
+                                    fontWeight: [600, 600, 400],
+                                  })
+                                }
                               >
                                 {factory.factory.occupier_name}
                               </div>
                               <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  textTransform: "capitalize",
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
+                                css={(theme) =>
+                                  mq({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    textTransform: "capitalize",
+                                    fontSize: [12, 12, 18],
+                                    lineHeight: ["14px", "14px", "22px"],
+                                    fontWeight: [600, 600, 400],
+                                  })
+                                }
                               >
                                 {factory.state}
                               </div>
                               <div
-                                css={(theme) => ({
-                                  textAlign: "left",
-                                  color: theme.colors.Gray_700,
-                                  fontSize: 18,
-                                  lineHeight: "22px",
-                                })}
+                                css={(theme) =>
+                                  mq({
+                                    textAlign: "left",
+                                    color: theme.colors.Gray_700,
+                                    fontSize: [12, 12, 18],
+                                    lineHeight: ["14px", "14px", "22px"],
+                                    fontWeight: [600, 600, 400],
+                                  })
+                                }
                               >
                                 {formatDateToCustom(factory.createdAt)}
                               </div>
@@ -456,10 +484,10 @@ const RenewalComp = () => {
                             }}
                           >
                             <img
-                              css={{
-                                width: 100,
-                                height: 100,
-                              }}
+                              css={mq({
+                                width: [50, 50, 100],
+                                height: [50, 50, 100],
+                              })}
                               src="/svg/dashboard/empty.svg"
                             />
                           </div>

@@ -15,22 +15,26 @@ const DeclarationPopup = (props) => {
         }}
       >
         <div
-          css={(theme) => ({
-            fontSize: 20,
-            fontWeight: 700,
-            color: theme.colors.Gray_700,
-            textAlign: "center",
-          })}
+          css={(theme) =>
+            mq({
+              fontSize: [16, 16, 20],
+              fontWeight: 700,
+              color: theme.colors.Gray_700,
+              textAlign: "center",
+            })
+          }
         >
           Are you sure you want to submit
         </div>
         <div
-          css={(theme) => ({
-            marginTop: 24,
-            fontSize: 16,
-            textAlign: "center",
-            color: theme.colors.Gray_700,
-          })}
+          css={(theme) =>
+            mq({
+              marginTop: 24,
+              fontSize: [14, 14, 16],
+              textAlign: "center",
+              color: theme.colors.Gray_700,
+            })
+          }
         >
           Once you’ve submitted, your amendment will be processed and your will
           be notified for inspection
@@ -43,27 +47,29 @@ const DeclarationPopup = (props) => {
           }}
         >
           <button
-            css={(theme) => ({
-              width: 354,
-              textAlign: "center",
-              border: "none",
-              outline: "none",
-              fontSize: 16,
+            css={(theme) =>
+              mq({
+                width: [140, 140, 356],
+                textAlign: "center",
+                border: "none",
+                outline: "none",
+                fontSize: [12, 12, 16],
 
-              fontWeight: 500,
-              lineHeight: "26px",
-              color: "#fff",
-              letterSpacing: "0.3px",
-              padding: "16px 16px",
-              backgroundColor: theme.colors.Primary_500,
-              textTransform: "capitalize",
-              marginRight: 4,
-              cursor: "pointer",
-              "&:active": {
-                backgroundColor: theme.colors.Primary_800,
-              },
-              borderRadius: 30,
-            })}
+                fontWeight: 500,
+                lineHeight: "26px",
+                color: "#fff",
+                letterSpacing: "0.3px",
+                padding: "16px 16px",
+                backgroundColor: theme.colors.Primary_500,
+                textTransform: "capitalize",
+                marginRight: 4,
+                cursor: "pointer",
+                "&:active": {
+                  backgroundColor: theme.colors.Primary_800,
+                },
+                borderRadius: 30,
+              })
+            }
             onClick={() => props.ammend()}
           >
             {props.loading ? (

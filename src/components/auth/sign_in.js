@@ -74,17 +74,17 @@ const SignInComp = () => {
         }}
       />
       <div
-        css={{
-          padding: " 40px 146px",
-        }}
+        css={mq({
+          padding: ["16px 16px", "16px 16px", " 40px 146px"],
+        })}
       >
         <div>
           <div
-            css={{
-              display: "flex",
+            css={mq({
+              display: ["none", "none", "flex"],
 
               width: "100%",
-            }}
+            })}
           >
             <div>
               <img src={"/svg/auth/arrow_left.svg"} />
@@ -101,25 +101,28 @@ const SignInComp = () => {
             </div>
           </div>
           <div
-            css={(theme) => ({
-              colors: theme.colors.Gray_600,
-              marginTop: 50,
-              textAlign: "center",
-              width: "100%",
-              fontSize: 40,
-              fontWeight: 700,
-            })}
+            css={(theme) =>
+              mq({
+                colors: theme.colors.Gray_600,
+                marginTop: [30, 30, 50],
+                textAlign: ["left", "left", "center"],
+                width: "100%",
+                fontSize: [20, 20, 40],
+                fontWeight: 700,
+              })
+            }
           >
             Welcome back
           </div>
           <form onSubmit={handleSubmit((e) => login(e))}>
             <div
-              css={{
-                display: "flex",
-                justifyContent: "center",
+              css={mq({
+                display: ["block", "block", "flex"],
+                justifyContent: ["left", "left", "center"],
                 alignItems: "center",
+
                 marginTop: 28,
-              }}
+              })}
             >
               <div>
                 <div>
@@ -141,18 +144,18 @@ const SignInComp = () => {
                       css={(theme) =>
                         mq({
                           padding: "12px 14px",
-                          width: ["100%", "100%", 450],
-                          fontSize: 20,
+                          width: ["90%", "90%", 450],
+                          fontSize: 18,
                           color: theme.colors.Gray_400,
                           border: `1px solid ${theme.colors.Gray_200}`,
                           borderRadius: 8,
 
                           ":focus": {
                             outline: "none",
-                            border: `1px solid ${theme.colors.Gray_200}`,
+                            border: `1px solid ${theme.colors.Gray_400}`,
 
                             padding: "12px 14px",
-                            color: theme.colors.Gray_400,
+                            color: theme.colors.Gray_800,
                           },
                           ":placeholder ": {
                             outline: "none",
@@ -206,18 +209,18 @@ const SignInComp = () => {
                       css={(theme) =>
                         mq({
                           padding: "12px 14px",
-                          width: ["100%", "100%", 450],
-                          fontSize: 20,
+                          width: ["90%", "90%", 450],
+                          fontSize: 18,
                           color: theme.colors.Gray_400,
                           border: `1px solid ${theme.colors.Gray_200}`,
                           borderRadius: 8,
 
                           ":focus": {
                             outline: "none",
-                            border: `1px solid ${theme.colors.Gray_200}`,
+                            border: `1px solid ${theme.colors.Gray_400}`,
 
                             padding: "12px 14px",
-                            color: theme.colors.Gray_400,
+                            color: theme.colors.Gray_800,
                           },
                           ":placeholder ": {
                             outline: "none",

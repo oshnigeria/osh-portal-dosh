@@ -15,7 +15,9 @@ import DeclarationPopup from "./comps/declaration_popup";
 import PDFComp from "./comps/certificate";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
-
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const PreviewCorComp = () => {
   const [value, setValue] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);
@@ -305,10 +307,10 @@ const PreviewCorComp = () => {
                       >
                         <img
                           src="/cert/coat_of_arms.png"
-                          css={{
-                            width: 102,
-                            height: 82,
-                          }}
+                          css={mq({
+                            width: [60, 60, 102],
+                            height: [42, 42, 82],
+                          })}
                         />
                       </div>
                       <div
@@ -348,14 +350,16 @@ const PreviewCorComp = () => {
                       The Factories Act, CAP F1 LFN 2004
                     </div>
                     <div
-                      css={(theme) => ({
-                        textAlign: "center",
-                        marginTop: 18,
-                        fontFamily: "Times New Roman",
-                        color: theme.colors.Primary_400,
-                        fontSize: 18,
-                        fontWeight: 700,
-                      })}
+                      css={(theme) =>
+                        mq({
+                          textAlign: "center",
+                          marginTop: [14, 14, 18],
+                          fontFamily: "Times New Roman",
+                          color: theme.colors.Primary_400,
+                          fontSize: [14, 14, 18],
+                          fontWeight: 700,
+                        })
+                      }
                     >
                       CERTIFICATE OF REGISTRATION OF FACTORY
                     </div>
@@ -665,12 +669,12 @@ const PreviewCorComp = () => {
               trigger={() => (
                 <button
                   css={(theme) => ({
-                    height: 56,
+                    height: [40, 40, 56],
                     borderRadius: 30,
-                    width: 356,
+                    width: [140, 140, 356],
                     //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                     padding: "16px 24px",
-                    fontSize: 20,
+                    fontSize: [12, 12, 20],
                     cursor: "pointer",
                     marginRight: 20,
                     fontWeight: 600,
@@ -703,12 +707,12 @@ const PreviewCorComp = () => {
 
             <button
               css={(theme) => ({
-                height: 56,
+                height: [40, 40, 56],
                 borderRadius: 30,
-                width: 356,
+                width: [140, 140, 356],
                 //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                 padding: "16px 24px",
-                fontSize: 20,
+                fontSize: [12, 12, 20],
                 cursor: "pointer",
                 marginRight: 20,
                 fontWeight: 600,
@@ -737,10 +741,10 @@ const PreviewCorComp = () => {
                   }}
                 >
                   <img
-                    css={{
-                      width: 24,
-                      height: 24,
-                    }}
+                    css={mq({
+                      width: [12, 12, 24],
+                      height: [16, 16, 24],
+                    })}
                     src="/svg/registration/left_arrow.svg"
                   />
                 </div>
