@@ -4,6 +4,11 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { cookies_id } from "@/src/details";
 import { AuthContext } from "@/src/context/authContext";
+
+import facepaint from "facepaint";
+
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const AuthNavWrapper = (props) => {
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -11,20 +16,26 @@ const AuthNavWrapper = (props) => {
   return (
     <div>
       <div
-        css={(theme) => ({
-          backgroundColor: theme.colors.Primary_500,
-          padding: "40px 140px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        })}
+        css={(theme) =>
+          mq({
+            backgroundColor: [
+              theme.colors.Primary_500,
+              theme.colors.Primary_500,
+              theme.colors.Primary_500,
+            ],
+            padding: ["16px 16px", "16px 16px", "40px 140px"],
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          })
+        }
       >
         <div>
           <img
-            css={{
-              width: 266,
-              height: 50,
-            }}
+            css={mq({
+              width: ["auto", "auto", 266],
+              height: [32, 40, 50],
+            })}
             src={"/svg/auth/logo_white.svg"}
           />
         </div>
@@ -62,20 +73,22 @@ const AuthNavWrapper = (props) => {
           ) : (
             <div>
               <button
-                css={(theme) => ({
-                  width: 192,
-                  height: 56,
-                  borderRadius: 30,
-                  //   padding: ["10px 16px", "10px 16px", "16px 24px"],
-                  fontSize: 16,
-                  cursor: "pointer",
+                css={(theme) =>
+                  mq({
+                    width: [100, 100, 192],
+                    height: 56,
+                    borderRadius: 30,
+                    //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                    fontSize: [14, 14, 16],
+                    cursor: "pointer",
 
-                  fontWeight: 600,
-                  lineHeight: "17px",
-                  border: "none",
-                  color: theme.colors.Primary_500,
-                  backgroundColor: "#fff",
-                })}
+                    fontWeight: 600,
+                    lineHeight: "17px",
+                    border: "none",
+                    color: theme.colors.Primary_500,
+                    backgroundColor: "#fff",
+                  })
+                }
                 onClick={() => {
                   router.push("/signin");
                 }}

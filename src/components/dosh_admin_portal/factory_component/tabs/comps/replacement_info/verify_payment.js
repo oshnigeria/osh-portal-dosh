@@ -199,23 +199,25 @@ const ReplacementVerifyPayment = () => {
             }}
           >
             <button
-              css={(theme) => ({
-                height: [40, 40, 56],
-                borderRadius: 30,
-                width: [140, 140, 356],
-                //   padding: ["10px 16px", "10px 16px", "16px 24px"],
-                padding: "16px 24px",
-                fontSize: [12, 12, 20],
-                cursor: "pointer",
-                marginRight: 20,
-                fontWeight: 600,
-                lineHeight: "17px",
-                border: "none",
-                display: "flex",
-                justifyContent: "center",
-                color: "#fff",
-                backgroundColor: theme.colors.Primary_500,
-              })}
+              css={(theme) =>
+                mq({
+                  height: [40, 40, 56],
+                  borderRadius: 30,
+                  width: [140, 140, 356],
+                  //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                  padding: "16px 24px",
+                  fontSize: [12, 12, 20],
+                  cursor: "pointer",
+                  marginRight: 20,
+                  fontWeight: 600,
+                  lineHeight: "17px",
+                  border: "none",
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#fff",
+                  backgroundColor: theme.colors.Primary_500,
+                })
+              }
               type="submit"
               onClick={() => {
                 // factory_details.add_factory_details(formData);

@@ -131,12 +131,12 @@ const DocumentUploadTab = () => {
             <button
               css={(theme) =>
                 mq({
-                  height: 56,
+                  height: [40, 40, 56],
                   borderRadius: 30,
-                  width: 356,
+                  width: [140, 140, 356],
                   //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                   padding: "16px 24px",
-                  fontSize: 20,
+                  fontSize: [12, 12, 20],
                   cursor: "pointer",
                   marginRight: 20,
                   fontWeight: 600,

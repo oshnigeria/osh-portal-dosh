@@ -706,7 +706,8 @@ const PreviewCorComp = () => {
             />
 
             <button
-              css={(theme) => ({
+             css={(theme) =>
+              mq({
                 height: [40, 40, 56],
                 borderRadius: 30,
                 width: [140, 140, 356],
@@ -722,7 +723,8 @@ const PreviewCorComp = () => {
                 justifyContent: "center",
                 color: "#fff",
                 backgroundColor: theme.colors.Primary_500,
-              })}
+              })
+            }
               type="submit"
               onClick={() => {
                 setWillAmmend(true);
