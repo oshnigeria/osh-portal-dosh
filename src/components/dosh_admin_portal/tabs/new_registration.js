@@ -44,7 +44,7 @@ const NewRegistrationComp = () => {
       state: () => {
         setProgress({
           min: 90,
-          max: 94,
+          max: 99,
         });
       },
     },
@@ -63,7 +63,7 @@ const NewRegistrationComp = () => {
       route: "completed",
       state: () => {
         setProgress({
-          min: 95,
+          min: 100,
           max: 101,
         });
       },
