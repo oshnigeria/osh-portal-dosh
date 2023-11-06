@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import facepaint from "facepaint";
 
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const DeclarationPopup = (props) => {
   return (
     <div

@@ -13,6 +13,10 @@ import VerifyPaymentTab from "./tabs/verify_payment";
 import VisitationLetterComp from "./tabs/visitation_letter";
 // import InspectionReportComp from "./tabs/inspection_report";
 import dynamic from "next/dynamic";
+import facepaint from "facepaint";
+
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const InspectionReportComp = dynamic(import("./tabs/inspection_report"), {
   ssr: false,
   loading: () => (
