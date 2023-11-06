@@ -177,7 +177,7 @@ const AddUserComp = (props) => {
                   },
                 })}
                 {...register("email", { required: true })}
-                placeholder=""
+                placeholder="Input Email"
                 type="text"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
@@ -414,7 +414,7 @@ const AddUserComp = (props) => {
                     },
                   })}
                   {...register("password", { required: true })}
-                  placeholder=""
+                  placeholder="Input Password"
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
@@ -473,7 +473,7 @@ const AddUserComp = (props) => {
                     },
                   })}
                   {...register("confirmpassword", { required: true })}
-                  placeholder=""
+                  placeholder="Confirm Password"
                   type="password"
                   onChange={(e) => setConfirm_Password(e.target.value)}
                   value={confirm_password}
