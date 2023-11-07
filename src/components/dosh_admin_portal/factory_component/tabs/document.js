@@ -26,7 +26,7 @@ const DocumentUploadTab = () => {
           Authorization: `Bearer ${Cookies.get(cookies_id)}`,
         },
       })
-      .then((res) => res.data)
+      .then((res) => res?.data)
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -43,7 +43,7 @@ const DocumentUploadTab = () => {
   } = useSWR(
     isLoading
       ? null
-      : `${main_url}/dosh/factory-docs?factory_id=${single_factory.data.factory._id}`,
+      : `${main_url}/dosh/factory-docs?factory_id=${single_factory?.data.factory._id}`,
     fetcher
   );
 
