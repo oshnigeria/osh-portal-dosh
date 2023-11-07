@@ -139,8 +139,9 @@ const VisitationLetterComp = () => {
                       lineHeight: "20px",
                     }}
                   >
-                    Lorem ipsum dolor sit amet consectetur. Arcu tristique
-                    dictumst sed in bibendum orci cras.
+                    _______________________ 
+                    _______________________<br/>
+                    _______________________
                   </div>
                 </div>
                 <div
@@ -155,23 +156,18 @@ const VisitationLetterComp = () => {
                       lineHeight: "20px",
                     }}
                   >
-                    Lorem ipsum dolor sit amet consectetur. Tempus eleifend leo
-                    arcu ut. Habitant aliquam sem quisque et. Suspendisse magnis
-                    mattis nisl pulvinar leo. Tristique ac commodo lorem lacinia
-                    in ut consequat. Tincidunt tristique amet tellus lectus
-                    nullam posuere eget mi egestas. Rhoncus mauris sit mi tortor
-                    ut lectus tincidunt auctor vulputate. Fermentum faucibus
-                    nibh mi pretium mauris ac odio. Cras aliquam sit dui morbi
-                    integer commodo interdum. Egestas habitasse nisl
-                    pellentesque nunc lectus ac elit. Commodo tincidunt
-                    venenatis scelerisque at aliquet sed nulla. Iaculis risus et
-                    turpis blandit risus quisque. Lacus viverra donec sed nec
-                    massa. Dui euismod volutpat ipsum consectetur. Cursus congue
-                    diam velit at vitae. Augue lectus dignissim et eget. Vitae
-                    leo lorem egestas nulla commodo. In iaculis ultrices nisi eu
-                    quis vulputate. Sit elit ac ullamcorper vitae adipiscing
-                    massa egestas viverra urna. Pulvinar laoreet consequat vitae
-                    pharetra.
+                    ___________________________________________________________
+                    ___________________________________________________________<br/>
+                    ___________________________________________________________
+                    ___________________________________________________________<br/>
+                    ___________________________________________________________
+                    ___________________________________________________________<br/>
+                    ___________________________________________________________
+                    ___________________________________________________________<br/>
+                    ___________________________________________________________
+                    ___________________________________________________________<br/>
+                    ___________________________________________________________
+                    ___________________________________________________________<br/>
                   </div>
                 </div>
               </div>
