@@ -28,7 +28,7 @@ const VerifyPaymentTab = () => {
           Authorization: `Bearer ${Cookies.get(cookies_id)}`,
         },
       })
-      .then((res) => res.data)
+      .then((res) => res?.data)
       .catch((error) => {
         console.error("Error:", error);
       });
