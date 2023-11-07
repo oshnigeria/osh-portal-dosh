@@ -85,10 +85,13 @@ const FactoryDocComp = (props) => {
                 />
               </div>
               <div
-                css={mq({
-                  marginLeft: 16,
-                  fontSize: [12, 12, 16],
-                })}
+                css={(theme) =>
+                  mq({
+                    marginLeft: 16,
+                    fontSize: [12, 12, 16],
+                    color: theme.colors.Gray_700,
+                  })
+                }
               >
                 {props.name}.{props.type}
               </div>
@@ -208,6 +211,7 @@ const FactoryDocComp = (props) => {
               height: [40, 56],
               borderRadius: 30,
               width: [140, 356],
+              marginBottom: 22,
               //   padding: ["10px 16px", "10px 16px", "16px 24px"],
               padding: "16px 24px",
               fontSize: [12, 14],

@@ -195,17 +195,19 @@ const FactoryPageComp = () => {
                 {steps.map((step) => (
                   <div
                     key={step.title}
-                    css={(theme) => ({
-                      padding: "14px 28px",
-                      backgroundColor:
-                        factory.tab === step.title
-                          ? theme.colors.Primary_500
-                          : theme.colors.Primary_50,
-                      fontSize: 12,
-                      textAlign: "center",
-                      cursor: "pointer",
-                      color: factory.tab === step.title ? "#fff" : "#000",
-                    })}
+                    css={(theme) =>
+                      mq({
+                        padding: ["8px 4px", "8px 4px", "14px 28px"],
+                        backgroundColor:
+                          factory.tab === step.title
+                            ? theme.colors.Primary_500
+                            : theme.colors.Primary_50,
+                        fontSize: [10, 10, 12],
+                        textAlign: "center",
+                        cursor: "pointer",
+                        color: factory.tab === step.title ? "#fff" : "#000",
+                      })
+                    }
                     onClick={() => {
                       factory.set_tab(step.title);
                       step.click();

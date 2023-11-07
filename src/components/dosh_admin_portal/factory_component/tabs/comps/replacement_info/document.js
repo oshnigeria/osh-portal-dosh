@@ -8,6 +8,9 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
 import FactoryDocComp from "@/src/components/factoryDetailsComp";
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const ReplacementDocumentUploaded = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
@@ -97,7 +100,7 @@ const ReplacementDocumentUploaded = () => {
               })
             }
           >
-            {single_factory_doc.data.docs.filter(
+            {single_factory_doc?.data?.docs?.filter(
               (word) => word.doc_type !== "replacement_payment_reciept"
             ).length ? (
               <div
@@ -106,8 +109,8 @@ const ReplacementDocumentUploaded = () => {
                   flexWrap: "wrap",
                 }}
               >
-                {single_factory_doc.data.docs
-                  .filter(
+                {single_factory_doc?.data?.docs
+                  ?.filter(
                     (word) => word.doc_type !== "replacement_payment_reciept"
                   )
                   .map((doc) => (
@@ -155,7 +158,7 @@ const ReplacementDocumentUploaded = () => {
             }}
           >
             <button
-               css={(theme) =>
+              css={(theme) =>
                 mq({
                   height: [40, 40, 56],
                   borderRadius: 30,

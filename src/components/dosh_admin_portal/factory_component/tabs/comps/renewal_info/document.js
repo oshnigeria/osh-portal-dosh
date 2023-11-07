@@ -8,6 +8,9 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
 import FactoryDocComp from "@/src/components/factoryDetailsComp";
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const RenewalDocumentUploaded = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
@@ -141,7 +144,7 @@ const RenewalDocumentUploaded = () => {
             }}
           >
             <button
-               css={(theme) =>
+              css={(theme) =>
                 mq({
                   height: [40, 40, 56],
                   borderRadius: 30,
