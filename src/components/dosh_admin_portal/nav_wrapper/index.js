@@ -82,6 +82,13 @@ const DashboadWrapperComp = (props) => {
       active_icon: "incident_active",
     },
     {
+      title: "Routine inspection",
+      route: "routine-inspections",
+      path: "routine-inspections",
+      icon: "incident",
+      active_icon: "incident_active",
+    },
+    {
       title: "Settings",
       route: "/settings",
       path: "settings",
@@ -121,7 +128,7 @@ const DashboadWrapperComp = (props) => {
               position: "fixed",
               top: 0,
               left: 0,
-              padding: ["16px 16px", "16px 16px", "102px 20px"],
+              padding: ["16px 16px", "16px 16px", "20px 20px"],
               width: 312,
               height: "100vh",
               background: theme.colors.Primary_500,
@@ -177,7 +184,7 @@ const DashboadWrapperComp = (props) => {
           <div
             css={{
               position: "fixed",
-              bottom: 30,
+              bottom: 20,
               left: 60,
             }}
           >

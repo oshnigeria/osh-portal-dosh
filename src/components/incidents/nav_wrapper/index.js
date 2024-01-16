@@ -80,7 +80,14 @@ const DashboadWrapperComp = (props) => {
       route: "/incident",
       path: "incident",
       icon: "incident",
-       active_icon: "incident_active",
+      active_icon: "incident_active",
+    },
+    {
+      title: "Routine inspection",
+      route: "routine-inspections",
+      path: "routine-inspections",
+      icon: "incident",
+      active_icon: "incident_active",
     },
     {
       title: "Settings",
@@ -120,7 +127,7 @@ const DashboadWrapperComp = (props) => {
               position: "fixed",
               top: 0,
               left: 0,
-              padding: ["16px 16px", "16px 16px", "102px 20px"],
+              padding: ["16px 16px", "16px 16px", "20px 20px"],
               width: 312,
               height: "100vh",
               background: theme.colors.Primary_500,
@@ -176,7 +183,7 @@ const DashboadWrapperComp = (props) => {
           <div
             css={{
               position: "fixed",
-              bottom: 30,
+              bottom: 20,
               left: 60,
             }}
           >
@@ -256,31 +263,40 @@ const DashboadWrapperComp = (props) => {
         </div>
       </div>
       <div
-        css={(theme) => mq({
-          display: ["flex", "flex", "none"],
-          justifyContent: "space-around",
-          backgroundColor: theme.colors.Primary_500,
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-          padding: "16px 0px",
-        })}
+        css={(theme) =>
+          mq({
+            display: ["flex", "flex", "none"],
+            justifyContent: "space-around",
+            backgroundColor: theme.colors.Primary_500,
+            position: "fixed",
+            bottom: 0,
+            width: "100%",
+            padding: "16px 0px",
+          })
+        }
       >
-        {tabs.map((tab) => (
-          tab.title !== "Settings" &&
-            <div
-            css={{
-              color: "#fff",
-              fontSize: 8,
-              fontWeight: 400,
-            }}
-             onClick={() => router.push(`/${tab.path}`)}
-          >
-            <img src={`/svg/tabs/${router.pathname == `/${tab.path}` ? tab.active_icon : tab.icon}.svg`} />
-            {/* {tab.icon} */}
-          </div>
-        
-        ))}
+        {tabs.map(
+          (tab) =>
+            tab.title !== "Settings" && (
+              <div
+                css={{
+                  color: "#fff",
+                  fontSize: 8,
+                  fontWeight: 400,
+                }}
+                onClick={() => router.push(`/${tab.path}`)}
+              >
+                <img
+                  src={`/svg/tabs/${
+                    router.pathname == `/${tab.path}`
+                      ? tab.active_icon
+                      : tab.icon
+                  }.svg`}
+                />
+                {/* {tab.icon} */}
+              </div>
+            )
+        )}
       </div>
     </div>
   );

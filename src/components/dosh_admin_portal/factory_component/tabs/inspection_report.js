@@ -725,29 +725,31 @@ const InspectionReportComp = () => {
                   >
                     <textarea
                       rows={5}
-                      css={(theme) => ({
-                        padding: "12px 14px",
-                        width: ["100%", "100%", 450],
-                        fontSize: [14, 14, 20],
-                        color: theme.colors.Gray_400,
-                        border: `1px solid ${theme.colors.Gray_200}`,
-                        borderRadius: 8,
-
-                        ":focus": {
-                          outline: "none",
+                      css={(theme) =>
+                        mq({
+                          padding: "12px 14px",
+                          width: ["100%", "100%", 450],
+                          fontSize: [14, 14, 20],
+                          color: theme.colors.Gray_400,
                           border: `1px solid ${theme.colors.Gray_200}`,
+                          borderRadius: 8,
 
-                          padding: "12px 14px",
-                          color: theme.colors.Gray_400,
-                        },
-                        ":placeholder ": {
-                          outline: "none",
-                          border: "none",
+                          ":focus": {
+                            outline: "none",
+                            border: `1px solid ${theme.colors.Gray_200}`,
 
-                          padding: "12px 14px",
-                          color: theme.colors.Gray_400,
-                        },
-                      })}
+                            padding: "12px 14px",
+                            color: theme.colors.Gray_400,
+                          },
+                          ":placeholder ": {
+                            outline: "none",
+                            border: "none",
+
+                            padding: "12px 14px",
+                            color: theme.colors.Gray_400,
+                          },
+                        })
+                      }
                       {...register("email", { required: true })}
                       placeholder=""
                       type="text"
@@ -773,23 +775,25 @@ const InspectionReportComp = () => {
                       }}
                     >
                       <button
-                        css={(theme) => ({
-                          height: [40, 40, 56],
-                          borderRadius: 30,
-                          width: [140, 140, 356],
-                          //   padding: ["10px 16px", "10px 16px", "16px 24px"],
-                          padding: "16px 24px",
-                          fontSize: [12, 12, 20],
-                          cursor: "pointer",
-                          marginRight: 20,
-                          fontWeight: 600,
-                          lineHeight: "17px",
-                          border: "none",
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "#fff",
-                          backgroundColor: theme.colors.Primary_500,
-                        })}
+                        css={(theme) =>
+                          mq({
+                            height: [40, 40, 56],
+                            borderRadius: 30,
+                            width: [140, 140, 356],
+                            //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                            padding: "16px 24px",
+                            fontSize: [12, 12, 16],
+                            cursor: "pointer",
+                            marginRight: 20,
+                            fontWeight: 600,
+                            lineHeight: "17px",
+                            border: "none",
+                            display: "flex",
+                            justifyContent: "center",
+                            color: "#fff",
+                            backgroundColor: theme.colors.Primary_500,
+                          })
+                        }
                         type="submit"
                         onClick={() => {
                           dosh_comments();
@@ -924,22 +928,24 @@ const InspectionReportComp = () => {
                 // duration: 0.4,
               }}
               id="location"
-              css={(theme) => ({
-                position: "fixed",
-                width: ["90vw", 524, 524],
-                height: 427,
-                borderRadius: 14,
-                zIndex: 5,
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                margin: "auto",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#fff",
-              })}
+              css={(theme) =>
+                mq({
+                  position: "fixed",
+                  width: ["90vw", 524, 524],
+                  height: 427,
+                  borderRadius: 14,
+                  zIndex: 5,
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  margin: "auto",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#fff",
+                })
+              }
             >
               {/* <CreateRiderAccount close={() => router.back()} /> */}
               <DeclarationPopup
