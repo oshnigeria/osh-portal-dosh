@@ -7,14 +7,14 @@ const EmployeeInfoComp = (props) => {
     <div>
       <div
         css={mq({
-          // display: "grid",
-          // gridTemplateColumns: [
-          //   `repeat(2, 1fr)`,
-          //   `repeat(2, 1fr)`,
-          //   `repeat(2, 1fr)`,
-          // ],
-          // rowGap: 48,
-          // columnGap: 50,
+          display: "grid",
+          gridTemplateColumns: [
+            `repeat(1, 1fr)`,
+            `repeat(1, 1fr)`,
+            `repeat(2, 1fr)`,
+          ],
+          rowGap: 48,
+          columnGap: 50,
           marginTop: 24,
         })}
       >
@@ -22,7 +22,7 @@ const EmployeeInfoComp = (props) => {
           <div
             css={{
               display: "grid",
-              gridTemplateColumns: `repeat(3, 1fr)`,
+              gridTemplateColumns: `repeat(2, 1fr)`,
               width: "100%",
               height: "auto",
               rowGap: 48,
@@ -37,10 +37,11 @@ const EmployeeInfoComp = (props) => {
                   color: theme.colors.Gray_700,
                   lineHeight: "20px",
                   fontSize: [14, 14, 20],
+                  textTransform: "capitalize",
                 })
               }
             >
-              Adults
+              Male
             </div>
             <div
               css={(theme) =>
@@ -54,13 +55,13 @@ const EmployeeInfoComp = (props) => {
                 })
               }
             >
-              <div
+              {/* <div
                 css={{
                   fontSize: 12,
                 }}
               >
                 Male
-              </div>
+              </div> */}
               <div
                 css={mq({
                   fontSize: [14, 14, 20],
@@ -72,6 +73,18 @@ const EmployeeInfoComp = (props) => {
             <div
               css={(theme) =>
                 mq({
+                  marginTop: 12,
+                  color: theme.colors.Gray_700,
+                  lineHeight: "20px",
+                  fontSize: [14, 14, 20],
+                })
+              }
+            >
+              Female
+            </div>
+            <div
+              css={(theme) =>
+                mq({
                   backgroundColor: theme.colors.Gray_100,
                   //   height: 67,
                   color: theme.colors.Gray_700,
@@ -81,13 +94,13 @@ const EmployeeInfoComp = (props) => {
                 })
               }
             >
-              <div
+              {/* <div
                 css={{
                   fontSize: 12,
                 }}
               >
                 Female
-              </div>
+              </div> */}
               <div
                 css={mq({
                   fontSize: [14, 14, 20],
@@ -96,108 +109,6 @@ const EmployeeInfoComp = (props) => {
                 {props.adult_female}
               </div>
             </div>
-          </div>
-        </div>
-        <div
-          css={{
-            marginTop: 20,
-          }}
-        >
-          <div
-            css={{
-              display: "grid",
-              gridTemplateColumns: `repeat(3, 1fr)`,
-              width: "100%",
-              height: "auto",
-              rowGap: 48,
-              columnGap: 50,
-            }}
-          >
-            {" "}
-            <div
-              css={(theme) =>
-                mq({
-                  marginTop: 12,
-                  color: theme.colors.Gray_700,
-                  lineHeight: "20px",
-                  fontSize: [14, 14, 20],
-                })
-              }
-            >
-              Youths
-            </div>
-            <div
-              css={(theme) =>
-                mq({
-                  backgroundColor: theme.colors.Gray_100,
-                  //   height: 67,
-                  color: theme.colors.Gray_700,
-                  borderRadius: 8,
-                  width: ["70%", "70%", "100%"],
-                  padding: "12px 14px",
-                })
-              }
-            >
-              <div
-                css={{
-                  fontSize: 12,
-                }}
-              >
-                Male
-              </div>
-              <div
-                css={mq({
-                  fontSize: [14, 14, 20],
-                })}
-              >
-                {props.youths_male}
-              </div>
-            </div>
-            <div
-              css={(theme) =>
-                mq({
-                  backgroundColor: theme.colors.Gray_100,
-                  //   height: 67,
-                  color: theme.colors.Gray_700,
-                  borderRadius: 8,
-                  width: ["70%", "70%", "100%"],
-                  padding: "12px 14px",
-                })
-              }
-            >
-              <div
-                css={{
-                  fontSize: 12,
-                }}
-              >
-                Female
-              </div>
-              <div
-                css={mq({
-                  fontSize: [14, 14, 20],
-                })}
-              >
-                {props.youths_female}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          css={{
-            marginTop: 20,
-          }}
-        >
-          <div
-            css={{
-              display: "grid",
-              gridTemplateColumns: `repeat(3, 1fr)`,
-              width: "100%",
-              height: "auto",
-              rowGap: 48,
-              columnGap: 50,
-            }}
-          >
-            {" "}
             <div
               css={(theme) =>
                 mq({
@@ -222,15 +133,19 @@ const EmployeeInfoComp = (props) => {
                 })
               }
             >
+              {/* <div
+                css={{
+                  fontSize: 12,
+                }}
+              >
+                Female
+              </div> */}
               <div
                 css={mq({
                   fontSize: [14, 14, 20],
                 })}
               >
-                {props.youths_male +
-                  props.adult_male +
-                  props.adult_female +
-                  props.youths_female}
+                {props.adult_female + props.adult_male}
               </div>
             </div>
           </div>

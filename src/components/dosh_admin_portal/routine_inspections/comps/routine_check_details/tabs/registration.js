@@ -46,7 +46,7 @@ const FacRoutineDetailsComp = () => {
     setLoading(true);
     axios
       .patch(
-        `${main_url}/zonal-officer/routine-check`,
+        `${main_url}/dosh/routine-check`,
         {
           id: router.query.id,
           // comment: comment,
@@ -62,7 +62,7 @@ const FacRoutineDetailsComp = () => {
         console.log(response.data);
 
         success_message(response?.data.message);
-
+        router.push("/routine-inspections?tab=pending");
         setLoading(false);
       })
       .catch(function (error) {
@@ -315,7 +315,7 @@ const FacRoutineDetailsComp = () => {
             ></div>
             <div
               css={{
-                width: "70%",
+                width: "80%",
               }}
             >
               <div
@@ -330,21 +330,9 @@ const FacRoutineDetailsComp = () => {
                 Employee Information
               </div>
               <EmployeeInfoComp
-                adult_male={
-                  single_report.data?.report?.factory.night_shift_employees
-                    .adult.male
-                }
+                adult_male={single_report.data?.report?.no_of_male_employees}
                 adult_female={
-                  single_report.data?.report?.factory.night_shift_employees
-                    .adult.female
-                }
-                youths_male={
-                  single_report.data?.report?.factory.night_shift_employees
-                    .youth.male
-                }
-                youths_female={
-                  single_report.data?.report?.factory.night_shift_employees
-                    .youth.female
+                  single_report.data?.report?.no_of_female_employees
                 }
               />
             </div>
@@ -450,124 +438,124 @@ const FacRoutineDetailsComp = () => {
                   }}
                 ></div>
               </div>
+              {/* <div
+              css={{
+                marginTop: 48,
+              }}
+            >
+              <div
+                css={(theme) =>
+                  mq({
+                    color: theme.colors.Gray_400,
+                    lineHeight: "20px",
+                    fontSize: [14, 14, 20],
+                  })
+                }
+              >
+                Comment
+              </div>
               <div
                 css={{
-                  marginTop: 48,
+                  marginTop: 20,
                 }}
               >
-                <div
+                <textarea
+                  rows={8}
                   css={(theme) =>
                     mq({
-                      color: theme.colors.Gray_400,
-                      lineHeight: "20px",
+                      padding: "12px 14px",
+                      width: ["100%", "100%", 450],
                       fontSize: [14, 14, 20],
+                      color: theme.colors.Gray_400,
+                      border: `1px solid ${theme.colors.Gray_200}`,
+                      borderRadius: 8,
+
+                      ":focus": {
+                        outline: "none",
+                        border: `1px solid ${theme.colors.Gray_200}`,
+
+                        padding: "12px 14px",
+                        color: theme.colors.Gray_400,
+                      },
+                      ":placeholder ": {
+                        outline: "none",
+                        border: "none",
+
+                        padding: "12px 14px",
+                        color: theme.colors.Gray_400,
+                      },
                     })
                   }
-                >
-                  Comment
-                </div>
+                  placeholder=""
+                  type="text"
+                  onChange={(e) => setComment(e.target.value)}
+                  value={comment}
+                />
+
                 <div
                   css={{
-                    marginTop: 20,
+                    marginTop: 48,
+                    display: "flex",
+                    justifyContent: "left",
                   }}
                 >
-                  <textarea
-                    rows={8}
+                  <button
                     css={(theme) =>
                       mq({
-                        padding: "12px 14px",
-                        width: ["100%", "100%", 450],
-                        fontSize: [14, 14, 20],
-                        color: theme.colors.Gray_400,
-                        border: `1px solid ${theme.colors.Gray_200}`,
-                        borderRadius: 8,
-
-                        ":focus": {
-                          outline: "none",
-                          border: `1px solid ${theme.colors.Gray_200}`,
-
-                          padding: "12px 14px",
-                          color: theme.colors.Gray_400,
-                        },
-                        ":placeholder ": {
-                          outline: "none",
-                          border: "none",
-
-                          padding: "12px 14px",
-                          color: theme.colors.Gray_400,
-                        },
+                        height: [40, 40, 56],
+                        borderRadius: 30,
+                        width: [140, 140, 356],
+                        //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                        padding: "16px 24px",
+                        fontSize: [12, 12, 16],
+                        cursor: "pointer",
+                        marginRight: 20,
+                        fontWeight: 600,
+                        lineHeight: "17px",
+                        border: "none",
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "#fff",
+                        backgroundColor: theme.colors.Primary_500,
                       })
                     }
-                    placeholder=""
-                    type="text"
-                    onChange={(e) => setComment(e.target.value)}
-                    value={comment}
-                  />
-
-                  <div
-                    css={{
-                      marginTop: 48,
-                      display: "flex",
-                      justifyContent: "left",
+                    type="submit"
+                    onClick={() => {
+                      handleSubmit();
                     }}
                   >
-                    <button
-                      css={(theme) =>
-                        mq({
-                          height: [40, 40, 56],
-                          borderRadius: 30,
-                          width: [140, 140, 356],
-                          //   padding: ["10px 16px", "10px 16px", "16px 24px"],
-                          padding: "16px 24px",
-                          fontSize: [12, 12, 16],
-                          cursor: "pointer",
-                          marginRight: 20,
-                          fontWeight: 600,
-                          lineHeight: "17px",
-                          border: "none",
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "#fff",
-                          backgroundColor: theme.colors.Primary_500,
-                        })
-                      }
-                      type="submit"
-                      onClick={() => {
-                        handleSubmit();
+                    <div
+                      css={{
+                        display: "flex",
+                        marginTop: 4,
+                        alignItems: "center",
                       }}
                     >
-                      <div
-                        css={{
-                          display: "flex",
-                          marginTop: 4,
-                          alignItems: "center",
-                        }}
-                      >
-                        {loading ? (
+                      {loading ? (
+                        <div
+                          css={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {" "}
                           <div
                             css={{
-                              display: "flex",
-                              justifyContent: "center",
+                              width: 24,
+                              height: 24,
                             }}
                           >
-                            {" "}
-                            <div
-                              css={{
-                                width: 24,
-                                height: 24,
-                              }}
-                            >
-                              <img src="/svg/loader/loader.svg" />
-                            </div>
+                            <img src="/svg/loader/loader.svg" />
                           </div>
-                        ) : (
-                          <div>Send comment</div>
-                        )}
-                      </div>
-                    </button>
-                  </div>
+                        </div>
+                      ) : (
+                        <div>Send comment</div>
+                      )}
+                    </div>
+                  </button>
                 </div>
               </div>
+            </div> */}
             </div>
           </div>
         </div>
