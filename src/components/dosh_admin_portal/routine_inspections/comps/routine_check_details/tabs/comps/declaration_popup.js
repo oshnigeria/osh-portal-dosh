@@ -18,11 +18,12 @@ const DeclarationPopup = (props) => {
           css={(theme) => ({
             fontSize: 20,
             fontWeight: 700,
-            color: theme.colors.Gray_700,
+            color: theme.colors.Gray_600,
             textAlign: "center",
+            // textTransform: "capitalize",
           })}
         >
-          Declaration
+          Would you like to proceed?
         </div>
         <div
           css={(theme) => ({
@@ -32,9 +33,7 @@ const DeclarationPopup = (props) => {
             color: theme.colors.Gray_700,
           })}
         >
-          Lorem ipsum dolor sit amet consectetur. Augue tempus nulla id erat.
-          Quisque tincidunt ut in dignissim vel egestas. Sed ut quisque rutrum
-          semper vulputate et volutpat mor
+          Please be aware that edits may not be possible after submission.
         </div>
         <div
           css={{
@@ -44,6 +43,7 @@ const DeclarationPopup = (props) => {
             columnGap: 50,
             alignItems: "center",
             marginTop: 54,
+            width: "100%",
           }}
         >
           <div

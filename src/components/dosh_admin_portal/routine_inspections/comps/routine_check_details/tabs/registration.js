@@ -11,7 +11,7 @@ import EmployeeInfoComp from "./regsitration_components/employee_info_comp";
 import toast, { Toaster } from "react-hot-toast";
 import { success_message, error_message } from "@/src/components/toasts";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
-
+import CancelRoutineCheckPopup from "./comps/cancel_routine_check";
 import DeclarationPopup from "./comps/declaration_popup";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
@@ -19,6 +19,11 @@ const FacRoutineDetailsComp = () => {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
   const [willAmmend, setWillAmmend] = useState(false);
+  const [willCancel, setWillCancel] = useState(false);
+
+  const handleCancelRoutinCheck = () => {
+    setWillCancel(true);
+  };
 
   const router = useRouter();
   const fetcher = (url) =>
@@ -106,6 +111,22 @@ const FacRoutineDetailsComp = () => {
 
   const handleSubmitApprove = () => {
     zonal_approve_comments();
+  };
+
+  const handleSendLetter = () => {
+    if (single_report.data?.report?.letter_type) {
+      if (router.query.cert) {
+        setWillAmmend(true);
+      } else {
+        router.push(
+          `/routine_inspection/${router.query.id}?cert=true&notice_type=${
+            single_report.data?.report?.letter_type ?? "none"
+          }`
+        );
+      }
+    } else {
+      setWillAmmend(true);
+    }
   };
   return (
     <div>
@@ -438,6 +459,104 @@ const FacRoutineDetailsComp = () => {
                   }}
                 ></div>
               </div>
+              {single_report.data?.report?.letter_type && (
+                <div
+                  css={{
+                    marginTop: 48,
+                  }}
+                >
+                  <div
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
+                  >
+                    Notice Generated
+                  </div>
+                  <div
+                    css={(theme) =>
+                      mq({
+                        marginTop: 12,
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
+                  >
+                    {single_report.data?.report?.letter_type}
+                  </div>
+                </div>
+              )}
+
+              <div>
+                {single_report.data?.report?.status === "cancelled" && (
+                  <div>
+                    <div
+                      css={{
+                        marginTop: 48,
+                      }}
+                    >
+                      <div
+                        css={(theme) =>
+                          mq({
+                            color: theme.colors.Gray_500,
+                            lineHeight: "20px",
+                            fontSize: [14, 14, 20],
+                            textTransform: "capitalize",
+                          })
+                        }
+                      >
+                        cancelled by
+                      </div>
+                      <div
+                        css={(theme) =>
+                          mq({
+                            marginTop: 12,
+                            color: theme.colors.Gray_700,
+                            lineHeight: "20px",
+                            fontSize: [14, 14, 20],
+                          })
+                        }
+                      >
+                        {single_report.data?.report?.cancelled_by}
+                      </div>
+                    </div>
+                    <div
+                      css={{
+                        marginTop: 48,
+                      }}
+                    >
+                      <div
+                        css={(theme) =>
+                          mq({
+                            color: theme.colors.Gray_500,
+                            lineHeight: "20px",
+                            fontSize: [14, 14, 20],
+                            textTransform: "capitalize",
+                          })
+                        }
+                      >
+                        cancellation reason
+                      </div>
+                      <div
+                        css={(theme) =>
+                          mq({
+                            marginTop: 12,
+                            color: theme.colors.Gray_700,
+                            lineHeight: "20px",
+                            fontSize: [14, 14, 20],
+                          })
+                        }
+                      >
+                        {single_report.data?.report?.cancellation_reason}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
               {/* <div
               css={{
                 marginTop: 48,
@@ -564,9 +683,59 @@ const FacRoutineDetailsComp = () => {
         css={{
           marginTop: 64,
           display: "flex",
-          justifyContent: "right",
+          justifyContent: "space-between",
         }}
       >
+        <button
+          css={(theme) =>
+            mq({
+              height: [40, 40, 56],
+              borderRadius: 30,
+              width: ["auto", "auto", 356],
+              //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+              padding: ["12px 16px", "12px 16px", "16px 24px"],
+              fontSize: [12, 12, 20],
+              cursor: "pointer",
+              marginRight: 20,
+              fontWeight: 600,
+              lineHeight: "17px",
+              border: "none",
+              display: "flex",
+              justifyContent: "center",
+              color: theme.colors.Cancel_800,
+              border: `1px solid ${theme.colors.Cancel_800}`,
+              backgroundColor: "#fff",
+            })
+          }
+          type="submit"
+          onClick={() => {
+            // factory_details.add_factory_details(formData);
+            handleCancelRoutinCheck();
+          }}
+        >
+          <div
+            css={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div
+              css={{
+                marginRight: 8,
+              }}
+            >
+              <img
+                css={{
+                  width: 24,
+                  height: 24,
+                }}
+                src="/svg/registration/close.svg"
+              />
+            </div>
+            <div>Cancel Report</div>
+          </div>
+        </button>
         <button
           css={(theme) =>
             mq({
@@ -590,7 +759,7 @@ const FacRoutineDetailsComp = () => {
           type="submit"
           onClick={() => {
             // factory_details.add_factory_details(formData);
-            setWillAmmend(true);
+            handleSendLetter();
           }}
         >
           <div
@@ -671,6 +840,70 @@ const FacRoutineDetailsComp = () => {
               {/* <CreateRiderAccount close={() => router.back()} /> */}
               <DeclarationPopup
                 close={() => setWillAmmend(false)}
+                loading={isLoading}
+                ammend={() => {
+                  handleSubmitApprove();
+                }}
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence initial={false}>
+        {willCancel && (
+          <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                ease: "easeInOut",
+                duration: 0.4,
+              }}
+              css={{
+                position: "fixed",
+                width: "100vw",
+                height: "100vh",
+                // zIndex: 2,
+                zIndex: 3,
+                backgroundColor: "rgb(0,0,0,0.1)",
+                right: 0,
+                top: 0,
+                opacity: 0,
+              }}
+              onClick={() => setWillCancel(false)}
+            >
+              {" "}
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 900 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 900 }}
+              transition={{
+                ease: "easeInOut",
+                // duration: 0.4,
+              }}
+              id="location"
+              css={(theme) => ({
+                position: "fixed",
+                width: ["90vw", 524, 524],
+                height: 427,
+                borderRadius: 14,
+                zIndex: 5,
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                margin: "auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+              })}
+            >
+              {/* <CreateRiderAccount close={() => router.back()} /> */}
+              <CancelRoutineCheckPopup
+                close={() => setWillCancel(false)}
                 loading={isLoading}
                 ammend={() => {
                   handleSubmitApprove();

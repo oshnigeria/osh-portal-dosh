@@ -9,6 +9,7 @@ import DashboadWrapperComp from "../../../nav_wrapper";
 import facepaint from "facepaint";
 import EmployeeInfoComp from "../../../factory_component/tabs/regsitration_components/employee_info_comp";
 import FacRoutineDetailsComp from "./tabs/registration";
+import PreviewCorComp from "./tabs/preview_cor";
 import { FactoryContext } from "@/src/context/factoryContext";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
@@ -159,7 +160,15 @@ const RoutineCheckDetailsComp = () => {
               ))}
             </div> */}
           </div>
-          {factory.tab === steps[0].title && <FacRoutineDetailsComp />}
+          {factory.tab === steps[0].title && (
+            <div>
+              {router.query.cert ? (
+                <PreviewCorComp />
+              ) : (
+                <FacRoutineDetailsComp />
+              )}
+            </div>
+          )}
           {/* {factory.tab === steps[1].title && <DocumentUploadTab />}
             {factory.tab === steps[2].title && <VerifyPaymentTab />}
             {factory.tab === steps[3].title && <InspectionReportComp />} */}

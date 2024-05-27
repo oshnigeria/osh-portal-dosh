@@ -17,6 +17,7 @@ const theme = {
     Success_100: "#D1FADF",
     Success_50: "#ECFDF3",
     Success_25: "#F6FEF9",
+    Cancel_800: "#FE5B4E",
     Error_900: "#7A271A",
     Error_800: "#912018",
     Error_700: "#B42318",
