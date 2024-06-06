@@ -57,9 +57,9 @@ const PreviewCorComp = () => {
     setLoading(true);
     axios
       .patch(
-        `${main_url}/dosh/factory/certificate`,
+        `${main_url}/dosh/routine-check`,
         {
-          factory: single_report.data?.report?.factory._id,
+          id: single_report.data?.report?._id,
           // comment: comment,
         },
         {
@@ -186,7 +186,7 @@ const PreviewCorComp = () => {
                 fontSize: 32,
               }}
             >
-              CoR Preview
+              Letter Preview
             </div>
             {isLoading || error ? null : (
               <div>
