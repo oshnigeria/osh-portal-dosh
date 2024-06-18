@@ -166,7 +166,7 @@ const AddUserComp = (props) => {
                     border: `1px solid ${theme.colors.Gray_200}`,
 
                     padding: "12px 14px",
-                    color: theme.colors.Gray_400,
+                    color: theme.colors.Gray_500,
                   },
                   ":placeholder ": {
                     outline: "none",
@@ -224,7 +224,7 @@ const AddUserComp = (props) => {
                     border: `1px solid ${theme.colors.Gray_200}`,
 
                     padding: "12px 14px",
-                    color: theme.colors.Gray_400,
+                    color: theme.colors.Gray_500,
                   },
                   ":placeholder ": {
                     outline: "none",
@@ -246,6 +246,9 @@ const AddUserComp = (props) => {
                 {/* <option value={"victim"}>Victim</option> */}
                 <option value={"state_officer"}>State officer</option>
                 <option value={"zonal_officer"}>Zonal officer</option>
+                <option value={"head_of_field_service"}>
+                  Head Of Services
+                </option>
               </select>
             </div>
 
@@ -279,7 +282,7 @@ const AddUserComp = (props) => {
                       border: `1px solid ${theme.colors.Gray_200}`,
 
                       padding: "12px 14px",
-                      color: theme.colors.Gray_400,
+                      color: theme.colors.Gray_500,
                     },
                     ":placeholder ": {
                       outline: "none",
@@ -340,7 +343,7 @@ const AddUserComp = (props) => {
                       border: `1px solid ${theme.colors.Gray_400}`,
 
                       padding: "12px 14px",
-                      color: theme.colors.Gray_800,
+                      color: theme.colors.Gray_500,
                     },
                     ":placeholder ": {
                       outline: "none",

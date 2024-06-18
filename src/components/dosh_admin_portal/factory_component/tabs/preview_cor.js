@@ -58,7 +58,11 @@ const PreviewCorComp = () => {
 
         success_message(response?.data.message);
         setTimeout(function () {
-          router.push("/");
+          if (router.query.type) {
+            router.push(`/${router.query.type}`);
+          } else {
+            router.push("/");
+          }
         }, 2000);
         setLoading(false);
       })
@@ -84,7 +88,11 @@ const PreviewCorComp = () => {
       )
       .then(function (response) {
         success_message(response?.data.message);
-        router.push("/");
+        if (router.query.type) {
+          router.push(`/${router.query.type}`);
+        } else {
+          router.push("/");
+        }
         setLoading(false);
       })
       .catch(function (error) {
@@ -110,7 +118,11 @@ const PreviewCorComp = () => {
       )
       .then(function (response) {
         success_message(response?.data.message);
-        router.push("/");
+        if (router.query.type) {
+          router.push(`/${router.query.type}`);
+        } else {
+          router.push("/");
+        }
         setLoading(false);
       })
       .catch(function (error) {
