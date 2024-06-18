@@ -193,8 +193,8 @@ const SettingsComp = () => {
                   opacity: 0,
                 }}
                 onClick={() => {
-                  setAdd_factory(false);
-                  router.push("/dashboard/account");
+                  // setAdd_factory(false);
+                  setWillAmmend(false);
                 }}
               >
                 {" "}

@@ -186,7 +186,7 @@ const AccountComp = () => {
           <button
             css={(theme) =>
               mq({
-                width: [174, 174,224],
+                width: [174, 174, 224],
                 height: [40, 40, 56],
                 borderRadius: 30,
                 padding: ["12px 16px", "12px 16px", "16px 24px"],
@@ -251,11 +251,11 @@ const AccountComp = () => {
                     key={factory._id}
                     css={(theme) =>
                       mq({
-                        display:["grid","grid", "grid"],
+                        display: ["grid", "grid", "grid"],
                         backgroundColor: "#fff",
-                       
+
                         marginBottom: 24,
-                        padding: ["16px 16px", "16px 16px","24px 24px"],
+                        padding: ["16px 16px", "16px 16px", "24px 24px"],
                         borderRadius: 16,
                         borderRadius: 16,
                         gridTemplateColumns: "repeat(3, 1fr)",
@@ -340,12 +340,10 @@ const AccountComp = () => {
                     </div>
 
                     <div
-                     css={mq({
+                      css={mq({
                         display: ["flex", "flex", "none"],
-                        justifyContent:"center",
-                        width:"100%",
-                       
-                       
+                        justifyContent: "center",
+                        width: "100%",
                       })}
                     >
                       <img
@@ -443,10 +441,8 @@ const AccountComp = () => {
                     <div
                       css={mq({
                         display: ["flex", "flex", "none"],
-                        justifyContent:"center",
-                        width:"100%",
-                       
-                       
+                        justifyContent: "center",
+                        width: "100%",
                       })}
                     >
                       <img
@@ -485,8 +481,9 @@ const AccountComp = () => {
                   opacity: 0,
                 }}
                 onClick={() => {
-                  setAdd_factory(false);
-                  router.push("/dashboard/account");
+                  // setAdd_factory(false);
+                  // router.push("/dashboard/account");
+                  setWillAmmend(false);
                 }}
               >
                 {" "}
