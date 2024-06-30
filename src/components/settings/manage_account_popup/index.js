@@ -12,8 +12,8 @@ const AddUserComp = (props) => {
   const [option, setOption] = useState("a");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [level, setLevel] = useState("state_officer");
-  const [zone, setZone] = useState("lagos");
+  const [level, setLevel] = useState("");
+  const [zone, setZone] = useState("");
 
   const [state, setState] = useState("");
   const [password, setPassword] = useState("");
@@ -49,7 +49,7 @@ const AddUserComp = (props) => {
       .then(function (response) {
         console.log(response.data);
         success_message(response.data.message);
-        mutate(`${main_url}/account/repo/users`);
+        mutate(`${main_url}/dosh/account/users`);
         setLoading(false);
         props.close();
         // router.push("/signin");
@@ -62,7 +62,7 @@ const AddUserComp = (props) => {
     // console.log("ade");
   };
 
-  const zones = ["lagos", "nc", "nw", "sw", "se", "ss", "ne"];
+  const zones = ["Select a zone", "lagos", "nc", "nw", "sw", "se", "ss", "ne"];
   return (
     <div
       css={{
@@ -243,7 +243,7 @@ const AddUserComp = (props) => {
                   // console.log(catId);
                 }}
               >
-                {/* <option value={"victim"}>Victim</option> */}
+                <option>Select officer</option>
                 <option value={"state_officer"}>State officer</option>
                 <option value={"zonal_officer"}>Zonal officer</option>
                 <option value={"head_of_field_service"}>
@@ -252,7 +252,64 @@ const AddUserComp = (props) => {
               </select>
             </div>
 
-            {level === "zonal_officer" && (
+            {level === "zonal_officer" ||
+              ("state_officer" && (
+                <div
+                  css={{
+                    marginTop: 40,
+                  }}
+                >
+                  <div
+                    css={(theme) => ({
+                      colors: theme.colors.Gray_500,
+                      lineHeight: "20px",
+                      fontSize: 20,
+                      marginBottom: 20,
+                    })}
+                  >
+                    Zone
+                  </div>
+                  <select
+                    css={(theme) => ({
+                      padding: "12px 14px",
+                      width: "100%",
+                      fontSize: 20,
+                      color: theme.colors.Gray_400,
+                      border: `1px solid ${theme.colors.Gray_200}`,
+                      borderRadius: 8,
+
+                      ":focus": {
+                        outline: "none",
+                        border: `1px solid ${theme.colors.Gray_200}`,
+
+                        padding: "12px 14px",
+                        color: theme.colors.Gray_500,
+                      },
+                      ":placeholder ": {
+                        outline: "none",
+                        border: "none",
+
+                        padding: "12px 14px",
+                        color: theme.colors.Gray_400,
+                      },
+                    })}
+                    placeholder=""
+                    defaultValue=""
+                    value={zone}
+                    onChange={(e) => {
+                      setZone(e.target.value);
+                      // console.log(e.target.value);
+                      // console.log(catId);
+                    }}
+                  >
+                    {zones.map((zon) => (
+                      <option>{zon}</option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+
+            {level !== "head_of_field_service" && (
               <div
                 css={{
                   marginTop: 40,
@@ -263,119 +320,66 @@ const AddUserComp = (props) => {
                     colors: theme.colors.Gray_500,
                     lineHeight: "20px",
                     fontSize: 20,
+
                     marginBottom: 20,
                   })}
                 >
-                  Zone
+                  State
                 </div>
-                <select
-                  css={(theme) => ({
-                    padding: "12px 14px",
-                    width: "100%",
-                    fontSize: 20,
-                    color: theme.colors.Gray_400,
-                    border: `1px solid ${theme.colors.Gray_200}`,
-                    borderRadius: 8,
-
-                    ":focus": {
-                      outline: "none",
-                      border: `1px solid ${theme.colors.Gray_200}`,
-
-                      padding: "12px 14px",
-                      color: theme.colors.Gray_500,
-                    },
-                    ":placeholder ": {
-                      outline: "none",
-                      border: "none",
-
-                      padding: "12px 14px",
-                      color: theme.colors.Gray_400,
-                    },
-                  })}
-                  placeholder=""
-                  defaultValue="lagos"
-                  value={level}
-                  onChange={(e) => {
-                    setLevel(e.target.value);
-                    // console.log(e.target.value);
-                    // console.log(catId);
+                <div
+                  css={{
+                    marginTop: 20,
                   }}
                 >
-                  {zones.map((zon) => (
-                    <option>{zon}</option>
-                  ))}
-                </select>
+                  <select
+                    css={(theme) => ({
+                      padding: "12px 14px",
+                      width: "100%",
+                      fontSize: 18,
+                      color: theme.colors.Gray_400,
+                      border: `1px solid ${theme.colors.Gray_200}`,
+                      borderRadius: 8,
+                      textTransform: "capitalize",
+                      ":focus": {
+                        outline: "none",
+                        border: `1px solid ${theme.colors.Gray_400}`,
+
+                        padding: "12px 14px",
+                        color: theme.colors.Gray_500,
+                      },
+                      ":placeholder ": {
+                        outline: "none",
+                        border: "none",
+
+                        padding: "12px 14px",
+                        color: theme.colors.Gray_400,
+                      },
+                    })}
+                    // {...register("state", { required: true })}
+                    placeholder=""
+                    type="text"
+                    value={state}
+                    onChange={(e) => {
+                      setState(e.target.value);
+                      // console.log(e.target.value);
+                      // console.log(catId);
+                    }}
+                  >
+                    {states.map((state) => (
+                      <option
+                        css={{
+                          textTransform: "capitalize",
+                        }}
+                        value={state}
+                      >
+                        {state}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             )}
 
-            <div
-              css={{
-                marginTop: 40,
-              }}
-            >
-              <div
-                css={(theme) => ({
-                  colors: theme.colors.Gray_500,
-                  lineHeight: "20px",
-                  fontSize: 20,
-
-                  marginBottom: 20,
-                })}
-              >
-                State
-              </div>
-              <div
-                css={{
-                  marginTop: 20,
-                }}
-              >
-                <select
-                  css={(theme) => ({
-                    padding: "12px 14px",
-                    width: "100%",
-                    fontSize: 18,
-                    color: theme.colors.Gray_400,
-                    border: `1px solid ${theme.colors.Gray_200}`,
-                    borderRadius: 8,
-                    textTransform: "capitalize",
-                    ":focus": {
-                      outline: "none",
-                      border: `1px solid ${theme.colors.Gray_400}`,
-
-                      padding: "12px 14px",
-                      color: theme.colors.Gray_500,
-                    },
-                    ":placeholder ": {
-                      outline: "none",
-                      border: "none",
-
-                      padding: "12px 14px",
-                      color: theme.colors.Gray_400,
-                    },
-                  })}
-                  // {...register("state", { required: true })}
-                  placeholder=""
-                  type="text"
-                  value={state}
-                  onChange={(e) => {
-                    setState(e.target.value);
-                    // console.log(e.target.value);
-                    // console.log(catId);
-                  }}
-                >
-                  {states.map((state) => (
-                    <option
-                      css={{
-                        textTransform: "capitalize",
-                      }}
-                      value={state}
-                    >
-                      {state}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
             <div
               css={{
                 marginTop: 40,

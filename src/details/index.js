@@ -6,6 +6,7 @@ export const main_url =
 export const cookies_id = "oshnigeria_dosh_cookies";
 
 export const states = [
+  "Select a state",
   "abia",
   "abuja federal capital",
   "adamawa",
