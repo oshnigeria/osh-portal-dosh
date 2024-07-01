@@ -32,9 +32,9 @@ const ProfileDetailsComp = (props) => {
       });
 
   const {
-    data: user,
+    data: sng_user,
     error,
-    isLoading,
+    isLoading: sng_isLoading,
   } = useSWR(
     `${main_url}/dosh/account/user?id=${router.query.id}&type=${router.query.type}
   `,
@@ -50,11 +50,22 @@ const ProfileDetailsComp = (props) => {
 
     return formattedDate;
   }
-  console.log(user);
+  console.log(sng_user);
   console.log("user");
 
   return (
-    <DashboadWrapperComp>
+
+    <div css={{
+      display:"flex",
+      justifyContent:"center"
+    }}>
+      <div css={{
+        // backgroundColor:"#f5f5f5",
+        width:"70%",
+        marginTop:50,
+        marginBottom:50,
+        padding: [16, 16, "36px 36px"],
+      }}>
       <Toaster
         position="top-right"
         toastOptions={{
@@ -94,7 +105,23 @@ const ProfileDetailsComp = (props) => {
         </div>
       </div>
 
-      {isLoading ? null : (
+      {sng_isLoading ? <div
+              css={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {" "}
+              <div
+                css={{
+                  width: 64,
+                  height: 64,
+                  margin: "50px 0px",
+                }}
+              >
+                <img src="/svg/loader/loader-green.svg" />
+              </div>
+            </div> : (
         <div
           css={(theme) => ({
             backgroundColor: theme.colors.Gray_25,
@@ -138,9 +165,9 @@ const ProfileDetailsComp = (props) => {
                       marginBottom: 8,
                     })}
                   >
-                    {user.data.user.name}
+                    {sng_user?.data?.user?.name}
                   </div>
-                  <div>{user.data.user.username}</div>
+                  <div>{sng_user?.data?.user?.username}</div>
                 </div>{" "}
               </div>
             </div>
@@ -167,7 +194,7 @@ const ProfileDetailsComp = (props) => {
                 </div>
                 <div
                   css={(theme) => ({
-                    color: user.data.user.is_disabled
+                    color: sng_user.data.user.is_disabled
                       ? theme.colors.Primary_500
                       : theme.colors.Error_500,
                     fontSize: 20,
@@ -177,11 +204,11 @@ const ProfileDetailsComp = (props) => {
                   })}
                   onClick={() => {
                     setDisable_account(true);
-                    setEmail(user.data.user.email);
-                    setStatus(!user.data.user.is_disabled);
+                    setEmail(sng_user.data.user.email);
+                    setStatus(!sng_user.data.user.is_disabled);
                   }}
                 >
-                  {user.data.user.is_disabled
+                  {sng_user.data.user.is_disabled
                     ? "Enable account"
                     : "Disable account"}
                 </div>
@@ -237,7 +264,7 @@ const ProfileDetailsComp = (props) => {
                     marginTop: 12,
                   })}
                 >
-                  {user.data.user.name}
+                  {sng_user.data.user.name}
                 </div>
                 <div>
                   <div
@@ -258,7 +285,7 @@ const ProfileDetailsComp = (props) => {
                       marginTop: 12,
                     })}
                   >
-                    {user.data.user.email}
+                    {sng_user.data.user.email}
                   </div>
                 </div>
               </div>
@@ -410,7 +437,7 @@ const ProfileDetailsComp = (props) => {
                     fontSize: 20,
                   })}
                 >
-                  {formatDateToCustom(user.data.user.createdAt)}
+                  {formatDateToCustom(sng_user.data.user.createdAt)}
                 </div>
                 {/* <div
                   css={(theme) => ({
@@ -571,7 +598,8 @@ const ProfileDetailsComp = (props) => {
           </div>
         )}
       </AnimatePresence>
-    </DashboadWrapperComp>
+      </div>
+ </div>
   );
 };
 

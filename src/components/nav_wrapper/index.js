@@ -34,7 +34,7 @@ const DashboadWrapperComp = (props) => {
     error,
     isLoading,
   } = useSWR(
-    `${main_url}/account/repo/user/${jwt.decode(Cookies.get(cookies_id))?.id}`,
+    `${main_url}/account/dosh/user/${jwt.decode(Cookies.get(cookies_id))?.id}`,
     fetcher
   );
   // console.log(user?.data.user.role);
@@ -142,7 +142,7 @@ const DashboadWrapperComp = (props) => {
 
                 display: "flex",
                 alignItems: "center",
-                marginBottom: 26,
+                marginBottom: 20,
                 padding: "16px 36px",
                 cursor: "pointer",
                 borderRadius: 8,
