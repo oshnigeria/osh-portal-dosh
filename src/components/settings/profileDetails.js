@@ -247,32 +247,14 @@ const ProfileDetailsComp = (props) => {
               }}
             >
               <div>
-                <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_400,
-                    fontWeight: theme.font_weight.size_500,
-                    fontSize: 20,
-                  })}
-                >
-                  Full name{" "}
-                </div>
-                <div
-                  css={(theme) => ({
-                    color: theme.colors.Gray_800,
-                    fontWeight: theme.font_weight.size_500,
-                    fontSize: 20,
-                    marginTop: 12,
-                  })}
-                >
-                  {sng_user.data.user.name}
-                </div>
+                
                 <div>
                   <div
                     css={(theme) => ({
                       color: theme.colors.Gray_400,
                       fontWeight: theme.font_weight.size_500,
                       fontSize: 20,
-                      marginTop: 48,
+                      
                     })}
                   >
                     Email{" "}
