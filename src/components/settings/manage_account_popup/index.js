@@ -252,8 +252,7 @@ const AddUserComp = (props) => {
               </select>
             </div>
 
-            {level === "zonal_officer" ||
-              ("state_officer" && (
+            {level === "zonal_officer" && (
                 <div
                   css={{
                     marginTop: 40,
@@ -307,7 +306,7 @@ const AddUserComp = (props) => {
                     ))}
                   </select>
                 </div>
-              ))}
+              )}
 
             {level !== "head_of_field_service" && (
               <div
