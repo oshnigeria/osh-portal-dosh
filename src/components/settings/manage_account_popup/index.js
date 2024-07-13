@@ -35,7 +35,7 @@ const AddUserComp = (props) => {
         {
           state: state,
           password: password,
-          zone: zone === "" ? null : zone,
+          zone: zone === "" ? undefined : zone,
           type: level,
           email: email,
         },
