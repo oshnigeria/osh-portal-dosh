@@ -308,7 +308,9 @@ const AddUserComp = (props) => {
                 </div>
               )}
 
-            {level !== "head_of_field_service" && (
+{level !== "zonal_officer" && 
+<div>
+            {level !== "head_of_field_service"  && (
               <div
                 css={{
                   marginTop: 40,
@@ -378,7 +380,7 @@ const AddUserComp = (props) => {
                 </div>
               </div>
             )}
-
+</div>}
             <div
               css={{
                 marginTop: 40,
