@@ -33,7 +33,7 @@ const AddUserComp = (props) => {
       .post(
         `${main_url}/dosh/account`,
         {
-          state: state,
+          state: state === "" ? undefined : state,
           password: password,
           zone: zone === "" ? undefined : zone,
           type: level,
