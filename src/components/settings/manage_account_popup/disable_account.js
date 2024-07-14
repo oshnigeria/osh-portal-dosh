@@ -139,7 +139,8 @@ const DisableAccountComp = (props) => {
                 textAlign: "center",
               })}
             >
-              Are you sure you want to disable this account?
+              {props.content}
+             
             </div>
             <div
               css={{

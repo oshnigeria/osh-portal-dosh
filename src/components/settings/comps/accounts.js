@@ -284,7 +284,7 @@ const AccountComp = () => {
                           fontSize: [12, 12, 16],
                           fontWeight: theme.font_weight.size_500,
                           color: theme.colors.Gray_800,
-                          textTransform: "capitalize",
+                          // textTransform: "capitalize",
                         })
                       }
                     >

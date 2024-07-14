@@ -573,6 +573,7 @@ const ProfileDetailsComp = (props) => {
                   router.push("/settings");
                 }}
                 status={status}
+                content={`Are you sure you want to ${sng_user?.data?.user?.is_disabled ?"enable": "disable"} this account?`}
                 email={email}
               />
               {/* <div>ade</div> */}

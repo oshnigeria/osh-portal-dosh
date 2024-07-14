@@ -130,7 +130,7 @@ const ChangePasswordComp = (props) => {
           //   marginBottom: 174,
           // }}
           >
-            <div
+            {/* <div
               css={{
                 marginTop: 40,
                 // display: "flex",
@@ -177,7 +177,7 @@ const ChangePasswordComp = (props) => {
                   * this field is required
                 </span>
               )}
-            </div>
+            </div> */}
             <div
               css={{
                 marginTop: 40,
