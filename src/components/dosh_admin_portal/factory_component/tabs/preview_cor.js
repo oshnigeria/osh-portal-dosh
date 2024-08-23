@@ -58,11 +58,7 @@ const PreviewCorComp = () => {
 
         success_message(response?.data.message);
         setTimeout(function () {
-          if (router.query.type) {
-            router.push(`/${router.query.type}`);
-          } else {
-            router.push("/");
-          }
+          router.push("/?tab=pending");
         }, 2000);
         setLoading(false);
       })
