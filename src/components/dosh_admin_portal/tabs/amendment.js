@@ -309,7 +309,7 @@ const AmmendmentComp = () => {
                                 })}
                                 onClick={() =>
                                   router.push(
-                                    `/factory/${factory.factory._id}?type=ammendment`
+                                    `/factory/${factory.factory._id}?type=amendment`
                                   )
                                 }
                               >
@@ -434,7 +434,7 @@ const AmmendmentComp = () => {
                               })}
                               onClick={() =>
                                 router.push(
-                                  `/factory/${factory.factory._id}?type=ammendment`
+                                  `/factory/${factory.factory._id}?type=amendment`
                                 )
                               }
                             >
