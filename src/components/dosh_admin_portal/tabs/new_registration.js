@@ -13,8 +13,8 @@ const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const NewRegistrationComp = () => {
   const [progress, setProgress] = useState({
-    min: 0,
-    max: 50,
+    min: 90,
+    max: 99,
   });
   const fetcher = (url) =>
     axios
