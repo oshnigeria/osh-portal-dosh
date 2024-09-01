@@ -822,7 +822,7 @@ const PreviewCorComp = () => {
                 loading={isLoading}
                 ammend={() => {
                   switch (router.query.type) {
-                    case "ammendment":
+                    case "amendment":
                       zonal_approve_ammendment();
                       break;
                     case "renewal":
