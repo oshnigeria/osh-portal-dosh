@@ -333,7 +333,7 @@ const FactoryRegistration = () => {
                         })
                       }
                     >
-                      {single_factory.data.factory._occupier_name}
+                      {single_factory.data.factory?.date_operations_started}
                     </div>
                   </div>
                   <div>
