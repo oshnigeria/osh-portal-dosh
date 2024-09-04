@@ -459,7 +459,9 @@ const PreviewCorComp = () => {
                         fontSize: 12,
                       })}
                     >
-                      I hereby certify that the Factory named below has been
+                      I hereby certify that the Factory <strong css={{
+                        textTransform:"capitalize"
+                      }}>{isLoading ? null : single_factory?.data?.factory?._occupier_name}</strong> has been
                       duly registered in pursuance of section 3 of the Factories
                       Act; 2004
                     </div>
