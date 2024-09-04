@@ -147,13 +147,13 @@ const CorDraftComp = () => {
             >
               <div>
                 <div
-                  css={{
+                  css={mq({
                     display: "grid",
                     gridTemplateColumns: `repeat(2, 1fr)`,
                     rowGap: [10, 10, 48],
                     columnGap: [8, 8, 50],
                     marginTop: 24,
-                  }}
+                  })}
                 >
                   <div>
                     <div
@@ -203,7 +203,8 @@ const CorDraftComp = () => {
                         })
                       }
                     >
-                      {single_factory.data.factory.phone_number}
+                       {single_factory.data.factory.postal_address}
+                      
                     </div>
                   </div>
 
@@ -258,7 +259,7 @@ const CorDraftComp = () => {
                         })
                       }
                     >
-                      {single_factory.data.factory.postal_address}
+                      {single_factory.data.factory.phone_number}
                     </div>
                   </div>
                   <div>

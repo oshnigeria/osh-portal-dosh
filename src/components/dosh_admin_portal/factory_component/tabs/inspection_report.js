@@ -191,13 +191,13 @@ const InspectionReportComp = () => {
             >
               <div>
                 <div
-                  css={{
+                  css={mq({
                     display: "grid",
                     gridTemplateColumns: `repeat(2, 1fr)`,
                     rowGap: [10, 10, 48],
                     columnGap: [8, 8, 50],
                     marginTop: 24,
-                  }}
+                  })}
                 >
                   <div>
                     <div
