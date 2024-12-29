@@ -27,5 +27,5 @@ jobs:
         echo "${{ secrets.SSH_PROD_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
         chmod 600 ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa.pub
-        rsync -avz --exclude='node_modules/' --exclude='.git/' /home/runner/work/dosh.osh.gov.ng/dosh.osh.gov.ng/ owoade@${{ secrets.SSH_PROD_HOST }}:~/dosh.osh.gov.ng/
-        ssh owoade@${{ secrets.SSH_PROD_HOST }} "cd dosh.osh.gov.ng && docker stop dosh.osh.gov.ng && docker rm dosh.osh.gov.ng && docker rmi -f dosh.osh.gov.ng && docker build -t dosh.osh.gov.ng . && docker run -d --name=dosh.osh.gov.ng -p 3000:3000 dosh.osh.gov.ng"
+        rsync -avz --exclude='node_modules/' --exclude='.git/' /home/runner/work/osh-dosh-portal/osh-dosh-portal/ owoade@${{ secrets.SSH_PROD_HOST }}:~/osh-dosh-portal/
+        ssh owoade@${{ secrets.SSH_PROD_HOST }} "cd osh-dosh-portal && docker stop osh-dosh-portal && docker rm osh-dosh-portal && docker rmi -f osh-dosh-portal && docker build -t osh-dosh-portal . && docker run -d --name=osh-dosh-portal -p 3000:3000 osh-dosh-portal"
