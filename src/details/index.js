@@ -1,7 +1,4 @@
-export const main_url =
-  process.env.NEXT_PUBLIC_NODE_ENV !== "production"
-    ? "https://api.oshnigeria.org"
-    : "https://api.oshnigeria.org";
+export const main_url = "https://api.osh.gov.ng";
 
 export const cookies_id = "oshnigeria_dosh_cookies";
 
