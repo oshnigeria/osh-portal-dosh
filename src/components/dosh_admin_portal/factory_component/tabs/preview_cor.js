@@ -54,7 +54,7 @@ const PreviewCorComp = () => {
         }
       )
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
 
         success_message(response?.data.message);
         setTimeout(function () {
@@ -154,6 +154,8 @@ const PreviewCorComp = () => {
 
     return formattedDate;
   }
+
+  console.log(single_factory)
   const {
     register,
     handleSubmit,
@@ -424,10 +426,10 @@ const PreviewCorComp = () => {
                               marginLeft: 24,
                             }}
                           >
-                            {/* {
+                            {
                               single_factory?.data?.factory
-                                ?.treasure_reciept_number
-                            } */}
+                                ?.cert_no
+                            }
                           </span>
                         </div>
                         <div
@@ -505,7 +507,7 @@ const PreviewCorComp = () => {
                           >
                             {
                               single_factory?.data?.factory
-                                ?.company_registration_no
+                                ?.cert_seal_no
                             }
                           </span>
                         </div>
