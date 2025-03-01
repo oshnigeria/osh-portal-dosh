@@ -10,7 +10,9 @@ import useSWR, { useSWRConfig, mutate } from "swr";
 import facepaint from "facepaint";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
-const DisableAccountComp = (props) => {
+
+
+const DeleteAccountComp = (props) => {
   const [old_password, setOld_password] = useState("");
   const [part, setPart] = useState("a");
 
@@ -26,15 +28,11 @@ const DisableAccountComp = (props) => {
   } = useForm();
   const change_password = () => {
     setLoading(true);
-
+// console.log("ade")
       axios
-        .patch(
-          `${main_url}/dosh/account/priviledge`,
-          {
-            email: props.email,
-            status: props.status,
-            type: router.query.type ?? props.type,
-          },
+        .delete(
+          `https://sbxapi.oshnigeria.org/dosh/account/user?type=${props.type}&id=${props.id}`,
+         
           {
             headers: {
               "Content-Type": "application/json",
@@ -43,6 +41,7 @@ const DisableAccountComp = (props) => {
           }
         )
         .then(function (response) {
+          console.log("ade")
           console.log(response.data);
           success_message(response.data.message);
           setLoading(false);
@@ -65,10 +64,10 @@ mutate(`${main_url}/dosh/account/users`)
   };
   return (
     <div
-      css={mq({
+      css={{
         backgroundColor: "#fff",
-        padding: ["30px 16px","30px 50px","30px 100px"],
-      })}
+        padding: "30px 100px",
+      }}
     >
       <div
         css={(theme) => ({
@@ -94,7 +93,7 @@ mutate(`${main_url}/dosh/account/users`)
             width: "100%",
           })}
         >
-          <div>Disable Account</div>
+          <div>Delete Account</div>
         </div>
         <div
           css={{
@@ -191,4 +190,4 @@ mutate(`${main_url}/dosh/account/users`)
   );
 };
 
-export default DisableAccountComp;
+export default DeleteAccountComp;

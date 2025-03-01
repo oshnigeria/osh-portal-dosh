@@ -159,7 +159,7 @@ const DashboadWrapperComp = (props) => {
 
                   display: "flex",
                   alignItems: "center",
-                  marginBottom: 26,
+                  marginBottom: 16,
                   padding: "16px 36px",
                   cursor: "pointer",
                   borderRadius: 8,

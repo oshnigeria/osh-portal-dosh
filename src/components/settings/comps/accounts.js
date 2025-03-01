@@ -8,6 +8,8 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import facepaint from "facepaint";
+import DisableAccountComp from "../manage_account_popup/disable_account";
+import DeleteAccountComp from "../manage_account_popup/delete_account";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 import AddUserComp from "../manage_account_popup";
@@ -15,6 +17,9 @@ const AccountComp = () => {
   const [add_factory, setAdd_factory] = useState(false);
   const [search, setSearch] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);
+  const [will_disable, setWillDisable] = useState(false);
+  const [user_details, setUserDetails] = useState(null)
+  const [will_delete, setWillDelete] = useState(false);
 
   const router = useRouter();
   const fetcher = (url) =>
@@ -47,6 +52,8 @@ const AccountComp = () => {
 
     return formattedDate;
   }
+
+  
 
   // console.log(
   //   factory.data.factories.filter(
@@ -85,6 +92,36 @@ const AccountComp = () => {
       },
     },
   ];
+
+  const open_change_status_popup = ( email,
+    status,
+    type,) => {
+    setWillDisable(true)
+    setUserDetails({email,
+      status,
+      type})
+     
+  }
+  
+   const close_change_status_popup = () =>{
+    setWillDisable(false)
+    setUserDetails(null)
+   }
+
+
+   const open_delete_user_popup = ( id,
+    type,
+   ) => {
+    setWillDelete(true)
+    setUserDetails({id,
+      type,})
+      
+  }
+  
+   const close_delete_user_popup = () =>{
+    setWillDelete(false)
+    setUserDetails(null)
+   }
   return (
     <div>
       <Toaster
@@ -261,22 +298,19 @@ const AccountComp = () => {
                         gridTemplateColumns: "repeat(3, 1fr)",
 
                         justifyContent: "space-between",
+                        alignItems:"center",
                         rowGap: 0,
                         columnGap: 0,
                         width: "100%",
                         height: "auto",
                         color: theme.colors.Gray_800,
                         fontSize: 18,
-                        cursor: "pointer",
+                       
                         fontWeight: 500,
                         lineHeight: "22px",
                       })
                     }
-                    onClick={() => {
-                      router.push(
-                        `/settings/user/${factory._id}?type=state_officer`
-                      );
-                    }}
+                   
                   >
                     <div
                       css={(theme) =>
@@ -285,8 +319,14 @@ const AccountComp = () => {
                           fontWeight: theme.font_weight.size_500,
                           color: theme.colors.Gray_800,
                           // textTransform: "capitalize",
+                          cursor: "pointer",
                         })
                       }
+                      onClick={() => {
+                        router.push(
+                          `/settings/user/${factory._id}?type=state_officer`
+                        );
+                      }}
                     >
                       {factory.email}
                     </div>
@@ -313,10 +353,14 @@ const AccountComp = () => {
                         State officer
                       </div>
                     </div>
+                    <div css={{
+                      display:"flex"
+                    }}>
+
                     <div
                       css={(theme) =>
                         mq({
-                          display: ["none", "none", "block"],
+                          display: ["block", "block", "block"],
                           color: factory.is_disabled
                             ? theme.colors.Primary_500
                             : theme.colors.Error_500,
@@ -325,14 +369,15 @@ const AccountComp = () => {
                           fontWeight: theme.font_weight.size_500,
                           lineHeight: "24px",
                           cursor: "pointer",
-                          textAlign: "right",
+                          textAlign: "center",
                         })
                       }
-                      // onClick={() => {
-                      //   setDisable_account(true);
-                      //   setEmail(factory.email);
-                      //   setStatus(factory.is_disabled);
-                      // }}
+                      onClick={() => {
+                        // setDisable_account(true);
+                        // setEmail(factory.email);
+                        // setStatus(factory.is_disabled);
+                        open_change_status_popup(factory.email,!factory.is_disabled, "state_officer" )
+                      }}
                     >
                       {factory.is_disabled
                         ? "Enable account"
@@ -341,10 +386,16 @@ const AccountComp = () => {
 
                     <div
                       css={mq({
-                        display: ["flex", "flex", "none"],
+                        display: ["flex", "flex", "flex"],
                         justifyContent: "center",
                         width: "100%",
                       })}
+                      onClick={() => {
+                        // setDisable_account(true);
+                        // setEmail(factory.email);
+                        // setStatus(factory.is_disabled);
+                        open_delete_user_popup(factory._id,"state_officer" )
+                      }}
                     >
                       <img
                         css={{
@@ -353,7 +404,7 @@ const AccountComp = () => {
                         }}
                         src="/svg/settings/delete.svg"
                       />
-                    </div>
+                    </div></div>
                   </div>
                 ))}
 
@@ -379,16 +430,12 @@ const AccountComp = () => {
                         height: "auto",
                         color: theme.colors.Gray_800,
                         fontSize: 18,
-                        cursor: "pointer",
+                        
                         fontWeight: 500,
                         lineHeight: "22px",
                       })
                     }
-                    onClick={() => {
-                      router.push(
-                        `/settings/user/${factory._id}?type=zonal_officer`
-                      );
-                    }}
+                   
                   >
                     <div
                       css={(theme) =>
@@ -396,9 +443,15 @@ const AccountComp = () => {
                           fontSize: [12, 12, 16],
                           fontWeight: theme.font_weight.size_500,
                           color: theme.colors.Gray_800,
-                          textTransform: "capitalize",
+                          // textTransform: "capitalize",
+                          cursor: "pointer",
                         })
                       }
+                      onClick={() => {
+                        router.push(
+                          `/settings/user/${factory._id}?type=zonal_officer`
+                        );
+                      }}
                     >
                       {factory.email}
                     </div>
@@ -425,25 +478,49 @@ const AccountComp = () => {
                         Zonal officer
                       </div>
                     </div>
+                    <div css={{
+                      display:"flex"
+                    }}>
+
                     <div
                       css={(theme) =>
                         mq({
-                          display: ["none", "none", "block"],
-                          textAlign: "right",
+                          display: ["block", "block", "block"],
+                          color: factory.is_disabled
+                            ? theme.colors.Primary_500
+                            : theme.colors.Error_500,
                           fontSize: [12, 12, 16],
                           fontWeight: 500,
-                          color: theme.colors.Error_500,
+                          fontWeight: theme.font_weight.size_500,
+                          lineHeight: "24px",
+                          cursor: "pointer",
+                          textAlign: "center",
                         })
                       }
+                      onClick={() => {
+                        // setDisable_account(true);
+                        // setEmail(factory.email);
+                        // setStatus(factory.is_disabled);
+                        open_change_status_popup(factory.email,factory.is_disabled, "zonal_officer" )
+                      }}
                     >
-                      Disable account
+                      {factory.is_disabled
+                        ? "Enable account"
+                        : "Disable account"}
                     </div>
+
                     <div
                       css={mq({
-                        display: ["flex", "flex", "none"],
+                        display: ["flex", "flex", "flex"],
                         justifyContent: "center",
                         width: "100%",
                       })}
+                      onClick={() => {
+                        // setDisable_account(true);
+                        // setEmail(factory.email);
+                        // setStatus(factory.is_disabled);
+                        open_delete_user_popup(factory._id,"zonal_officer" )
+                      }}
                     >
                       <img
                         css={{
@@ -452,7 +529,7 @@ const AccountComp = () => {
                         }}
                         src="/svg/settings/delete.svg"
                       />
-                    </div>
+                    </div></div>
                   </div>
                 ))}
             </div>
@@ -497,13 +574,13 @@ const AccountComp = () => {
                   // duration: 0.4,
                 }}
                 id="location"
-                css={(theme) => ({
+                css={(theme) => mq({
                   position: "fixed",
                   overflowY: "scroll",
                   overflowX: "hidden",
 
-                  width: 525,
-                  height: 600,
+                  width: ["90%","70%",525],
+                  height: [450,450,600],
                   borderRadius: 14,
                   zIndex: 5,
                   left: 0,
@@ -518,6 +595,142 @@ const AccountComp = () => {
               >
                 {/* <CreateRiderAccount close={() => router.back()} /> */}
                 <AddUserComp close={() => setWillAmmend(false)} />
+                {/* <div>ade</div> */}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence initial={false}>
+          {will_disable && (
+            <div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  ease: "easeInOut",
+                  duration: 0.4,
+                }}
+                css={{
+                  position: "fixed",
+                  width: "100vw",
+                  height: "100vh",
+                  // zIndex: 2,
+                  zIndex: 3,
+                  backgroundColor: "rgb(0,0,0,0.1)",
+                  right: 0,
+                  top: 0,
+                  opacity: 0,
+                }}
+                onClick={() => {
+                  // setAdd_factory(false);
+                  // router.push("/dashboard/account");
+                  close_change_status_popup(false);
+                }}
+              >
+                {" "}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{
+                  ease: "easeInOut",
+                  // duration: 0.4,
+                }}
+                id="location"
+                css={(theme) => mq({
+                  position: "fixed",
+                  overflowY: "scroll",
+                  overflowX: "hidden",
+
+                  width: ["90%","70%",525],
+                  height: [400,400,600],
+                  borderRadius: 14,
+                  zIndex: 5,
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  margin: "auto",
+                  // display: "flex",
+                  // justifyContent: "center",
+                  backgroundColor: "#fff",
+                })}
+              >
+                {/* <CreateRiderAccount close={() => router.back()} /> */}
+                <DisableAccountComp close={() => close_change_status_popup(false)} content={"Are you sure you want to enable this account?"} email={user_details.email}
+    status={user_details.status}
+    type={user_details.type}  />
+                {/* <div>ade</div> */}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence initial={false}>
+          {will_delete && (
+            <div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  ease: "easeInOut",
+                  duration: 0.4,
+                }}
+                css={{
+                  position: "fixed",
+                  width: "100vw",
+                  height: "100vh",
+                  // zIndex: 2,
+                  zIndex: 3,
+                  backgroundColor: "rgb(0,0,0,0.1)",
+                  right: 0,
+                  top: 0,
+                  opacity: 0,
+                }}
+                onClick={() => {
+                  // setAdd_factory(false);
+                  // router.push("/dashboard/account");
+                  close_delete_user_popup(false);
+                }}
+              >
+                {" "}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{
+                  ease: "easeInOut",
+                  // duration: 0.4,
+                }}
+                id="location"
+                css={(theme) => mq({
+                  position: "fixed",
+                  overflowY: "scroll",
+                  overflowX: "hidden",
+
+                  width: ["90%","70%",525],
+                  height: [400,400,600],
+                  borderRadius: 14,
+                  zIndex: 5,
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  margin: "auto",
+                  // display: "flex",
+                  // justifyContent: "center",
+                  backgroundColor: "#fff",
+                })}
+              >
+                {/* <CreateRiderAccount close={() => router.back()} /> */}
+                <DeleteAccountComp close={() => close_delete_user_popup(false)} content={"Are you sure you want to Delete this account?"} id={user_details.id}
+    
+    type={user_details.type}  />
                 {/* <div>ade</div> */}
               </motion.div>
             </div>

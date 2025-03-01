@@ -7,7 +7,10 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { success_message, error_message } from "../../toasts";
 import { mutate } from "swr";
+import facepaint from "facepaint";
 
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const AddUserComp = (props) => {
   const [option, setOption] = useState("a");
   const [name, setName] = useState("");
@@ -65,10 +68,10 @@ const AddUserComp = (props) => {
   const zones = ["Select a zone", "lagos", "nc", "nw", "sw", "se", "ss", "ne"];
   return (
     <div
-      css={{
+      css={mq({
         backgroundColor: "#fff",
-        padding: "30px 80px",
-      }}
+        padding: ["30px 16px","30px 40px","30px 80px"],
+      })}
     >
       <div
         css={(theme) => ({
@@ -84,9 +87,9 @@ const AddUserComp = (props) => {
       >
         {/* <div></div> */}
         <div
-          css={(theme) => ({
+          css={(theme) => mq({
             color: theme.colors.Gray_800,
-            fontSize: 24,
+            fontSize: [20,20,24],
             fontWeight: 700,
             textAlign: "center",
             flex: "flex",

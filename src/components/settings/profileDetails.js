@@ -11,6 +11,9 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import ChangePasswordComp from "./manage_account_popup/change_password";
 import DisableAccountComp from "./manage_account_popup/disable_account";
+import facepaint from "facepaint";
+const breakpoints = [576, 768, 1200];
+const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const ProfileDetailsComp = (props) => {
   const [change_password, setChange_password] = useState(false);
   const [disable_account, setDisable_account] = useState(false);
@@ -59,13 +62,13 @@ const ProfileDetailsComp = (props) => {
       display:"flex",
       justifyContent:"center"
     }}>
-      <div css={{
+      <div css={mq({
         // backgroundColor:"#f5f5f5",
-        width:"70%",
+        width:["100%","80%","70%"],
         marginTop:50,
         marginBottom:50,
         padding: [16, 16, "36px 36px"],
-      }}>
+      })}>
       <Toaster
         position="top-right"
         toastOptions={{
@@ -94,9 +97,9 @@ const ProfileDetailsComp = (props) => {
           />
         </div>
         <div
-          css={(theme) => ({
+          css={(theme) => mq({
             color: theme.colors.Gray_800,
-            fontSize: 32,
+            fontSize: [22,24,32],
             fontWeight: 700,
             lineHeight: "38px",
           })}
@@ -123,16 +126,16 @@ const ProfileDetailsComp = (props) => {
               </div>
             </div> : (
         <div
-          css={(theme) => ({
+          css={(theme) => mq({
             backgroundColor: theme.colors.Gray_25,
-            padding: "54px 25px",
+            padding: ["24px 16px","54px 25px","54px 25px"],
             marginTop: 64,
           })}
         >
           <div
-            css={(theme) => ({
+            css={(theme) => mq({
               padding: "24px 24px",
-              display: "flex",
+              display: ["block","block","flex"],
               justifyContent: "space-between",
               alignItems: "center",
               borderRadius: 16,
@@ -236,15 +239,15 @@ const ProfileDetailsComp = (props) => {
               Personal information
             </div>
             <div
-              css={{
+              css={mq({
                 marginTop: 32,
-                display: "grid",
+                display: ["block","block","grid"],
                 gridTemplateColumns: "repeat(2, 1fr)",
                 rowGap: 0,
                 columnGap: 48,
                 justifyContent: "space-between",
                 width: "70%",
-              }}
+              })}
             >
               <div>
                 
@@ -543,13 +546,13 @@ const ProfileDetailsComp = (props) => {
                 // duration: 0.4,
               }}
               id="location"
-              css={(theme) => ({
+              css={(theme) => mq({
                 position: "fixed",
                 overflowY: "scroll",
                 overflowX: "hidden",
 
-                width: 525,
-                height: 500,
+                width: ["90%","70%",525],
+                  height: [400,400,600],
                 borderRadius: 14,
                 zIndex: 5,
                 left: 0,
