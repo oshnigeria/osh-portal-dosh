@@ -31,7 +31,7 @@ const DeleteAccountComp = (props) => {
 // console.log("ade")
       axios
         .delete(
-          `https://sbxapi.oshnigeria.org/dosh/account/user?type=${props.type}&id=${props.id}`,
+          `${main_url}/dosh/account/user?type=${props.type}&id=${props.id}`,
          
           {
             headers: {
