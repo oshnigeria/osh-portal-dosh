@@ -573,7 +573,7 @@ const PreviewCorComp = () => {
                               marginLeft: 24,
                             }}
                           >
-                            5 years
+                            3 years
                           </span>
                         </div>
                       </div>

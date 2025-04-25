@@ -310,7 +310,7 @@ const IncidentsComp = () => {
                                 }
                                 onClick={() =>
                                   router.push(
-                                    `/factory/${factory.factory._id}?type=incident`
+                                    `/factory/${factory._id}?type=incident`
                                   )
                                 }
                               >

@@ -122,6 +122,11 @@ const AccountComp = () => {
     setWillDelete(false)
     setUserDetails(null)
    }
+
+   function shortenText(text, maxLength) {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength).trim() + '...';
+  }
   return (
     <div>
       <Toaster
@@ -220,13 +225,14 @@ const AccountComp = () => {
               src="/svg/dashboard/search.svg"
             />
           </div>
+          <div>
           <button
             css={(theme) =>
               mq({
-                width: [174, 174, 224],
+                width: [154, 174, 224],
                 height: [40, 40, 56],
                 borderRadius: 30,
-                padding: ["12px 16px", "12px 16px", "16px 24px"],
+                padding: ["12px 8px", "12px 16px", "16px 24px"],
 
                 fontSize: [12, 12, 16],
                 fontWeight: 600,
@@ -254,7 +260,7 @@ const AccountComp = () => {
               src="/svg/dashboard/plus.svg"
             />
             <div> Add new account</div>
-          </button>
+          </button></div>
         </div>
         <div
           css={{
@@ -312,6 +318,7 @@ const AccountComp = () => {
                     }
                    
                   >
+                    <div>
                     <div
                       css={(theme) =>
                         mq({
@@ -328,7 +335,8 @@ const AccountComp = () => {
                         );
                       }}
                     >
-                      {factory.email}
+                      {shortenText(factory.email, 15)}
+                    </div>
                     </div>
                     <div
                       css={(theme) => ({

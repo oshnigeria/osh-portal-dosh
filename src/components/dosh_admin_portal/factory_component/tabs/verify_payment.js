@@ -144,7 +144,10 @@ const VerifyPaymentTab = () => {
                 .filter((word) => word.doc_type === "payment_reciept")
                 .map((doc) => (
                   <div key={doc._id}>
-                    <FactoryDocComp name={doc.name} type={doc.file_type} />
+                    <FactoryDocComp name={doc.name}
+                      doc_type={doc.doc_type}
+                      factory_id={router.query.id}
+                      file_key={doc.src}  type={doc.file_type} />
                   </div>
                 ))}
             </div>
