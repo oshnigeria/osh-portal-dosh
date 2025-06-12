@@ -5,7 +5,7 @@ import React, { useState, useContext, useRef } from "react";
 import axios from "axios";
 
 import ReactToPrint from "react-to-print";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout, color, m } from "framer-motion";
 import useSWR, { useSWRConfig, mutate } from "swr";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -283,10 +283,12 @@ const PreviewCorComp = () => {
                     backgroundImage: "url('/cert/coat_of_arms_light.png')",
                     objectFit: "cover",
                     backgroundPosition: "center center",
-
+ background:theme.colors.Primary_25,
+ background: "linear-gradient(90deg,#D1E5E0 0%, rgba(255, 255, 255, 1) 50%, #D1E5E0 100%)",
                     backgroundRepeat: "no-repeat",
                     //   width: "100vw",
-                    height: "100vh",
+                    height: 900,
+                    border: "20px inset #66A898"
                   })}
                 >
                   <div
@@ -301,7 +303,7 @@ const PreviewCorComp = () => {
                         rowGap: 48,
                         alignItems: "center",
                         columnGap: 50,
-                        marginTop: 24,
+                        marginTop: 0,
                       }}
                     >
                       <div
@@ -320,8 +322,8 @@ const PreviewCorComp = () => {
                         <img
                           src="/cert/coat_of_arms.png"
                           css={mq({
-                            width: [60, 60, 102],
-                            height: [42, 42, 82],
+                            width: 102,
+                            // height: [42, 42, 82],
                           })}
                         />
                       </div>
@@ -332,6 +334,7 @@ const PreviewCorComp = () => {
                           textAlign: "right",
                           fontFamily: "Times New Roman",
                           fontWeight: 700,
+                          color:"#111"
                         }}
                       >
                         Form LAB/F/2
@@ -345,6 +348,7 @@ const PreviewCorComp = () => {
                         fontFamily: "Times New Roman",
                         fontWeight: 700,
                         fontSize: 12,
+                        color:"#111"
                       }}
                     >
                       FEDERAL REPUBLIC OF NIGERIA
@@ -354,7 +358,7 @@ const PreviewCorComp = () => {
                         textAlign: "center",
                         marginTop: 4,
                         fontFamily: "Times New Roman",
-
+color:"#111",
                         fontSize: 12,
                         fontStyle: "italic",
                       }}
@@ -382,6 +386,7 @@ const PreviewCorComp = () => {
                         fontFamily: "Times New Roman",
                         color: theme.colors.Gray_800,
                         fontSize: 12,
+                        color:"#111"
                       })}
                     >
                       Section 2(2) ; 3 (2)
@@ -391,6 +396,7 @@ const PreviewCorComp = () => {
                         display: "flex",
                         justifyContent: "right",
                         marginTop: 18,
+                        color:"#111"
                       }}
                     >
                       <div>
@@ -453,27 +459,39 @@ const PreviewCorComp = () => {
                         </div>
                       </div>
                     </div>
-                    <div
+                    {/* <div
                       css={(theme) => ({
                         marginTop: 28,
                         fontFamily: "Times New Roman",
                         color: theme.colors.Gray_800,
-                        fontSize: 12,
+                        fontSize: 18,
+                        textAlign:"center",
+                        fontWeight:500
                       })}
                     >
-                      I hereby certify that the Factory <strong css={{
-                        textTransform:"capitalize"
-                      }}>{isLoading ? null : single_factory?.data?.factory?._occupier_name}</strong> has been
-                      duly registered in pursuance of section 3 of the Factories
-                      Act; 2004
+                      The Registrar - Federal Ministry of Labour and Employment
+                     
                     </div>
+
+                    <div css={(theme) => ({
+                        marginTop: 16,
+                        fontFamily: "Times New Roman",
+                        color: theme.colors.Gray_800,
+                        fontSize: 12,
+                        fontStyle: "italic",
+                        textAlign:"center",
+                        fontWeight:700
+                      })}>
+                      Certificate of Recognition awarded to
+                      </div> */}
                     <div
-                      css={{
+                      css={theme => ({
                         display: "flex",
-                        justifyContent: "left",
+                        justifyContent: "center",
                         marginTop: 18,
                         fontFamily: "Times New Roman",
-                      }}
+                          color: theme.colors.Gray_800,
+                      })}
                     >
                       <div>
                         <div
@@ -484,10 +502,11 @@ const PreviewCorComp = () => {
                         >
                           Name of Occupier :{" "}
                           <span
-                            css={{
+                            css={ theme => ({
                               fontWeight: 700,
-                              marginLeft: 24,
-                            }}
+                              marginLeft: 16,
+                              color: theme.colors.Warning_600,
+                            })}
                           >
                             {single_factory?.data?.factory?.occupier_name}
                           </span>
@@ -496,18 +515,20 @@ const PreviewCorComp = () => {
                           css={{
                             marginBottom: 8,
                             fontSize: 12,
+                          
+                          
                           }}
                         >
                           Registration No :{" "}
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              marginLeft: 16,
                             }}
                           >
                             {
                               single_factory?.data?.factory
-                                ?.cert_seal_no
+                                ?.company_registration_no
                             }
                           </span>
                         </div>
@@ -521,7 +542,7 @@ const PreviewCorComp = () => {
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              marginLeft: 16,
                             }}
                           >
                             {single_factory?.data?.factory?.postal_address}
@@ -537,7 +558,7 @@ const PreviewCorComp = () => {
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              marginLeft: 16,
                             }}
                           >
                             {single_factory?.data?.factory?.address}
@@ -554,7 +575,7 @@ const PreviewCorComp = () => {
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              marginLeft: 16,
                             }}
                           >
                             {single_factory?.data?.factory?.type}
@@ -570,7 +591,7 @@ const PreviewCorComp = () => {
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              marginLeft: 16,
                             }}
                           >
                             3 years
@@ -601,21 +622,23 @@ const PreviewCorComp = () => {
                           />
                         </div>
                         <div
-                          css={{
+                          css={theme => ({
                             marginTop: 8,
                             fontSize: 12,
                             fontWeight: 700,
                             textAlign: "center",
-                          }}
+                              color: theme.colors.Gray_800,
+                          })}
                         >
                           Director’s name here
                         </div>
                         <div
-                          css={{
+                          css={ theme => ({
                             marginTop: 8,
                             fontSize: 12,
                             textAlign: "center",
-                          }}
+                              color: theme.colors.Gray_800,
+                          })}
                         >
                           Director’s name here
                         </div>
@@ -624,24 +647,27 @@ const PreviewCorComp = () => {
 
                     <div
                       css={{
-                        marginTop: 40,
+                        marginTop: 24,
+                        // marginBottom:-50
                       }}
                     >
                       <div
-                        css={{
+                        css={theme =>( {
                           marginTop: 8,
                           fontSize: 12,
                           fontWeight: 700,
                           textAlign: "center",
-                        }}
+                            color: theme.colors.Primary_400,
+                        })}
                       >
                         NOTES
                       </div>
                       <ol
-                        css={{
+                        css={theme => ({
                           fontFamily: "Times New Roman",
                           fontSize: 12,
-                        }}
+                            color: theme.colors.Gray_800,
+                        })}
                       >
                         <li>
                           This Certificate is issued under and solely for the
