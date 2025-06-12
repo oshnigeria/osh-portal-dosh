@@ -527,8 +527,7 @@ color:"#111",
                             }}
                           >
                             {
-                              single_factory?.data?.factory
-                                ?.company_registration_no
+                             ""
                             }
                           </span>
                         </div>
