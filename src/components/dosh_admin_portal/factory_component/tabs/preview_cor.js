@@ -38,6 +38,12 @@ const PreviewCorComp = () => {
         console.error("Error:", error);
       });
 
+      const {
+          data: dosh_signature,
+          error: dosh_signature_error,
+          isLoading: dosh_signature_isLoading,
+        } = useSWR(`${main_url}/dosh/signature`, fetcher);
+
   const dosh_send_certificate = () => {
     setLoading(true);
     axios
@@ -527,7 +533,7 @@ color:"#111",
                             }}
                           >
                             {
-                             ""
+                             single_factory?.data?.factory?.cert_seal_no
                             }
                           </span>
                         </div>
@@ -563,7 +569,7 @@ color:"#111",
                             {single_factory?.data?.factory?.address}
                           </span>
                         </div>
-                        <div
+                        {/* <div
                           css={{
                             marginBottom: 8,
                             fontSize: 12,
@@ -579,7 +585,7 @@ color:"#111",
                           >
                             {single_factory?.data?.factory?.type}
                           </span>
-                        </div>
+                        </div> */}
                         <div
                           css={{
                             marginBottom: 8,
@@ -612,13 +618,22 @@ color:"#111",
                             justifyContent: "center",
                           }}
                         >
-                          <img
+                          {
+                            dosh_signature_isLoading ?  <img
                             src="/cert/Union.svg"
                             css={{
                               width: 60,
                               height: 20,
                             }}
+                          /> :  <img
+                            src={dosh_signature?.data?.url}
+                            css={{
+                              width: 60,
+                                                              height: 20,
+                            }}
                           />
+                          }
+                         
                         </div>
                         <div
                           css={theme => ({
@@ -629,7 +644,7 @@ color:"#111",
                               color: theme.colors.Gray_800,
                           })}
                         >
-                          Director’s name here
+                          {dosh_signature_isLoading ? "Director’s name here" : dosh_signature?.data?.name}
                         </div>
                         <div
                           css={ theme => ({
@@ -639,7 +654,7 @@ color:"#111",
                               color: theme.colors.Gray_800,
                           })}
                         >
-                          Director’s name here
+                           Director, OSH Nigeria.
                         </div>
                       </div>
                     </div>
@@ -760,7 +775,7 @@ color:"#111",
                 display: "flex",
                 justifyContent: "center",
                 color: "#fff",
-                backgroundColor: theme.colors.Primary_500,
+                backgroundColor: theme.colors.Primary_600,
               })}
               type="submit"
               onClick={() => {
@@ -773,8 +788,8 @@ color:"#111",
                   alignItems: "center",
                 }}
               >
-                <div>Send certificate</div>
-                <div
+                <div>Approve certificate</div>
+                {/* <div
                   css={{
                     marginLeft: 8,
                   }}
@@ -786,7 +801,7 @@ color:"#111",
                     })}
                     src="/svg/registration/left_arrow.svg"
                   />
-                </div>
+                </div> */}
               </div>
             </button>
           </div>
