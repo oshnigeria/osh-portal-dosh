@@ -246,7 +246,7 @@ const PreviewCorComp = () => {
               marginTop: 54,
 
               border: `1px solid ${theme.colors.Primary_100}`,
-              padding: "50px 32px",
+              padding: "16px 32px",
 
               borderRadius: 8,
             })}
@@ -260,7 +260,7 @@ const PreviewCorComp = () => {
             </div>
             <div
               css={{
-                marginTop: 48,
+                marginTop: 0,
               }}
             >
               {/* <img
@@ -412,11 +412,11 @@ color:"#111",
                             fontSize: 12,
                           }}
                         >
-                          Treasury Reciept No :
+                          Treasury Receipt No :
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              // marginLeft: 24,
                             }}
                           >
                             {
@@ -435,7 +435,7 @@ color:"#111",
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              // marginLeft: 24,
                             }}
                           >
                             {
@@ -454,7 +454,7 @@ color:"#111",
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 24,
+                              // marginLeft: 24,
                             }}
                           >
                             {formatDateToCustom(
@@ -492,8 +492,8 @@ color:"#111",
                       </div> */}
                     <div
                       css={theme => ({
-                        display: "flex",
-                        justifyContent: "center",
+                        // display: "flex",
+                        // justifyContent: "center",
                         marginTop: 18,
                         fontFamily: "Times New Roman",
                           color: theme.colors.Gray_800,
@@ -506,16 +506,18 @@ color:"#111",
                             fontSize: 12,
                           }}
                         >
+                          <div>
                           Name of Occupier :{" "}
                           <span
                             css={ theme => ({
                               fontWeight: 700,
-                              marginLeft: 16,
+                              // marginLeft: 16,
+                              marginTop:4,
                               color: theme.colors.Warning_600,
                             })}
                           >
                             {single_factory?.data?.factory?.occupier_name}
-                          </span>
+                          </span></div>
                         </div>
                         <div
                           css={{
@@ -525,17 +527,19 @@ color:"#111",
                           
                           }}
                         >
+                          <div>
                           Registration No :{" "}
                           <span
-                            css={{
+                              css={ theme => ({
                               fontWeight: 700,
-                              marginLeft: 16,
-                            }}
+                              // marginLeft: 16,
+                            
+                            })}
                           >
                             {
                              single_factory?.data?.factory?.cert_seal_no
                             }
-                          </span>
+                          </span></div>
                         </div>
                         <div
                           css={{
@@ -543,15 +547,17 @@ color:"#111",
                             fontSize: 12,
                           }}
                         >
+                          <div>
                           Postal Address of Occupier :{" "}
                           <span
-                            css={{
+                             css={ theme => ({
                               fontWeight: 700,
-                              marginLeft: 16,
-                            }}
+                              // marginLeft: 16,
+                            
+                            })}
                           >
                             {single_factory?.data?.factory?.postal_address}
-                          </span>
+                          </span></div>
                         </div>
                         <div
                           css={{
@@ -559,15 +565,18 @@ color:"#111",
                             fontSize: 12,
                           }}
                         >
+                          <div>
                           Location of Factory :{" "}
                           <span
-                            css={{
+                             css={ theme => ({
                               fontWeight: 700,
-                              marginLeft: 16,
-                            }}
+                              // marginLeft: 16,
+                              // marginTop:4,
+                              // color: theme.colors.Warning_600,
+                            })}
                           >
                             {single_factory?.data?.factory?.address}
-                          </span>
+                          </span></div>
                         </div>
                         {/* <div
                           css={{
@@ -592,15 +601,18 @@ color:"#111",
                             fontSize: 12,
                           }}
                         >
+                          <div>
                           Period of validity of Certificate :{" "}
                           <span
-                            css={{
+                             css={ theme => ({
                               fontWeight: 700,
-                              marginLeft: 16,
-                            }}
+                              // marginLeft: 16,
+                             
+                              // color: theme.colors.Warning_600,
+                            })}
                           >
                             3 years
-                          </span>
+                          </span></div>
                         </div>
                       </div>
                     </div>
@@ -654,7 +666,17 @@ color:"#111",
                               color: theme.colors.Gray_800,
                           })}
                         >
-                           Director, OSH Nigeria.
+                           Director of Factories of the Federation.
+                        </div>
+                         <div
+                          css={ theme => ({
+                            marginTop: 4,
+                            fontSize: 10,
+                            textAlign: "center",
+                              color: theme.colors.Gray_800,
+                          })}
+                        >
+                           FGP 2465/(89)190/500 Bks (OL.5) of 100ls in triplicate
                         </div>
                       </div>
                     </div>
@@ -683,27 +705,31 @@ color:"#111",
                             color: theme.colors.Gray_800,
                         })}
                       >
-                        <li>
-                          This Certificate is issued under and solely for the
-                          purpose of the Factories Act; 2004 and valid only in
-                          respect of the factory occupier and purpose or work
-                          name above.
-                        </li>
-                        <li>
-                          If at any time after the issue of this Certificate any
-                          change occurs in respect of the particulars set out
-                          above, the occupier to which this notice relates must
-                          inform the Director of Factories Forthwith, in
-                          writing, of such changes. Failure to do so is a
-                          punishable offence under this Act.{" "}
-                        </li>
+                      <li css={{
+                        marginBottom:4
+                      }}>
+  This Certificate is issued under and solely for the
+  purpose of the Factories Act, 2004, and is valid only in
+  respect of the factory occupier and purpose or work
+  name above.
+</li>
+<li css={{
+                        marginBottom:4
+                      }}>
+  If at any time after the issue of this Certificate any
+  change occurs in respect of the particulars set out
+  above, the occupier to whom this notice relates must
+  inform the Director of Factories forthwith, in
+  writing, of such changes. Failure to do so is a
+  punishable offence under this Act.
+</li>
+<li>
+  This Certificate must be attached to a flap at the
+  front of the General Register, and the Number and Date
+  of issue of this Certificate entered in paragraph 4 of
+  Part 1 of the General Register.
+</li>
 
-                        <li>
-                          This Certificate must be attached to a flap at the
-                          front of the General Register, abd the Number and Date
-                          of issue of ths Certificate entered in paragraph 4 of
-                          Past 1 of hte General Register{" "}
-                        </li>
                       </ol>
                     </div>
                   </div>
