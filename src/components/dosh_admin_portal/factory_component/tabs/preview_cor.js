@@ -670,7 +670,7 @@ color:"#111",
                         </div>
                          <div
                           css={ theme => ({
-                            marginTop: 4,
+                            marginTop: 2,
                             fontSize: 10,
                             textAlign: "center",
                               color: theme.colors.Gray_800,
@@ -683,7 +683,7 @@ color:"#111",
 
                     <div
                       css={{
-                        marginTop: 24,
+                        marginTop: 74,
                         // marginBottom:-50
                       }}
                     >
