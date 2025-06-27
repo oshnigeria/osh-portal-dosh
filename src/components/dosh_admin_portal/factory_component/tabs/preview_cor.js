@@ -578,23 +578,23 @@ color:"#111",
                             {single_factory?.data?.factory?.address}
                           </span></div>
                         </div>
-                        {/* <div
+                        <div
                           css={{
                             marginBottom: 8,
                             fontSize: 12,
                           }}
                         >
                           Purpose or work in respect of which premises have been
-                          registered :
+                          registered : {" "}
                           <span
                             css={{
                               fontWeight: 700,
-                              marginLeft: 16,
+                              
                             }}
                           >
-                            {single_factory?.data?.factory?.type}
+                            {single_factory?.data?.factory?.inspection_report?.nature_of_work_done}
                           </span>
-                        </div> */}
+                        </div>
                         <div
                           css={{
                             marginBottom: 8,
