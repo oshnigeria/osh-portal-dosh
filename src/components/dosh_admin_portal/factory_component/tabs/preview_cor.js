@@ -668,7 +668,7 @@ color:"#111",
                         >
                            Director of Factories of the Federation.
                         </div>
-                         <div
+                         {/* <div
                           css={ theme => ({
                             marginTop: 2,
                             fontSize: 10,
@@ -677,7 +677,7 @@ color:"#111",
                           })}
                         >
                            FGP 2465/(89)190/500 Bks (OL.5) of 100ls in triplicate
-                        </div>
+                        </div> */}
                       </div>
                     </div>
 
@@ -732,6 +732,24 @@ color:"#111",
 
                       </ol>
                     </div>
+
+
+                    
+
+                           <div
+                          css={ theme => ({
+                            // width:"100%",
+                            // position:"absolute",
+                            // bottom:20,
+                            marginTop: 42,
+                            fontSize: 10,
+                            textAlign: "center",
+                              color: theme.colors.Gray_800,
+                          })}
+                        >
+                           FGP 2465/(89)190/500 Bks (OL.5) of 100ls in triplicate
+                        </div>
+                    
                   </div>
                 </div>
               </div>
