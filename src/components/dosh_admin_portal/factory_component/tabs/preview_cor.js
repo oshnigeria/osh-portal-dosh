@@ -326,7 +326,7 @@ const PreviewCorComp = () => {
                         }}
                       >
                         <img
-                          src="/cert/coat_of_arms.png"
+                          src="/cert/nigeria_coa.png"
                           css={mq({
                             width: 102,
                             // height: [42, 42, 82],
@@ -741,7 +741,8 @@ color:"#111",
                             // width:"100%",
                             // position:"absolute",
                             // bottom:20,
-                            marginTop: 42,
+                         
+                            marginTop: 62,
                             fontSize: 10,
                             textAlign: "center",
                               color: theme.colors.Gray_800,
