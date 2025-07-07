@@ -250,7 +250,7 @@ const AddUserComp = (props) => {
                 <option value={"state_officer"}>State officer</option>
                 <option value={"zonal_officer"}>Zonal officer</option>
                 <option value={"head_of_field_service"}>
-                  Head Of Services
+                  Head Of Field Services
                 </option>
               </select>
             </div>

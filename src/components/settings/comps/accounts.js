@@ -540,6 +540,131 @@ const AccountComp = () => {
                     </div></div>
                   </div>
                 ))}
+
+                {users?.data?.users?.head_of_service_officers
+                ?.filter((item) => item.email.toLowerCase().includes(search))
+                .map((factory) => (
+                  <div
+                    key={factory._id}
+                    css={(theme) =>
+                      mq({
+                        display: "grid",
+                        backgroundColor: "#fff",
+                        marginBottom: 24,
+                        padding: "24px 24px",
+                        borderRadius: 16,
+                        borderRadius: 16,
+                        gridTemplateColumns: "repeat(3, 1fr)",
+
+                        justifyContent: "space-between",
+                        rowGap: 0,
+                        columnGap: 0,
+                        width: "100%",
+                        height: "auto",
+                        color: theme.colors.Gray_800,
+                        fontSize: 18,
+                        
+                        fontWeight: 500,
+                        lineHeight: "22px",
+                      })
+                    }
+                   
+                  >
+                    <div
+                      css={(theme) =>
+                        mq({
+                          fontSize: [12, 12, 16],
+                          fontWeight: theme.font_weight.size_500,
+                          color: theme.colors.Gray_800,
+                          // textTransform: "capitalize",
+                          cursor: "pointer",
+                        })
+                      }
+                      onClick={() => {
+                        router.push(
+                          `/settings/user/${factory._id}?type=head_of_field_service`
+                        );
+                      }}
+                    >
+                      {factory.email}
+                    </div>
+                    <div
+                      css={(theme) => ({
+                        display: "flex",
+                        justifyContent: "center",
+                      })}
+                    >
+                      <div
+                        css={(theme) =>
+                          mq({
+                            textAlign: "center",
+                            fontSize: [12, 12, 16],
+                            fontWeight: 500,
+                            color: theme.colors.Primary_500,
+                            backgroundColor: theme.colors.Primary_50,
+                            borderRadius: 8,
+                            padding: "4px 12px",
+                          })
+                        }
+                      >
+                        {" "}
+                        Heads Of Field Service officer
+                      </div>
+                    </div>
+                    <div css={{
+                      display:"flex"
+                    }}>
+
+                    <div
+                      css={(theme) =>
+                        mq({
+                          display: ["block", "block", "block"],
+                          color: factory.is_disabled
+                            ? theme.colors.Primary_500
+                            : theme.colors.Error_500,
+                          fontSize: [12, 12, 16],
+                          fontWeight: 500,
+                          fontWeight: theme.font_weight.size_500,
+                          lineHeight: "24px",
+                          cursor: "pointer",
+                          textAlign: "center",
+                        })
+                      }
+                      onClick={() => {
+                        // setDisable_account(true);
+                        // setEmail(factory.email);
+                        // setStatus(factory.is_disabled);
+                        open_change_status_popup(factory.email,factory.is_disabled, "head_of_field_service" )
+                      }}
+                    >
+                      {factory.is_disabled
+                        ? "Enable account"
+                        : "Disable account"}
+                    </div>
+
+                    <div
+                      css={mq({
+                        display: ["flex", "flex", "flex"],
+                        justifyContent: "center",
+                        width: "100%",
+                      })}
+                      onClick={() => {
+                        // setDisable_account(true);
+                        // setEmail(factory.email);
+                        // setStatus(factory.is_disabled);
+                        open_delete_user_popup(factory._id,"head_of_field_service" )
+                      }}
+                    >
+                      <img
+                        css={{
+                          width: 16,
+                          height: 16,
+                        }}
+                        src="/svg/settings/delete.svg"
+                      />
+                    </div></div>
+                  </div>
+                ))}
             </div>
           )}
         </div>

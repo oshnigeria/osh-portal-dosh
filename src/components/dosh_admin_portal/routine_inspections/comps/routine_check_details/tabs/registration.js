@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import axios from "axios";
 import { main_url, cookies_id } from "@/src/details";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import useSWR, { useSWRConfig, mutate } from "swr";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -13,6 +13,8 @@ import { success_message, error_message } from "@/src/components/toasts";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import CancelRoutineCheckPopup from "./comps/cancel_routine_check";
 import DeclarationPopup from "./comps/declaration_popup";
+import ReactToPrint from "react-to-print"
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const FacRoutineDetailsComp = () => {
@@ -20,6 +22,7 @@ const FacRoutineDetailsComp = () => {
   const [loading, setLoading] = useState(false);
   const [willAmmend, setWillAmmend] = useState(false);
   const [willCancel, setWillCancel] = useState(false);
+  const componentRef = useRef();
 
   const handleCancelRoutinCheck = () => {
     setWillCancel(true);
@@ -157,6 +160,7 @@ const FacRoutineDetailsComp = () => {
         </div>
       ) : (
         <div
+        ref={componentRef}
           css={{
             display: "flex",
             justifyContent: "center",
@@ -556,6 +560,89 @@ const FacRoutineDetailsComp = () => {
                     </div>
                   </div>
                 )}
+                 <div
+                  css={{
+                    marginTop: 48,
+                  }}
+                >
+                  <div
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                        fontWeight:700
+                      })
+                    }
+                  >
+                    State Officer
+                  </div>
+                 <div
+                  css={{
+                    marginTop: 16,
+                  }}
+                >
+                  <div
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
+                  >
+                    Name
+                  </div>
+                  <div
+                    css={(theme) =>
+                      mq({
+                        marginTop: 12,
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
+                  >
+                    {single_report.data?.report?.state_officer_name}
+                  </div>
+                </div>
+                   <div
+                  css={{
+                    marginTop: 16,
+                  }}
+                >
+                  <div
+                    css={(theme) =>
+                      mq({
+                        color: theme.colors.Gray_500,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
+                  >
+                    Signature
+                  </div>
+                  <div
+                    css={(theme) =>
+                      mq({
+                        marginTop: 12,
+                        color: theme.colors.Gray_700,
+                        lineHeight: "20px",
+                        fontSize: [14, 14, 20],
+                      })
+                    }
+                  >
+                    <img
+                              src={single_report.data?.report?.state_officer_signature}
+                              css={{
+                                width: 60,
+                                height: 20,
+                              }}
+                            />
+                
+                  </div>
+                </div>
+                </div>
               </div>
               {/* <div
               css={{
@@ -679,6 +766,53 @@ const FacRoutineDetailsComp = () => {
           </div>
         </div>
       )}
+       <div css={{
+        marginTop:24
+      }}>
+  <ReactToPrint
+                onBeforePrint={() => null}
+                onAfterPrint={() => null}
+                trigger={() => (
+                  <button
+                      css={(theme) =>
+                mq({
+                  height: [40, 40, 56],
+                  borderRadius: 30,
+                  width: ["auto", "auto", 356],
+                  //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                  padding: ["12px 16px", "12px 16px", "16px 24px"],
+                  fontSize: [12, 12, 20],
+                  cursor: "pointer",
+                  marginRight: 20,
+                  fontWeight: 600,
+                  lineHeight: "17px",
+                  border: "none",
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#fff",
+                  backgroundColor: theme.colors.Primary_500,
+                })
+                    }
+                    type="submit"
+                    // onClick={() => {
+                    //   factory_details.add_factory_details(formData);
+                    //   factory.set_tab("Upload document");
+                    // }}
+                  >
+                    <div
+                      css={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginTop: 4,
+                      }}
+                    >
+                      <div>Print Report</div>
+                    </div>
+                  </button>
+                )}
+                content={() => componentRef.current}
+              />
+      </div>
       <div
         css={{
           marginTop: 64,

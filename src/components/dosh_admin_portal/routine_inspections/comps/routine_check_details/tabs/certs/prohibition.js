@@ -415,7 +415,42 @@ const ProhibitionCertComp = (props) => {
                         </div>
                       </div>
                     </div>
-
+ <div>
+                        <div
+                          css={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <img
+                            src={props.state_officer_signature}
+                            css={{
+                              width: 60,
+                              height: 20,
+                            }}
+                          />
+                        </div>
+                        <div
+                          css={{
+                            marginTop: 8,
+                            fontSize: 12,
+                            fontWeight: 700,
+                            textAlign: "center",
+                          }}
+                        >
+                          {props.name}
+                        </div>
+                        <div
+                          css={{
+                            marginTop: 8,
+                            fontSize: 12,
+                            textAlign: "center",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          State Officer
+                        </div>
+                      </div>
                     <div
                       css={{
                         display: "flex",

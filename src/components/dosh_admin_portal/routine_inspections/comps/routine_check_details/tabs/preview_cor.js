@@ -189,11 +189,14 @@ const PreviewCorComp = () => {
               Letter Preview
             </div>
             {isLoading || error ? null : (
-              <div>
+              <div ref={componentRef}>
                 <div>
                   {router.query.notice_type === "WARNING-NOTICE" && (
                     <WarningCertComp
                       address={single_report.data?.report?.location}
+                        name={single_report.data?.report?.state_officer_name}
+                  state_officer_signature={single_report.data?.report?.state_officer_signature}
+                  sections_of_contraventions={single_report.data?.report?.sections_of_contraventions}
                     />
                   )}
                 </div>
@@ -206,6 +209,8 @@ const PreviewCorComp = () => {
                       }
                       factory_name={single_report.data?.report?.factory_name}
                       address={single_report.data?.report?.location}
+                        name={single_report.data?.report?.state_officer_name}
+                  state_officer_signature={single_report.data?.report?.state_officer_signature}
                     />
                   )}
                 </div>
@@ -218,6 +223,9 @@ const PreviewCorComp = () => {
                       }
                       factory_name={single_report.data?.report?.factory_name}
                       address={single_report.data?.report?.location}
+                        name={single_report.data?.report?.state_officer_name}
+                  state_officer_signature={single_report.data?.report?.state_officer_signature}
+                  areas_to_improve={single_report.data?.report?.areas_to_improve}
                     />
                   )}
                 </div>
@@ -229,10 +237,10 @@ const PreviewCorComp = () => {
             css={{
               marginTop: 64,
               display: "flex",
-              justifyContent: "right",
+              justifyContent: "space-between",
             }}
           >
-            {/* <ReactToPrint
+            <ReactToPrint
               trigger={() => (
                 <button
                   css={(theme) => ({
@@ -270,7 +278,7 @@ const PreviewCorComp = () => {
                 </button>
               )}
               content={() => componentRef.current}
-            /> */}
+            />
 
             <button
               css={(theme) => ({

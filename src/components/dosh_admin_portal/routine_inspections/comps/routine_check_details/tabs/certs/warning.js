@@ -400,9 +400,70 @@ const WarningCertComp = (props) => {
                           and provide a safe working environment for all
                           operations.
                         </div>
+                        <div>
+                            <div
+                            css={{
+                              fontWeight: 600,
+                               marginBottom: 8,
+                            }}
+                          >
+                            Sections of Contraventions
+                          </div>
+                          <div
+                            css={{
+                              fontSize: 12,
+                            }}
+                          >
+                            {props.sections_of_contraventions}
+                          </div>
+                        </div>
                       </div>
                     </div>
-
+  <div
+                      css={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: 30,
+                        color: "#000",
+                      }}
+                    >
+                      <div>
+                        <div
+                          css={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <img
+                            src={props.state_officer_signature}
+                            css={{
+                              width: 60,
+                              height: 20,
+                            }}
+                          />
+                        </div>
+                        <div
+                          css={{
+                            marginTop: 8,
+                            fontSize: 12,
+                            fontWeight: 700,
+                            textAlign: "center",
+                          }}
+                        >
+                          {props.name}
+                        </div>
+                        <div
+                          css={{
+                            marginTop: 8,
+                            fontSize: 12,
+                            textAlign: "center",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          State Officer
+                        </div>
+                      </div>
+                    </div>
                     <div
                       css={{
                         display: "flex",
