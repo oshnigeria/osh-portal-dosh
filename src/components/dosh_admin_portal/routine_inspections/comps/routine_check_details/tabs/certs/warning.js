@@ -354,7 +354,7 @@ const WarningCertComp = (props) => {
                           It has been brought to the attention of the Director
                           of Factories of the Federation that your organization
                           was found to be in contravention of the following
-                          Section(s) of the Act:
+                          Section(s) of the Act: {" "}
                           <span
                             css={{
                               fontWeight: 700,
@@ -373,7 +373,7 @@ const WarningCertComp = (props) => {
                           observation(s) you are hereby required to rectify all
                           defects as pointed out to you by the Chief Inspector
                           of Factories in the State within ONE month of this
-                          notice. Failure to do so will result in
+                          notice. Failure to do so will result in {" "}
                           <span
                             css={{
                               fontWeight: 700,
