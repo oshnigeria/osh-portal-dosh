@@ -388,14 +388,14 @@ const WarningCertComp = (props) => {
                             fontSize: 12,
                           }}
                         >
-                          Kindly regard this as to
+                          Kindly regard this as to {" "}
                           <span
                             css={{
                               fontWeight: 700,
                             }}
                           >
                             {router.query.notice_type}
-                          </span>
+                          </span> {" "}
                           comply with the provisions of the Factories Act 2004
                           and provide a safe working environment for all
                           operations.
