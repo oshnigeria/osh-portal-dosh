@@ -820,7 +820,10 @@ const FacRoutineDetailsComp = () => {
           justifyContent: "space-between",
         }}
       >
-        <button
+        {
+            (single_report.data?.report?.letter_type === "PROHIBITION-NOTICE" ||
+ single_report.data?.report?.letter_type === "WARNING-NOTICE")
+ &&   <button
           css={(theme) =>
             mq({
               height: [40, 40, 56],
@@ -870,6 +873,9 @@ const FacRoutineDetailsComp = () => {
             <div>Cancel Report</div>
           </div>
         </button>
+        }
+       
+
         <button
           css={(theme) =>
             mq({
