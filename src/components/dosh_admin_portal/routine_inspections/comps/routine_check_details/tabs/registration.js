@@ -766,7 +766,7 @@ const FacRoutineDetailsComp = () => {
           </div>
         </div>
       )}
-       <div css={{
+       {/* <div css={{
         marginTop:24
       }}>
   <ReactToPrint
@@ -812,7 +812,7 @@ const FacRoutineDetailsComp = () => {
                 )}
                 content={() => componentRef.current}
               />
-      </div>
+      </div> */}
       <div
         css={{
           marginTop: 64,

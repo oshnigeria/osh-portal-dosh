@@ -415,7 +415,7 @@ const ProhibitionCertComp = (props) => {
                         </div>
                       </div>
                     </div>
- <div>
+ {/* <div>
                         <div
                           css={{
                             display: "flex",
@@ -450,7 +450,7 @@ const ProhibitionCertComp = (props) => {
                         >
                           State Officer
                         </div>
-                      </div>
+                      </div> */}
                     <div
                       css={{
                         display: "flex",

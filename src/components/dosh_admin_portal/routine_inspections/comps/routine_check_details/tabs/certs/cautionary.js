@@ -431,7 +431,7 @@ const CautionaryCertComp = (props) => {
                         color: "#000",
                       }}
                     >
-                      <div>
+                      {/* <div>
                         <div
                           css={{
                             display: "flex",
@@ -466,7 +466,7 @@ const CautionaryCertComp = (props) => {
                         >
                           State Officer
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div
                       css={{
