@@ -72,6 +72,15 @@ const WarningCertComp = (props) => {
     error,
     isLoading,
   } = useSWR(`${main_url}/dosh/signature`, fetcher);
+
+   const {
+    data: routine_details,
+    error: routine_error,
+    isLoading:routine_isloading,
+  } = useSWR(
+    `${main_url}/inventory/factory/routine-check?id=${router.query.id}`,
+    fetcher
+  );
   function formatDateToCustom(inputDate) {
     const date = new Date(inputDate);
     const formattedDate = date.toLocaleDateString("en-GB", {
@@ -124,10 +133,12 @@ const WarningCertComp = (props) => {
     "image",
     "video",
   ];
+
+  // console.log("Props:", props.routine_details);
   return (
     <div
       css={{
-        display: "center",
+        // display: "center",
         justifyContent: "center",
       }}
     >
@@ -161,7 +172,7 @@ const WarningCertComp = (props) => {
             width: "100%",
           }}
         >
-          <div
+          {routine_isloading || routine_error ? null : <div
           // css={(theme) => ({
           //   marginTop: 54,
 
@@ -189,7 +200,7 @@ const WarningCertComp = (props) => {
                   mq({
                     width: ["100%", "100%", 598],
                     border: `1px solid ${theme.colors.Gray_100}`,
-                    height: 880,
+                    height: "auto",
                   })
                 }
               >
@@ -199,13 +210,16 @@ const WarningCertComp = (props) => {
                     display: "flex",
                     justifyContent: "center",
                     fontFamily: "Times New Roman",
-                    backgroundImage: "url('/cert/coat_of_arms_light.png')",
-                    objectFit: "cover",
-                    backgroundPosition: "center center",
-
+                     backgroundPosition: "center center",
+ background:theme.colors.Primary_25,
+ background: "linear-gradient(90deg,#D1E5E0 0%, rgba(255, 255, 255, 1) 50%, #D1E5E0 100%)",
                     backgroundRepeat: "no-repeat",
                     //   width: "100vw",
-                    height: "100vh",
+                  
+                    border: "20px inset #66A898",
+                    //   width: "100vw",
+                    // height: "100vh",
+                    padding:"24px 0px"
                   })}
                 >
                   <div
@@ -225,32 +239,42 @@ const WarningCertComp = (props) => {
                         }}
                       ></div>
 
-                      <div
+                     <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 10,
+                          fontSize: 14,
                           textAlign: "right",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
                         }}
                       >
-                        Ref No:
+                        Ref No:  <span
+                          css={(theme) => ({
+                            fontWeight: 600,
+                            color: theme.colors.Warning_700,
+                          })}
+                        >{routine_details.data?.report?.reference_number}</span>
                       </div>
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 10,
+                          fontSize: 14,
                           textAlign: "right",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
                         }}
                       >
-                        Date:
+                        Date: <span
+                          css={(theme) => ({
+                            fontWeight: 600,
+                            color: theme.colors.Warning_700,
+                          })}
+                        >{routine_details.data?.report?.inspection_date}</span>
                       </div>
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: "left",
                           fontFamily: "Times New Roman",
                           fontWeight: 700,
@@ -258,22 +282,33 @@ const WarningCertComp = (props) => {
                       >
                         The Managing Director,
                       </div>
+                       <div
+                        css={{
+                          fontSize: 14,
+                          textAlign: "left",
+                          fontFamily: "Times New Roman",
+
+                          // fontWeight: 700,
+                        }}
+                      >
+                        {routine_details.data?.report?.factory_name},
+                      </div>
                       <div
                         css={{
                           marginBottom: 20,
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: "left",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
                         }}
                       >
-                        {props.address}
+                        {routine_details.data?.report?.location}
                       </div>
 
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: "left",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
@@ -283,29 +318,9 @@ const WarningCertComp = (props) => {
                       </div>
                     </div>
 
-                    <div
-                      css={{
-                        textAlign: "center",
-                        marginTop: 20,
-                        fontFamily: "Times New Roman",
-                        fontWeight: 700,
-                        fontSize: 12,
-                      }}
-                    >
-                      FEDERAL REPUBLIC OF NIGERIA
-                    </div>
-                    <div
-                      css={{
-                        textAlign: "center",
-                        marginTop: 4,
-                        fontFamily: "Times New Roman",
-
-                        fontSize: 12,
-                        fontStyle: "italic",
-                      }}
-                    >
-                      The Factories Act, CAP F1 LFN 2004
-                    </div>
+                    
+                    
+                    
                     <div
                       css={(theme) =>
                         mq({
@@ -321,11 +336,25 @@ const WarningCertComp = (props) => {
                     >
                       FACTORIES ACT CAP F1 L.F.N 2004
                     </div>
-                    <div
+                       <div
+                      css={(theme) =>
+                        mq({
+                          marginTop: [10, 10, 10],
+                          fontSize: 16,
+                          textAlign: "center",
+                          fontFamily: "Times New Roman",
+                          fontWeight: 700,
+                          color: theme.colors.Warning_700,
+                        })
+                      }
+                    >
+                      {routine_details.data?.report?.factory_name}
+                    </div>
+                     <div
                       css={(theme) =>
                         mq({
                           textAlign: "center",
-                          marginTop: [14, 14, 18],
+                          marginTop: [10, 10, 10],
                           fontFamily: "Times New Roman",
                           color: theme.colors.Primary_400,
                           fontSize: [14, 14, 18],
@@ -334,7 +363,11 @@ const WarningCertComp = (props) => {
                         })
                       }
                     >
-                      NOTICE: {router.query.notice_type}
+                      NOTICE: <span
+                        css={(theme) => ({
+                          color: theme.colors.Primary_700,
+                        })}
+                      >{router.query.notice_type}</span>
                     </div>
                     <div
                       css={{
@@ -348,13 +381,14 @@ const WarningCertComp = (props) => {
                         <div
                           css={{
                             marginBottom: 8,
-                            fontSize: 12,
+                                fontSize: 14,
+                            lineHeight:"20px"
                           }}
                         >
                           It has been brought to the attention of the Director
                           of Factories of the Federation that your organization
                           was found to be in contravention of the following
-                          Section(s) of the Act: {" "}
+                          Section(s) of the Act:{" "}
                           <span
                             css={{
                               fontWeight: 700,
@@ -366,7 +400,8 @@ const WarningCertComp = (props) => {
                         <div
                           css={{
                             marginBottom: 8,
-                            fontSize: 12,
+                               fontSize: 14,
+                            lineHeight:"20px"
                           }}
                         >
                           Considering the contravention(s) listed above and
@@ -385,7 +420,8 @@ const WarningCertComp = (props) => {
                         <div
                           css={{
                             marginBottom: 8,
-                            fontSize: 12,
+                                fontSize: 14,
+                            lineHeight:"20px"
                           }}
                         >
                           Kindly regard this as to {" "}
@@ -405,65 +441,23 @@ const WarningCertComp = (props) => {
                             css={{
                               fontWeight: 600,
                                marginBottom: 8,
+                               
                             }}
                           >
                             Sections of Contraventions
                           </div>
                           <div
                             css={{
-                              fontSize: 12,
+                                  fontSize: 14,
+                            lineHeight:"20px"
                             }}
                           >
-                            {props.sections_of_contraventions}
+                            {routine_details.data?.report?.sections_of_contraventions}
                           </div>
                         </div>
                       </div>
                     </div>
-  <div
-                      css={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: 30,
-                        color: "#000",
-                      }}
-                    >
-                      {/* <div>
-                        <div
-                          css={{
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <img
-                            src={props.state_officer_signature}
-                            css={{
-                              width: 60,
-                              height: 20,
-                            }}
-                          />
-                        </div>
-                        <div
-                          css={{
-                            marginTop: 8,
-                            fontSize: 12,
-                            fontWeight: 700,
-                            textAlign: "center",
-                          }}
-                        >
-                          {props.name}
-                        </div>
-                        <div
-                          css={{
-                            marginTop: 8,
-                            fontSize: 12,
-                            textAlign: "center",
-                            fontStyle: "italic",
-                          }}
-                        >
-                          State Officer
-                        </div>
-                      </div> */}
-                    </div>
+
                     <div
                       css={{
                         display: "flex",
@@ -480,7 +474,7 @@ const WarningCertComp = (props) => {
                           }}
                         >
                           <img
-                            src={single_factory?.data?.url}
+                           src={single_factory?.data?.url}
                             css={{
                               width: 60,
                               height: 20,
@@ -490,19 +484,20 @@ const WarningCertComp = (props) => {
                         <div
                           css={{
                             marginTop: 8,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: 700,
                             textAlign: "center",
                           }}
                         >
-                          {single_factory?.data?.name}
+                       {single_factory?.data?.name}
                         </div>
                         <div
                           css={{
                             marginTop: 8,
-                            fontSize: 12,
+                            fontSize: 14,
                             textAlign: "center",
                             fontStyle: "italic",
+                        
                           }}
                         >
                           Director of the factories of the federation
@@ -513,7 +508,8 @@ const WarningCertComp = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> }
+          
         </div>
       )}
     </div>
