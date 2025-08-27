@@ -500,7 +500,7 @@ const {
                             fontStyle: "italic",
                           }}
                         >
-                          Director of the factories of the federation
+                          Director of factories of the federation
                         </div>
                       </div>
                     </div>
