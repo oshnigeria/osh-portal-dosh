@@ -16,6 +16,8 @@ import PDFComp from "./comps/certificate";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
 import facepaint from "facepaint";
+import moment from "moment";
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const PreviewCorComp = () => {
@@ -611,7 +613,19 @@ color:"#111",
                               // color: theme.colors.Warning_600,
                             })}
                           >
-                            3 years
+                            {moment(
+                              single_factory?.data?.factory
+                                ?.year_of_last_renewal
+                            ).format("YYYY-MM-DD")}{" "}
+                            <span> -- </span>
+                            {moment(single_factory?.data?.factory
+                                ?.year_of_last_renewal)
+                              .add(
+                                3,
+                                "years"
+                              )
+                              .format("YYYY-MM-DD")}
+                            {/* 3 years */}
                           </span></div>
                         </div>
                       </div>
