@@ -178,17 +178,37 @@ const FacRoutineDetailsComp = () => {
               })
             }
           >
-            <div
-              css={(theme) =>
-                mq({
-                  fontSize: [16, 16, 32],
-                  color: theme.colors.Gray_700,
-                  textTransform: "capitalize",
-                })
-              }
-            >
-              Factory information
-            </div>
+             <div css={{
+                  display:"flex",
+                  justifyContent:"space-between",
+                  alignItems:"center"
+                }}>
+                <div
+                  css={(theme) =>
+                    mq({
+                      fontSize: [16, 16, 32],
+                      color: theme.colors.Gray_700,
+                      textTransform: "capitalize",
+                    })
+                  }
+                >
+                  Inspection Report
+                </div>
+ <div
+                  css={(theme) =>
+                    mq({
+                        fontSize: [14, 14, 16],
+                      color: theme.colors.Success_700,
+                      textTransform: "capitalize",
+                      fontWeight:600,
+                      
+                    })
+                  }
+                >
+                   Form LAB|F|9
+                </div>
+                
+                </div>
 
             <div>
               <div
@@ -766,7 +786,7 @@ const FacRoutineDetailsComp = () => {
           </div>
         </div>
       )}
-       {/* <div css={{
+       <div css={{
         marginTop:24
       }}>
   <ReactToPrint
@@ -812,7 +832,7 @@ const FacRoutineDetailsComp = () => {
                 )}
                 content={() => componentRef.current}
               />
-      </div> */}
+      </div>
       <div
         css={{
           marginTop: 64,

@@ -35,43 +35,24 @@ const CautionaryCertComp = (props) => {
         console.error("Error:", error);
       });
 
-  const zonal_approve_comments = () => {
-    setLoading(true);
-    axios
-      .patch(
-        `${main_url}/dosh/routine-check`,
-        {
-          id: router.query.id,
-          // comment: comment,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookies.get(cookies_id)}`,
-          },
-        }
-      )
-      .then(function (response) {
-        console.log(response.data);
-
-        success_message(response?.data.message);
-        router.push("/routine-inspections?tab=pending");
-        setLoading(false);
-      })
-      .catch(function (error) {
-        error_message(error?.response?.data?.message);
-        console.log(error);
-        setLoading(false);
-      });
-  };
-  const handleSubmitApprove = () => {
-    zonal_approve_comments();
-  };
   const {
-    data: single_factory,
+    data: user,
     error,
     isLoading,
-  } = useSWR(`${main_url}/dosh/signature`, fetcher);
+  } = useSWR(`${main_url}/state-officer/info`, fetcher);
+
+
+  const {
+    data: routine_details,
+    error: routine_error,
+    isLoading:routine_isloading,
+  } = useSWR(
+    `${main_url}/inventory/factory/routine-check?id=${router.query.id}`,
+    fetcher
+  );
+
+
+  // console.log(user);
   function formatDateToCustom(inputDate) {
     const date = new Date(inputDate);
     const formattedDate = date.toLocaleDateString("en-GB", {
@@ -189,7 +170,7 @@ const CautionaryCertComp = (props) => {
                   mq({
                     width: ["100%", "100%", 598],
                     border: `1px solid ${theme.colors.Gray_100}`,
-                    height: 880,
+                    // height: 880,
                   })
                 }
               >
@@ -199,13 +180,16 @@ const CautionaryCertComp = (props) => {
                     display: "flex",
                     justifyContent: "center",
                     fontFamily: "Times New Roman",
-                    backgroundImage: "url('/cert/coat_of_arms_light.png')",
-                    objectFit: "cover",
-                    backgroundPosition: "center center",
-
+                   backgroundPosition: "center center",
+ background:theme.colors.Primary_25,
+ background: "linear-gradient(90deg,#D1E5E0 0%, rgba(255, 255, 255, 1) 50%, #D1E5E0 100%)",
                     backgroundRepeat: "no-repeat",
                     //   width: "100vw",
-                    height: "100vh",
+                  
+                    border: "20px inset #66A898",
+                      padding:"24px 0px"
+                    //   width: "100vw",
+                    // height: "100vh",
                   })}
                 >
                   <div
@@ -228,29 +212,45 @@ const CautionaryCertComp = (props) => {
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 10,
+                          fontSize: 14,
                           textAlign: "right",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
                         }}
                       >
-                        Ref No:
+                        Ref No:{" "}
+                        <span
+                          css={(theme) => ({
+                            fontWeight: 600,
+                            color: theme.colors.Warning_700,
+                          })}
+                        >
+                          {routine_details.data?.report?.reference_number}
+                        </span>
                       </div>
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 10,
+                          fontSize: 14,
                           textAlign: "right",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
                         }}
                       >
-                        Date:
+                        Date:{" "}
+                        <span
+                          css={(theme) => ({
+                            fontWeight: 600,
+                            color: theme.colors.Warning_700,
+                          })}
+                        >
+                          {routine_details.data?.report?.inspection_date}
+                        </span>
                       </div>
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: "left",
                           fontFamily: "Times New Roman",
                           fontWeight: 700,
@@ -260,20 +260,31 @@ const CautionaryCertComp = (props) => {
                       </div>
                       <div
                         css={{
+                          fontSize: 14,
+                          textAlign: "left",
+                          fontFamily: "Times New Roman",
+
+                          // fontWeight: 700,
+                        }}
+                      >
+                        {routine_details.data?.report?.factory_name},
+                      </div>
+                      <div
+                        css={{
                           marginBottom: 20,
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: "left",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
                         }}
                       >
-                        {props.address}
+                        {routine_details.data?.report?.location}
                       </div>
 
                       <div
                         css={{
                           marginBottom: 8,
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: "left",
                           fontFamily: "Times New Roman",
                           // fontWeight: 700,
@@ -283,7 +294,7 @@ const CautionaryCertComp = (props) => {
                       </div>
                     </div>
 
-                    <div
+                    {/* <div
                       css={{
                         textAlign: "center",
                         marginTop: 20,
@@ -294,17 +305,7 @@ const CautionaryCertComp = (props) => {
                     >
                       FEDERAL REPUBLIC OF NIGERIA
                     </div>
-                    <div
-                      css={{
-                        marginBottom: 8,
-                        fontSize: 12,
-                        textAlign: "center",
-                        fontFamily: "Times New Roman",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {props.factory_name}
-                    </div>
+                   
                     <div
                       css={{
                         textAlign: "center",
@@ -316,7 +317,7 @@ const CautionaryCertComp = (props) => {
                       }}
                     >
                       The Factories Act, CAP F1 LFN 2004
-                    </div>
+                    </div> */}
                     <div
                       css={(theme) =>
                         mq({
@@ -335,8 +336,22 @@ const CautionaryCertComp = (props) => {
                     <div
                       css={(theme) =>
                         mq({
+                          marginTop: [10, 10, 10],
+                          fontSize: 16,
                           textAlign: "center",
-                          marginTop: [14, 14, 18],
+                          fontFamily: "Times New Roman",
+                          fontWeight: 700,
+                          color: theme.colors.Warning_700,
+                        })
+                      }
+                    >
+                      {routine_details.data?.report?.factory_name}
+                    </div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          textAlign: "center",
+                          marginTop: [10, 10, 10],
                           fontFamily: "Times New Roman",
                           color: theme.colors.Primary_400,
                           fontSize: [14, 14, 18],
@@ -345,7 +360,14 @@ const CautionaryCertComp = (props) => {
                         })
                       }
                     >
-                      NOTICE: {router.query.notice_type}
+                      NOTICE:{" "}
+                      <span
+                        css={(theme) => ({
+                          color: theme.colors.Primary_700,
+                        })}
+                      >
+                        {routine_details.data?.report?.letter_type}
+                      </span>
                     </div>
                     <div
                       css={{
@@ -359,115 +381,79 @@ const CautionaryCertComp = (props) => {
                         <div
                           css={{
                             marginBottom: 8,
-                            fontSize: 12,
+                              fontSize: 14,
+                            lineHeight:"20px"
                           }}
                         >
-                          We refer to our letter dated Date of previous letter
-                          fills here with Ref. No: Reference number fills here
-                          requesting you to register your premises in accordance
-                          with section 2 and 3 of the Factories Act 2004 in
-                          which you failed to comply. This is in pursuance of
-                          the provision of section 17(3c) of the Constitution of
-                          the Federal Republic of Nigeria and the mandate of the
-                          Federal Ministry of Labour and Employment on
-                          protection of Health, Safety and Welfare of persons at
-                          Work.
-                        </div>
-                        <div
-                          css={{
-                            marginBottom: 8,
-                            fontSize: 12,
-                          }}
-                        >
-                          2. Following your failure to comply since Date of
-                          previous letter fills here. I have been directed to
-                          serve you with a cautionary letter due to your
-                          deliberate failure to register your premises with the
-                          Director of Factories of the Federation. You are
-                          advised to make effort and comply for the sake of a
-                          harmonious relationship.
-                        </div>
-                        <div
-                          css={{
-                            marginBottom: 8,
-                            fontSize: 12,
-                          }}
-                        >
-                          3. Looking forward to a favourable response
-                        </div>
-                        <div
-                          css={{
-                            marginBottom: 8,
-                            fontSize: 12,
-                          }}
-                        >
-                          4.  Thank you Yours faithfully,
-                        </div>
-                         <div>
-                            <div
-                            css={{
+                         
+                          Refer to our letter dated{" "}
+                          <span
+                            css={(theme) => ({
                               fontWeight: 600,
-                               marginBottom: 8,
-                            }}
+                              color: theme.colors.Primary_700,
+                            })}
                           >
-                            Areas to Improve
-                          </div>
-                          <div
-                            css={{
-                              fontSize: 12,
-                            }}
+                            {" "}
+                            {"  "}
+                            {routine_details.data?.report?.date_of_last_inspection}
+                          </span>{" "}
+                          with Ref. No.{" "}
+                          <span
+                            css={(theme) => ({
+                              fontWeight: 600,
+                              color: theme.colors.Primary_700,
+                            })}
                           >
-                            {props.areas_to_improve}
-                          </div>
+                            {routine_details.data?.report?.reference_number}{" "}
+                          </span>{" "}
+                          requesting you to address the following{" "}
+                          <span
+                            css={(theme) => ({
+                              fontWeight: 600,
+                              color: theme.colors.Primary_700,
+                            })}
+                          >
+                            {routine_details.data?.report?.areas_to_improve}.{" "}
+                          </span>
+
+                          <p>
+
+
+                          This is in pursuance of the provision of section
+                          17(3c) of the constitution of the Federal Republic of
+                          Nigeria and mandate of THE FEDERAL MINISTRY OF LABOUR
+                          AND EMPLOYMENT on protection of health, Safety and
+                          Welfare of person at work. </p>
+
+
+<p>
+                          Following your failure to
+                          comply since{" "}
+                          <span
+                            css={(theme) => ({
+                              fontWeight: 600,
+                              color: theme.colors.Primary_700,
+                            })}
+                          >
+                            {" "}
+                            {"  "}
+                            {routine_details.data?.report?.date_of_last_inspection}
+                          </span>{" "}
+                          you are by this notice required to rectify the
+                          contravention(s) within no of weeks fill in weeks or
+                          you will be sanctioned. </p>
+
+                          <p>
+                            Kindly regard this as a
+                          CAUTION to comply with the provisions of the Factories
+                          Act CAP F1 LAW OF FEDERAL REPUBLIC OF NIGERIA 2004 to
+                          protect Health, Safety and Welfare of workers.
+                          </p>
                         </div>
+                       
                       </div>
                     </div>
 
-  <div
-                      css={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: 30,
-                        color: "#000",
-                      }}
-                    >
-                      {/* <div>
-                        <div
-                          css={{
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <img
-                            src={props.state_officer_signature}
-                            css={{
-                              width: 60,
-                              height: 20,
-                            }}
-                          />
-                        </div>
-                        <div
-                          css={{
-                            marginTop: 8,
-                            fontSize: 12,
-                            fontWeight: 700,
-                            textAlign: "center",
-                          }}
-                        >
-                          {props.name}
-                        </div>
-                        <div
-                          css={{
-                            marginTop: 8,
-                            fontSize: 12,
-                            textAlign: "center",
-                            fontStyle: "italic",
-                          }}
-                        >
-                          State Officer
-                        </div>
-                      </div> */}
-                    </div>
                     <div
                       css={{
                         display: "flex",
@@ -484,7 +470,7 @@ const CautionaryCertComp = (props) => {
                           }}
                         >
                           <img
-                            src={single_factory?.data?.url}
+                            src={routine_details.data?.report?.state_officer_signature}
                             css={{
                               width: 60,
                               height: 20,
@@ -494,22 +480,22 @@ const CautionaryCertComp = (props) => {
                         <div
                           css={{
                             marginTop: 8,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: 700,
                             textAlign: "center",
                           }}
                         >
-                          {single_factory?.data?.name}
+                          {routine_details.data?.report?.state_officer_name}
                         </div>
-                        <div
-                          css={{
+                       <div
+                          css={(theme) => ({
                             marginTop: 8,
-                            fontSize: 12,
+                            fontSize: 14,
                             textAlign: "center",
                             fontStyle: "italic",
-                          }}
+                          })}
                         >
-                          Director of the factories of the federation
+                          Head of Factories, {routine_details.data?.report?.state_officer_name}
                         </div>
                       </div>
                     </div>

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import axios from "axios";
 import { main_url, cookies_id } from "@/src/details";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import EmployeeInfoComp from "./regsitration_components/employee_info_comp";
 import useSWR, { useSWRConfig, mutate } from "swr";
 import { useRouter } from "next/router";
@@ -9,11 +9,15 @@ import Cookies from "js-cookie";
 import { FactoryContext } from "@/src/context/factoryContext";
 import AmmendmentRegistration from "./comps/ammendment_info/registration";
 import facepaint from "facepaint";
+import ReactToPrint from "react-to-print"
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const FactoryRegistration = () => {
   const router = useRouter();
   const factory = useContext(FactoryContext);
+    const componentRef = useRef();
+  
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -68,6 +72,7 @@ const FactoryRegistration = () => {
         </div>
       ) : (
         <div
+          ref={componentRef}
           css={{
             display: "flex",
             justifyContent: "center",
@@ -85,6 +90,11 @@ const FactoryRegistration = () => {
               })
             }
           >
+
+            <div css={{
+              display:"flex",
+              justifyContent:"space-between"
+            }}>
             <div
               css={(theme) =>
                 mq({
@@ -97,6 +107,20 @@ const FactoryRegistration = () => {
               Factory information
             </div>
 
+            <div
+                  css={(theme) =>
+                    mq({
+                        fontSize: [14, 14, 16],
+                      color: theme.colors.Success_700,
+                      textTransform: "capitalize",
+                      fontWeight:600,
+                      
+                    })
+                  }
+                >
+                   Form LAB|F|9
+                </div>
+</div>
             <div>
               <div
                 css={mq({
@@ -1107,9 +1131,52 @@ const FactoryRegistration = () => {
         css={{
           marginTop: 64,
           display: "flex",
-          justifyContent: "right",
+          justifyContent: "space-between",
         }}
       >
+          <ReactToPrint
+                        onBeforePrint={() => null}
+                        onAfterPrint={() => null}
+                        trigger={() => (
+                          <button
+                              css={(theme) =>
+                        mq({
+                          height: [40, 40, 56],
+                          borderRadius: 30,
+                          width: ["auto", "auto", 356],
+                          //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                          padding: ["12px 16px", "12px 16px", "16px 24px"],
+                          fontSize: [12, 12, 20],
+                          cursor: "pointer",
+                          marginRight: 20,
+                          fontWeight: 600,
+                          lineHeight: "17px",
+                          border: "none",
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#fff",
+                          backgroundColor: theme.colors.Primary_500,
+                        })
+                            }
+                            type="submit"
+                            // onClick={() => {
+                            //   factory_details.add_factory_details(formData);
+                            //   factory.set_tab("Upload document");
+                            // }}
+                          >
+                            <div
+                              css={{
+                                display: "flex",
+                                alignItems: "center",
+                                marginTop: 4,
+                              }}
+                            >
+                              <div>Print Report</div>
+                            </div>
+                          </button>
+                        )}
+                        content={() => componentRef.current}
+                      />
         <button
           css={(theme) =>
             mq({

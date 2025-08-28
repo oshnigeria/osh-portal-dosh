@@ -5,7 +5,7 @@ import React, { useState, useContext, useRef } from "react";
 import axios from "axios";
 
 import ReactToPrint from "react-to-print";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout, color } from "framer-motion";
 import useSWR, { useSWRConfig, mutate } from "swr";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -13,9 +13,10 @@ import { main_url, cookies_id } from "@/src/details";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
 import facepaint from "facepaint";
+import moment from "moment";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
-const ProhibitionCertComp = (props) => {
+const ImprovementCertComp = (props) => {
   const [value, setValue] = useState("");
   const [willAmmend, setWillAmmend] = useState(false);
   const router = useRouter();
@@ -35,54 +36,13 @@ const ProhibitionCertComp = (props) => {
         console.error("Error:", error);
       });
 
-  const zonal_approve_comments = () => {
-    setLoading(true);
-    axios
-      .patch(
-        `${main_url}/dosh/routine-check`,
-        {
-          id: router.query.id,
-          // comment: comment,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Cookies.get(cookies_id)}`,
-          },
-        }
-      )
-      .then(function (response) {
-        console.log(response.data);
-
-        success_message(response?.data.message);
-        router.push("/routine-inspections?tab=pending");
-        setLoading(false);
-      })
-      .catch(function (error) {
-        error_message(error?.response?.data?.message);
-        console.log(error);
-        setLoading(false);
-      });
-  };
-  const handleSubmitApprove = () => {
-    zonal_approve_comments();
-  };
-const {
-    data: single_factory,
+  const {
+    data: user,
     error,
     isLoading,
-  } = useSWR(`${main_url}/dosh/signature`, fetcher);
+  } = useSWR(`${main_url}/state-officer/info`, fetcher);
 
-     const {
-    data: routine_details,
-    error: routine_error,
-    isLoading:routine_isloading,
-  } = useSWR(
-    `${main_url}/inventory/factory/routine-check?id=${router.query.id}`,
-    fetcher
-  );
-
-
+  // console.log(user);
   function formatDateToCustom(inputDate) {
     const date = new Date(inputDate);
     const formattedDate = date.toLocaleDateString("en-GB", {
@@ -99,6 +59,17 @@ const {
     watch,
     formState: { errors },
   } = useForm();
+
+
+    const {
+    data: routine_details,
+    error: routine_error,
+    isLoading:routine_isloading,
+  } = useSWR(
+    `${main_url}/inventory/factory/routine-check?id=${router.query.id}`,
+    fetcher
+  );
+
 
   const modules = {
     toolbar: [
@@ -135,8 +106,6 @@ const {
     "image",
     "video",
   ];
-    // console.log("Props:", props);
-
   return (
     <div
       css={{
@@ -174,7 +143,7 @@ const {
             width: "100%",
           }}
         >
-          {routine_isloading || routine_error ? null  : <div
+          {routine_isloading || routine_error ? null :  <div
           // css={(theme) => ({
           //   marginTop: 54,
 
@@ -198,6 +167,9 @@ const {
               /> */}
 
               <div
+            //   css={theme => ({
+              
+            // })}
                 css={(theme) =>
                   mq({
                     width: ["100%", "100%", 598],
@@ -212,16 +184,21 @@ const {
                     display: "flex",
                     justifyContent: "center",
                     fontFamily: "Times New Roman",
-                    backgroundPosition: "center center",
+                    // backgroundImage: "url('/cert/coat_of_arms_light.png')",
+                    // objectFit: "cover",
+                    // backgroundPosition: "center center",
+
+                    // backgroundRepeat: "no-repeat",
+                     backgroundPosition: "center center",
  background:theme.colors.Primary_25,
  background: "linear-gradient(90deg,#D1E5E0 0%, rgba(255, 255, 255, 1) 50%, #D1E5E0 100%)",
                     backgroundRepeat: "no-repeat",
                     //   width: "100vw",
                   
                     border: "20px inset #66A898",
+                    padding:"24px 0px"
                     //   width: "100vw",
                     // height: "100vh",
-                      padding:"24px 0px"
                   })}
                 >
                   <div
@@ -257,7 +234,7 @@ const {
                             color: theme.colors.Warning_700,
                           })}
                         >
-                         {routine_details.data?.report?.reference_number}
+                          {routine_details.data?.report?.reference_number}
                         </span>
                       </div>
                       <div
@@ -272,8 +249,8 @@ const {
                         Date:{" "}
                         <span
                           css={(theme) => ({
-                            fontWeight: 600,
                             color: theme.colors.Warning_700,
+                            fontWeight: 600,
                           })}
                         >
                           {routine_details.data?.report?.inspection_date}
@@ -290,6 +267,7 @@ const {
                       >
                         The Managing Director,
                       </div>
+
                       <div
                         css={{
                           fontSize: 14,
@@ -337,17 +315,7 @@ const {
                     >
                       FEDERAL REPUBLIC OF NIGERIA
                     </div>
-                    <div
-                      css={{
-                        marginBottom: 8,
-                        fontSize: 12,
-                        textAlign: "center",
-                        fontFamily: "Times New Roman",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {props.factory_name}
-                    </div>
+                   
                     <div
                       css={{
                         textAlign: "center",
@@ -408,7 +376,7 @@ const {
                           color: theme.colors.Primary_700,
                         })}
                       >
-                        {router.query.notice_type}
+                        {routine_details.data?.report?.letter_type}
                       </span>
                     </div>
                     <div
@@ -424,38 +392,52 @@ const {
                           css={{
                             marginBottom: 8,
                             fontSize: 14,
-                            lineHeight: "20px",
+                            lineHeight:"20px"
                           }}
                         >
-                          Sequels to your non – compliance to the provision of
-                          section of the factories act and the contravention
-                           {routine_details.data?.report?.sections_of_contraventions}  of the <span css={{
-                             fontWeight: 700,
-                          }}>FACTORIES ACT CAP F1 LAW OF FEDERAL
-                          REPUBLIC OF NIGERIA 2004 AND OTHER EXTANT LABOUR LAWS
-                          OF THE NATION</span>.
+                          
+                          During our visit to your premises on{" "}
+                          <span
+                            css={(theme) => ({
+                              fontWeight: 600,
+                              color: theme.colors.Primary_700,
+                            })}
+                          >
+                            {" "}
+                            {"  "}
+                            {routine_details.data?.report?.date_of_last_inspection}
+                          </span>{" "}
+                          , the following contravention(s) of the Factories Act
+                          F1 Law of the Federal Republic of Nigeria was/were
+                          noticed;{" "}
+                          <span
+                            css={(theme) => ({
+                              fontWeight: 600,
+                              color: theme.colors.Primary_700,
+                            })}
+                          >
+                            {routine_details.data?.report?.areas_to_improve}.{" "}
+                          </span>
+                          <p>
+                          Please you are hereby advised to rectify the
+                          contravention(s) within <span
+                            css={(theme) => ({
+                              fontWeight: 600,
+                              color: theme.colors.Primary_700,
+                            })}
+                          >{moment(routine_details.data?.report?.createdAt).format("YYYY-MM-DD")} <span css={{
+                            color:"#111"
+                          }}>--</span> {moment(routine_details.data?.report?.createdAt).add(routine_details.data?.report?.no_of_weeks_for_deadline, "weeks").format("YYYY-MM-DD")} ({routine_details.data?.report?.no_of_weeks_for_deadline} weeks)</span>  and
+                          notify this office in writing. </p>
+
+                          <p>
+                            Kindly regard this as
+                          an IMPROVEMENT NOTICE to comply with the provisions of
+                          the Factories Act CAP F1 LAW OF FEDERAL REPUBLIC OF
+                          NIGERIA 2004 to protect Health, Safety and Welfare of
+                          workers.
+                          </p>
                         </div>
-                        <p
-                          css={{
-                            marginBottom: 8,
-                            fontSize: 14,
-                            lineHeight: "20px",
-                          }}
-                        >
-                         Your fill in the prohibited part is hereby prohibited from further operation, pending full compliance with the provision of the Factories Act Cap F1 L.F.N 2004 and other extant Labour laws.
-                        </p>
-                       
-                        <p
-                          css={{
-                            marginBottom: 8,
-                            fontSize: 14,
-                            lineHeight: "20px",
-                          }}
-                        >
-                       Kindly regard this as a <span css={{
-                             fontWeight: 700,
-                          }}>PROHIBITION NOTICE </span>
-                      </p>
                       </div>
                     </div>
 
@@ -475,7 +457,7 @@ const {
                           }}
                         >
                           <img
-                                   src={routine_details.data?.report?.dosh_signature}
+                            src={routine_details.data?.report?.state_officer_signature}
                             css={{
                               width: 60,
                               height: 20,
@@ -483,24 +465,25 @@ const {
                           />
                         </div>
                         <div
-                          css={{
+                          css={(theme) => ({
                             marginTop: 8,
                             fontSize: 14,
                             fontWeight: 700,
                             textAlign: "center",
-                          }}
+                            color: theme.colors.Primary_700,
+                          })}
                         >
-                           {routine_details.data?.report?.dosh_name}
+                          {routine_details.data?.report?.state_officer_name}
                         </div>
                         <div
-                          css={{
+                          css={(theme) => ({
                             marginTop: 8,
                             fontSize: 14,
                             textAlign: "center",
                             fontStyle: "italic",
-                          }}
+                          })}
                         >
-                          Director of factories of the federation
+                          Head of Factories, {routine_details.data?.report?.state_officer_name}
                         </div>
                       </div>
                     </div>
@@ -509,11 +492,11 @@ const {
               </div>
             </div>
           </div>}
-          
+         
         </div>
       )}
     </div>
   );
 };
 
-export default ProhibitionCertComp;
+export default ImprovementCertComp;

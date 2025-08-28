@@ -474,7 +474,7 @@ const WarningCertComp = (props) => {
                           }}
                         >
                           <img
-                           src={single_factory?.data?.url}
+                           src={routine_details.data?.report?.dosh_signature}
                             css={{
                               width: 60,
                               height: 20,
@@ -489,7 +489,8 @@ const WarningCertComp = (props) => {
                             textAlign: "center",
                           }}
                         >
-                       {single_factory?.data?.name}
+                          
+                       {routine_details.data?.report?.dosh_name}
                         </div>
                         <div
                           css={{
