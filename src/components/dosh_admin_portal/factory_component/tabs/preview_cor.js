@@ -278,7 +278,7 @@ const PreviewCorComp = () => {
                   mq({
                     width: ["100%", "100%", 598],
                     border: `1px solid ${theme.colors.Gray_100}`,
-                    height: 880,
+                    // height: 880,
                   })
                 }
               >
@@ -295,7 +295,8 @@ const PreviewCorComp = () => {
  background: "linear-gradient(90deg,#D1E5E0 0%, rgba(255, 255, 255, 1) 50%, #D1E5E0 100%)",
                     backgroundRepeat: "no-repeat",
                     //   width: "100vw",
-                    height: 900,
+                    // height: 900,
+                    padding:"24px 0px",
                     border: "20px inset #66A898"
                   })}
                 >
