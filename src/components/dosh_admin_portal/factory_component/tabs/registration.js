@@ -118,7 +118,7 @@ const FactoryRegistration = () => {
                     })
                   }
                 >
-                   Form LAB|F|9
+                   Form LAB|F|1
                 </div>
 </div>
             <div>
