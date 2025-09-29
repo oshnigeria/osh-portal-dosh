@@ -13,6 +13,8 @@ import { main_url, cookies_id } from "@/src/details";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
 import facepaint from "facepaint";
+import moment from "moment";
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const CautionaryCertComp = (props) => {
@@ -194,12 +196,60 @@ const CautionaryCertComp = (props) => {
                 >
                   <div
                     css={{
-                      width: "60%",
+                      width: "80%",
                     }}
                   >
+                                        <div>
+                                           <div
+                                css={{
+                                  display:"flex",
+                                  justifyContent:"center"
+                                }}
+                              >
+                                <img css={{
+                                  width: 100,
+                                  height: 80,
+                                 
+                                }} src="/cert/coat_of_arms.png" />
+                              </div>
+                              <div css={theme => ({
+                                textAlign:"center",
+                                textTransform:"uppercase",
+                               
+                                              color: theme.colors.Primary_700,
+                                              fontWeight:700,
+                                              marginTop:12,
+                                              fontSize:20
+                                          
+                              })}>
+                                federal ministry of labour and employment
+                              </div>
+                              <div css={{
+                                 textAlign:"center",
+                                textTransform:"capitalize",
+                                 fontWeight:700,
+                                   marginTop:4,
+                                   color:"#111"
+                              }}>
+                               Occupational Safety and Health Department
+                              </div>
+                    
+                              <div css={{
+                                 marginTop:2,
+                                fontSize:12,
+                    fontWeight:600,
+                      textAlign:"center",
+                       color:"#1a1a1a"
+                              }}>
+                                <span css={{
+                                textTransform:"capitalize",
+                    
+                                }}>federal secretariat complex, phase 1, shehu shagari way, abuja,</span> Tel: 09011127853, Email doshlabourhqrs@gmail.com
+                                </div>
+                                        </div>
                     <div
                       css={{
-                        marginTop: 24,
+                        marginTop: 44,
                       }}
                     >
                       <div
@@ -244,7 +294,7 @@ const CautionaryCertComp = (props) => {
                             color: theme.colors.Warning_700,
                           })}
                         >
-                          {routine_details.data?.report?.inspection_date}
+                          {moment(routine_details.data?.report?.inspection_date).format("YYYY-MM-DD")}
                         </span>
                       </div>
                       <div
@@ -360,7 +410,7 @@ const CautionaryCertComp = (props) => {
                         })
                       }
                     >
-                      NOTICE:{" "}
+                    
                       <span
                         css={(theme) => ({
                           color: theme.colors.Primary_700,
@@ -404,9 +454,9 @@ const CautionaryCertComp = (props) => {
                               color: theme.colors.Primary_700,
                             })}
                           >
-                            {routine_details.data?.report?.reference_number}{" "}
+                            {routine_details.data?.report?.previous_notice_reference_number}{" "}
                           </span>{" "}
-                          requesting you to address the following{" "}
+                          requesting you to address the following;{" "}
                           <span
                             css={(theme) => ({
                               fontWeight: 600,
@@ -420,9 +470,8 @@ const CautionaryCertComp = (props) => {
 
 
                           This is in pursuance of the provision of section
-                          17(3c) of the constitution of the Federal Republic of
-                          Nigeria and mandate of THE FEDERAL MINISTRY OF LABOUR
-                          AND EMPLOYMENT on protection of health, Safety and
+                          17(3c) of the constitution of the Laws of the Federation of Nigeria and mandate of  <span> {" "} THE FEDERAL MINISTRY OF LABOUR
+                          AND EMPLOYMENT</span> on protection of health, Safety and
                           Welfare of person at work. </p>
 
 
@@ -440,7 +489,15 @@ const CautionaryCertComp = (props) => {
                             {routine_details.data?.report?.date_of_last_inspection}
                           </span>{" "}
                           you are by this notice required to rectify the
-                          contravention(s) within no of weeks fill in weeks or
+                          contravention(s) within   <span
+                                                      css={(theme) => ({
+                                                        fontWeight: 600,
+                                                        color: theme.colors.Primary_700,
+                                                      })}
+                                                    >{moment(routine_details.data?.report?.inspection_date).format("YYYY-MM-DD")} <span css={{
+                                                      color:"#111"
+                                                    }}>--</span> {moment(routine_details.data?.report?.inspection_date).add(routine_details.data?.report?.no_of_weeks_for_deadline, "weeks").format("YYYY-MM-DD")} ({routine_details.data?.report?.no_of_weeks_for_deadline} weeks)</span>
+                                                    {" "} or
                           you will be sanctioned. </p>
 
                           <p>
@@ -495,7 +552,9 @@ const CautionaryCertComp = (props) => {
                             fontStyle: "italic",
                           })}
                         >
-                          Head of Factories, {routine_details.data?.report?.state_officer_name}
+                          Head of Factories, <span css={{
+                            textTransform:"capitalize"
+                          }}>{user?.data.state_officer.state}</span>
                         </div>
                       </div>
                     </div>

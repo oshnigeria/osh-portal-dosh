@@ -5,7 +5,7 @@ import React, { useState, useContext, useRef } from "react";
 import axios from "axios";
 
 import ReactToPrint from "react-to-print";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout, color } from "framer-motion";
 import useSWR, { useSWRConfig, mutate } from "swr";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -13,6 +13,8 @@ import { main_url, cookies_id } from "@/src/details";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
 import facepaint from "facepaint";
+import moment from "moment";
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const ProhibitionCertComp = (props) => {
@@ -226,12 +228,62 @@ const {
                 >
                   <div
                     css={{
-                      width: "60%",
+                      width: "80%",
                     }}
                   >
+
+                    <div>
+                       <div
+            css={{
+              display:"flex",
+              justifyContent:"center"
+            }}
+          >
+            <img css={{
+              width: 100,
+              height: 80,
+             
+            }} src="/cert/coat_of_arms.png" />
+          </div>
+          <div css={theme => ({
+            textAlign:"center",
+            textTransform:"uppercase",
+           
+                          color: theme.colors.Primary_700,
+                          fontWeight:700,
+                          marginTop:12,
+                          fontSize:20
+                      
+          })}>
+            federal ministry of labour and employment
+          </div>
+          <div css={{
+             textAlign:"center",
+            // textTransform:"capitalize",
+             fontWeight:700,
+               marginTop:4,
+               color:"#111"
+          }}>
+          Occupational Safety and Health Department
+          </div>
+
+          <div css={{
+             marginTop:2,
+            fontSize:12,
+fontWeight:600,
+  textAlign:"center",
+   color:"#1a1a1a"
+          }}>
+            <span css={{
+            textTransform:"capitalize",
+
+            }}>federal secretariat complex, phase 1, shehu shagari way, abuja,</span> Tel: 09011127853, Email doshlabourhqrs@gmail.com
+            </div>
+                    </div>
+                    
                     <div
                       css={{
-                        marginTop: 24,
+                        marginTop: 44,
                       }}
                     >
                       <div
@@ -276,7 +328,7 @@ const {
                             color: theme.colors.Warning_700,
                           })}
                         >
-                          {routine_details.data?.report?.inspection_date}
+                          {moment(routine_details.data?.report?.createdAt).format("YYYY-MM-DD")}
                         </span>
                       </div>
                       <div
@@ -402,13 +454,14 @@ const {
                         })
                       }
                     >
-                      NOTICE:{" "}
+                      
                       <span
                         css={(theme) => ({
                           color: theme.colors.Primary_700,
                         })}
                       >
-                        {router.query.notice_type}
+                        
+                        {routine_details.data?.report?.letter_type}
                       </span>
                     </div>
                     <div
@@ -427,13 +480,14 @@ const {
                             lineHeight: "20px",
                           }}
                         >
-                          Sequels to your non – compliance to the provision of
-                          section of the factories act and the contravention
+                          Sequel to your non – compliance to the provision of
+                          section; <span css={(theme) => ({
+                                                       fontWeight: 600,
+                                                       color: theme.colors.Primary_700,
+                                                     })}>{routine_details.data?.report?.further_sanctions}</span>{" "} of the factories act and the contravention
                            {routine_details.data?.report?.sections_of_contraventions}  of the <span css={{
-                             fontWeight: 700,
-                          }}>FACTORIES ACT CAP F1 LAW OF FEDERAL
-                          REPUBLIC OF NIGERIA 2004 AND OTHER EXTANT LABOUR LAWS
-                          OF THE NATION</span>.
+                            //  fontWeight: 700,
+                          }}>Factories Act Cap F1 Laws of the Federation of {" "} Nigeria and other extant Labour Laws of the Nation</span>.
                         </div>
                         <p
                           css={{
@@ -442,7 +496,10 @@ const {
                             lineHeight: "20px",
                           }}
                         >
-                         Your fill in the prohibited part is hereby prohibited from further operation, pending full compliance with the provision of the Factories Act Cap F1 L.F.N 2004 and other extant Labour laws.
+                         The following; <span  css={(theme) => ({
+                                                       fontWeight: 600,
+                                                       color: theme.colors.Primary_700,
+                                                     })}>{routine_details.data?.report?.prohibited_part}</span> {" "}is hereby prohibited from further operation, pending full compliance with the provision of the Factories Act Cap F1 Laws of the federation of Nigeria 2004 and other extant Labour laws.
                         </p>
                        
                         <p
@@ -500,7 +557,7 @@ const {
                             fontStyle: "italic",
                           }}
                         >
-                          Director of factories of the federation
+                          Director of Factories of the Federation
                         </div>
                       </div>
                     </div>

@@ -13,6 +13,8 @@ import { main_url, cookies_id } from "@/src/details";
 import { success_message, error_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
 import facepaint from "facepaint";
+import moment from "moment";
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const WarningCertComp = (props) => {
@@ -224,12 +226,60 @@ const WarningCertComp = (props) => {
                 >
                   <div
                     css={{
-                      width: "60%",
+                      width: "80%",
                     }}
                   >
+                                        <div>
+                                           <div
+                                css={{
+                                  display:"flex",
+                                  justifyContent:"center"
+                                }}
+                              >
+                                <img css={{
+                                  width: 100,
+                                  height: 80,
+                                 
+                                }} src="/cert/coat_of_arms.png" />
+                              </div>
+                              <div css={theme => ({
+                                textAlign:"center",
+                                textTransform:"uppercase",
+                               
+                                              color: theme.colors.Primary_700,
+                                              fontWeight:700,
+                                              marginTop:12,
+                                              fontSize:20
+                                          
+                              })}>
+                                federal ministry of labour and employment
+                              </div>
+                              <div css={{
+                                 textAlign:"center",
+                                textTransform:"capitalize",
+                                 fontWeight:700,
+                                   marginTop:4,
+                                   color:"#111"
+                              }}>
+                                Occupational Safety and Health Department
+                              </div>
+                    
+                              <div css={{
+                                 marginTop:2,
+                                fontSize:12,
+                    fontWeight:600,
+                      textAlign:"center",
+                       color:"#1a1a1a"
+                              }}>
+                                <span css={{
+                                textTransform:"capitalize",
+                    
+                                }}>federal secretariat complex, phase 1, shehu shagari way, abuja,</span> Tel: 09011127853, Email doshlabourhqrs@gmail.com
+                                </div>
+                                        </div>
                     <div
                       css={{
-                        marginTop: 24,
+                        marginTop: 44,
                       }}
                     >
                       <div
@@ -269,7 +319,7 @@ const WarningCertComp = (props) => {
                             fontWeight: 600,
                             color: theme.colors.Warning_700,
                           })}
-                        >{routine_details.data?.report?.inspection_date}</span>
+                        >{moment(routine_details.data?.report?.createdAt).format("YYYY-MM-DD")}</span>
                       </div>
                       <div
                         css={{
@@ -363,11 +413,11 @@ const WarningCertComp = (props) => {
                         })
                       }
                     >
-                      NOTICE: <span
+                     <span
                         css={(theme) => ({
                           color: theme.colors.Primary_700,
                         })}
-                      >{router.query.notice_type}</span>
+                      >{routine_details.data?.report?.letter_type}</span>
                     </div>
                     <div
                       css={{
@@ -388,55 +438,20 @@ const WarningCertComp = (props) => {
                           It has been brought to the attention of the Director
                           of Factories of the Federation that your organization
                           was found to be in contravention of the following
-                          Section(s) of the Act:{" "}
+                          section(s) of the {" "}
                           <span
                             css={{
                               fontWeight: 700,
                             }}
                           >
-                            FACTORIES ACT CAP F1 L.F.N 2004
-                          </span>
-                        </div>
-                        <div
-                          css={{
-                            marginBottom: 8,
-                               fontSize: 14,
-                            lineHeight:"20px"
-                          }}
-                        >
-                          Considering the contravention(s) listed above and
-                          observation(s) you are hereby required to rectify all
-                          defects as pointed out to you by the Chief Inspector
-                          of Factories in the State within ONE month of this
-                          notice. Failure to do so will result in {" "}
-                          <span
-                            css={{
-                              fontWeight: 700,
-                            }}
-                          >
-                            FURTHER SANCTION(S)
-                          </span>
-                        </div>
-                        <div
-                          css={{
-                            marginBottom: 8,
-                                fontSize: 14,
-                            lineHeight:"20px"
-                          }}
-                        >
-                          Kindly regard this as to {" "}
-                          <span
-                            css={{
-                              fontWeight: 700,
-                            }}
-                          >
-                            {router.query.notice_type}
+                           Factories Act CAP F1 Laws of the Federation of Nigeria 2004;
                           </span> {" "}
-                          comply with the provisions of the Factories Act 2004
-                          and provide a safe working environment for all
-                          operations.
+                          <span  css={(theme) => ({
+                                                        fontWeight: 600,
+                                                        color: theme.colors.Primary_700,
+                                                      })}>{routine_details.data?.report?.sections_of_contraventions}</span>
                         </div>
-                        <div>
+                         {/* <div>
                             <div
                             css={{
                               fontWeight: 600,
@@ -454,7 +469,47 @@ const WarningCertComp = (props) => {
                           >
                             {routine_details.data?.report?.sections_of_contraventions}
                           </div>
+                        </div> */}
+                        <div
+                          css={{
+                            marginBottom: 8,
+                               fontSize: 14,
+                            lineHeight:"20px"
+                          }}
+                        >
+                          Considering the contravention(s) listed above and
+                          observation(s) you are hereby required to rectify all
+                          defects as pointed out to you by the Head of Factories in the state within <strong>ONE month</strong> of this
+                          notice. Failure to do so will result in {" "}
+                          <span
+                            css={{
+                              fontWeight: 700,
+                            }}
+                          >
+                            FURTHER SANCTION(S)
+                          </span>
                         </div>
+                        <div
+                          css={{
+                            marginBottom: 8,
+                                fontSize: 14,
+                            lineHeight:"20px"
+                          }}
+                        >
+                          Kindly regard this as a  {" "}
+                          <span
+                            css={{
+                              fontWeight: 700,
+                            }}
+                          >
+                           {routine_details.data?.report?.letter_type}
+                          </span> {" "}
+                          
+                         to comply with the provisions of the Factories Act 2004
+                          and provide a safe working environment for all
+                          operations.
+                        </div>
+                       
                       </div>
                     </div>
 
@@ -489,7 +544,6 @@ const WarningCertComp = (props) => {
                             textAlign: "center",
                           }}
                         >
-                          
                        {routine_details.data?.report?.dosh_name}
                         </div>
                         <div
@@ -501,7 +555,7 @@ const WarningCertComp = (props) => {
                         
                           }}
                         >
-                          Director of factories of the federation
+                          Director of Factories of the Federation
                         </div>
                       </div>
                     </div>

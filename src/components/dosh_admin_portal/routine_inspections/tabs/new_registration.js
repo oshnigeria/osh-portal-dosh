@@ -519,6 +519,7 @@ const NewRegistrationComp = () => {
                               router.push(`/routine_inspection/${factory._id}`)
                             }
                           >
+                            <div>
                             <div
                               css={(theme) =>
                                 mq({
@@ -534,6 +535,22 @@ const NewRegistrationComp = () => {
                               }
                             >
                               {factory.factory_name}
+                            </div>
+                             <div css={(theme) =>
+                                mq({
+                                  marginTop:4,
+                                  textAlign: "left",
+                                  color: theme.colors.Primary_500,
+
+                                  textTransform: "capitalize",
+
+                                  fontSize: [10, 10, 12],
+                                 
+                                  fontWeight: [600, 600, 600],
+                                })
+                              }> 
+                              ({factory.letter_type})
+                            </div>
                             </div>
                             <div
                               css={(theme) =>
