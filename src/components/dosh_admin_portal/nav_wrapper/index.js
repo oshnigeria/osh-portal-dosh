@@ -95,6 +95,20 @@ const DashboadWrapperComp = (props) => {
       icon: "settings",
       active_icon: "settings_active",
     },
+    {
+      title: "State reports",
+      route: "/analytics/state-reports",
+      path: "analytics/state-reports",
+      icon: "incident",
+      active_icon: "incident_active",
+    },
+    {
+      title: "System Analytics",
+      route: "/analytics/system-analytics",
+      path: "analytics/system-analytics",
+      icon: "incident",
+      active_icon: "incident_active",
+    },
   ];
   return (
     <div>
@@ -160,7 +174,7 @@ const DashboadWrapperComp = (props) => {
                   display: "flex",
                   alignItems: "center",
                   marginBottom: 16,
-                  padding: "16px 36px",
+                  padding: "10px 36px",
                   cursor: "pointer",
                   borderRadius: 8,
                 }}

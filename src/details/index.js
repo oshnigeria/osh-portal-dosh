@@ -42,3 +42,7 @@ export const states = [
   "yobe",
   "zamfara",
 ];
+
+export const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+export  const zones = [ "lagos", "nc", "nw", "sw", "se", "ss", "ne"];
