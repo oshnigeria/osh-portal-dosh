@@ -497,14 +497,21 @@ const WarningCertComp = (props) => {
                           }}
                         >
                           Kindly regard this as a  {" "}
-                          <span
+                          {/* <span
                             css={{
                               fontWeight: 700,
                             }}
                           >
                            {routine_details.data?.report?.letter_type}
+                          </span> {" "} */}
+                          <span
+                            css={{
+                              fontWeight: 700,
+                              textTransform:"Uppercase"
+                            }}
+                          >
+                           {routine_details.data?.report?.warning_stage}
                           </span> {" "}
-                          
                          to comply with the provisions of the Factories Act 2004
                           and provide a safe working environment for all
                           operations.
