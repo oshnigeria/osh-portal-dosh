@@ -698,7 +698,7 @@ color:"#111",
 
                     <div
                       css={{
-                        marginTop: 74,
+                        marginTop: 40,
                         // marginBottom:-50
                       }}
                     >
