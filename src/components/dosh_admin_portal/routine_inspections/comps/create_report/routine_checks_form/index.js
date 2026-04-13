@@ -17,7 +17,7 @@ import { main_url, cookies_id } from "@/src/details";
 import facepaint from "facepaint";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+const QuillNoSSRWrapper = dynamic(() =>import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });

@@ -1,7 +1,7 @@
 //  import RoutineInspectionComp from "@/src/components/dosh_admin_portal/routine_inspections";
 import dynamic from "next/dynamic";
 
-const RoutineInspectionComp = dynamic(
+const RoutineInspectionComp = dynamic(() =>
   import("@/src/components/dosh_admin_portal/routine_inspections"),
   {
     ssr: false,

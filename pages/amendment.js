@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const AmmendmentComp = dynamic(
+const AmmendmentComp = dynamic(() =>
   import("@/src/components/dosh_admin_portal/tabs/amendment"),
   {
     ssr: false,

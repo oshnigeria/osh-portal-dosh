@@ -17,10 +17,7 @@ import { compliance_with_options, entitled_as_options } from "../details";
 import facepaint from "facepaint";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+
 const CommentCertComp = () => {
   if (typeof window !== "undefined") null;
   const router = useRouter();

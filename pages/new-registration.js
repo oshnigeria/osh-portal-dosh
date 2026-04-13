@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const NewRegistrationComp = dynamic(
+const NewRegistrationComp = dynamic(() =>
   import("@/src/components/dosh_admin_portal/tabs/new_registration"),
   {
     ssr: false,

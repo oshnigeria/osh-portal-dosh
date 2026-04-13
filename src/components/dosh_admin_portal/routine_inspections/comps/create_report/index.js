@@ -1,7 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
-import CreateRoutineReportComp from "./routine_checks_form";
+// import CreateRoutineReportComp from "./routine_checks_form";
+const CreateRoutineReportComp = dynamic(() =>import("./routine_checks_form"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 import DashboadWrapperComp from "../../../nav_wrapper";
 import facepaint from "facepaint";
 const breakpoints = [576, 768, 1200];
