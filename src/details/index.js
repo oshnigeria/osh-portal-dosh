@@ -2,6 +2,7 @@ export const main_url = "https://api.osh.gov.ng";
 
 export const cookies_id = "oshnigeria_dosh_cookies";
 
+export const media_url = "https://media.osh.gov.ng/osh-bucket"
 export const states = [
   "Select a state",
   "abia",

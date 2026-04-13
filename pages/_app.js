@@ -62,6 +62,8 @@ const theme = {
     Warning_100: "#FEF0C7",
     Warning_50: "#FFFAEB",
     Warning_25: "#FFFCF5",
+    Background_Danger_Tertiary:"#FEE9E7",
+    Text_Danger_Secondary:"#C00F0C"
   },
   fonts: {
     navMarginTop: 54,

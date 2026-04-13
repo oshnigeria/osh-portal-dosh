@@ -6,15 +6,55 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import useSWR, { useSWRConfig } from "swr";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import facepaint from "facepaint";
 import MobileNav from "./mobile_nav";
-import { color } from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 
 const DashboadWrapperComp = (props) => {
+
   const router = useRouter();
+     const [show_lifting_menu, setShowLiftingMenu] = useState(true);
+
+
+     
+   const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.09, // controls delay between items
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 10,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 10,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+const handleToggleLiftingMenu = () => {
+    setShowLiftingMenu(!show_lifting_menu)
+   }
+
   const fetcher = (url) =>
     axios
       .get(url, {
@@ -110,6 +150,31 @@ const DashboadWrapperComp = (props) => {
       active_icon: "incident_active",
     },
   ];
+
+  const lifting_tabs = [
+    {
+      title: "Certificate of Authorization",
+      route: "/lifting-certification/authorization",
+      path: "lifting-certification/authorization",
+      icon: "register",
+      active_icon: "register_active",
+    },
+    // {
+    //   title: "Equipment Registration Licence",
+    //   route: "/renewal",
+    //   path: "renewal",
+    //   icon: "renewal",
+    //   active_icon: "renewal_active",
+    // },
+    // {
+    //   title: "Certificate of Competency",
+    //   route: "/amendment",
+    //   path: "amendment",
+    //   icon: "ammendments",
+    //   active_icon: "ammendments_active",
+    // },
+   
+  ];
   return (
     <div>
       <div
@@ -145,6 +210,7 @@ const DashboadWrapperComp = (props) => {
               padding: ["16px 16px", "16px 16px", "20px 20px"],
               width: 312,
               height: "100vh",
+              overflow:"scroll",
               background: theme.colors.Primary_500,
             })
           }
@@ -174,7 +240,7 @@ const DashboadWrapperComp = (props) => {
                   display: "flex",
                   alignItems: "center",
                   marginBottom: 16,
-                  padding: "10px 36px",
+                  padding: "8px 12px",
                   cursor: "pointer",
                   borderRadius: 8,
                 }}
@@ -182,6 +248,7 @@ const DashboadWrapperComp = (props) => {
               >
                 <div
                   css={(theme) => ({
+                      fontSize: 16,
                     color:
                       router.pathname == `/${tab.path}`
                         ? theme.colors.Primary_500
@@ -193,14 +260,94 @@ const DashboadWrapperComp = (props) => {
                 </div>
               </div>
             ))}
+             <div>
+              <div css={{
+                    display: "flex",
+                  alignItems: "center",
+                  marginBottom: 16,
+                  padding: "8px 0px",
+                 display:"flex",
+                 justifyContent:"space-between",
+                 alignItems:"center"
+              }}  onClick={() => handleToggleLiftingMenu()}>
+              <div  css={(theme) => ({
+                    color:theme.colors.Primary_50,
+                    fontWeight: 500,
+                    fontSize: 16,
+                    textTransform: "capitalize",
+                  })}>
+                Lifting Certifications
+              </div>
+               <div>
+            <motion.img
+            animate={{
+      rotate: show_lifting_menu ? 180 : 0, // flips up when open
+    }}
+    transition={{
+      duration: 0.25,
+      ease: "easeInOut",
+    }}
+              css={{
+                width: 24,
+                height: 24,
+              }}
+              src="/svg/nav/drop_down_arrow.svg"
+            />
+          </div>
+              </div>
+            </div>
+<AnimatePresence>
+  {show_lifting_menu && (
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
+            {lifting_tabs.map((tab) => (
+              <motion.div
+               key={tab.path}
+          variants={itemVariants}
+                css={{
+                  backgroundColor:
+                    router.pathname == `/${tab.path}`
+                      ? "#FCFCFD"
+                      : "transparent",
+
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: 16,
+                  padding: "8px 12px",
+                  cursor: "pointer",
+                  borderRadius: 8,
+                  textTransform: "capitalize",
+                }}
+                onClick={() => router.push(`/${tab.path}`)}
+              >
+                <div
+                  css={(theme) => ({
+                    color:
+                      router.pathname == `/${tab.path}`
+                        ? theme.colors.Primary_500
+                        : theme.colors.Primary_50,
+                    fontWeight: router.pathname == `/${tab.path}` ? 600 : 500,
+                    fontSize: 16,
+                    textTransform: "capitalize",
+                  })}
+                >
+                  {tab.title}
+                </div>
+              </motion.div>
+            ))}</motion.div>)}
+            </AnimatePresence>
           </div>
 
           <div
-            css={{
-              position: "fixed",
-              bottom: 20,
-              left: 60,
-            }}
+            // css={{
+            //   position: "fixed",
+            //   bottom: 20,
+            //   left: 60,
+            // }}
           >
             {isLoading ? null : (
               <div
