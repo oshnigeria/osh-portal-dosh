@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useForm } from "react-hook-form";
-import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import React, { useState, useContext } from "react";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";

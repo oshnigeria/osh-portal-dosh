@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useForm } from "react-hook-form";
-import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import React, { useState, useContext } from "react";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
@@ -13,10 +12,7 @@ import DeclarationPopup from "./comps/declaration_popup";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { main_url, cookies_id } from "@/src/details";
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+
 const InspectionReportComp = () => {
   if (typeof window !== "undefined") null;
   const router = useRouter();
