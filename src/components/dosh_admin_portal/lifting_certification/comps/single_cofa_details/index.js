@@ -17,7 +17,7 @@ import toast, { Toaster } from "react-hot-toast";
 import COFACertComp from "./cert";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
-const SingleCofaComp = () => {
+const SingleCofaComp = (props) => {
       const router = useRouter();
 
   const [progress, setProgress] = useState({
@@ -31,6 +31,7 @@ const SingleCofaComp = () => {
 
   const handleComment = () => {
     setWillcheck(!willCheck)
+    
   }
 
   const fetcher = (url) =>
@@ -134,7 +135,7 @@ const SingleCofaComp = () => {
     );
 
     success_message(res?.data.message);
-
+props.close()
     // return res?.data?.data?._id; // 👈 return certificate ID
   } catch (error) {
     error_message(error?.response?.data?.message);

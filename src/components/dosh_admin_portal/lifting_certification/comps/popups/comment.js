@@ -17,7 +17,7 @@ import facepaint from "facepaint";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 
-const CommentCertComp = () => {
+const CommentCertComp = (props) => {
   if (typeof window !== "undefined") null;
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -146,8 +146,10 @@ const uploadFiles = async (url, files) => {
       )
       .then(function (response) {
         success_message(response?.data.message);
-        setFactory(response?.data?.data?._id);
-        handleUploadFlow()
+        props.close()
+        setWillAmmend(false)
+        // setFactory(response?.data?.data?._id);
+        // handleUploadFlow()
         // router.push("/");
         console.log("fac");
         console.log(response?.data);

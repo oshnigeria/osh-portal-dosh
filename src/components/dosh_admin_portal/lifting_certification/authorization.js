@@ -10,6 +10,8 @@ import { main_url, cookies_id } from "@/src/details";
 import React, { useState, useContext, useEffect } from "react";
 import facepaint from "facepaint";
 import SingleCofaComp from "./comps/single_cofa_details";
+import toast, { Toaster } from "react-hot-toast";
+
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const AuthorizationComp = () => {
@@ -131,6 +133,12 @@ const handleCloseSingleCofa = () => {
           marginLeft: [22, 22, 0],
         }}
       >
+         <Toaster
+                position="top-right"
+                toastOptions={{
+                  duration: 3000,
+                }}
+              />
         <div
           css={(theme) =>
             mq({
