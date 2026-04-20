@@ -138,6 +138,7 @@ const handleCloseSingleCofa = () => {
               fontSize: [16, 16, 32],
               lineHeight: "28px",
               fontWeight: 700,
+                 padding: ["0px 10px","0px 10px",0], 
             })
           }
         >
@@ -292,9 +293,10 @@ const handleCloseSingleCofa = () => {
           mq({
             marginTop: [0, 0, 82],
             // border: [0, 0, `1px solid ${theme.colors.Gray_200}`],
-            //   padding: "42px 66px",
+             padding: ["0px 10px","0px 10px",0], 
             borderRadius: 8,
             width: "100%",
+            marginBottom:100
           })
         }
       >

@@ -14,7 +14,7 @@ import DeclarationPopup from "../../../factory_component/tabs/comps/declaration_
 import CommentCertComp from "../popups/comment";
 import { error_message, success_message } from "@/src/components/toasts";
 import toast, { Toaster } from "react-hot-toast";
-
+import COFACertComp from "./cert";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const SingleCofaComp = () => {
@@ -24,7 +24,7 @@ const SingleCofaComp = () => {
     min: 0,
     max: 50,
   });
-    const [search, setSearch] = useState("");
+    const [show_cert, setShow_cert] = useState(false);
   const [willCheck, setWillcheck] = useState(false);
   const [willAmmend, setWillAmmend] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -156,13 +156,15 @@ const SingleCofaComp = () => {
           duration: 3000,
         }}
       />
+
+     
         <div css={(theme) =>
             mq({
               marginTop: [24, 24, 54],
-
               // border: [0, 0, `1px solid ${theme.colors.Primary_100}`],
               padding: "16px 16px",
-           
+          
+
              
             })
           }>
@@ -188,6 +190,7 @@ const SingleCofaComp = () => {
                   color: theme.colors.Gray_700,
                   textTransform: "capitalize",
                   fontWeight: 700,
+                 
                 })
               }
 
@@ -210,14 +213,16 @@ const SingleCofaComp = () => {
         }
       >
        
-        <div>
+        <div css={{
+           
+        }}>
           {
             single_cofa_loading ?  <div css={{
             display:"flex",
             justifyContent:"center",
             padding:"24px 0px"
           }}>
-             <img
+             <img 
               css={{
                 width: 50,
                 height: 50,
@@ -227,7 +232,12 @@ const SingleCofaComp = () => {
           </div> : <div css={{
             marginTop:24
           }}>
-<div  css={{
+
+            {
+              show_cert ?  <div css={{
+                display:"flex",
+                justifyContent:"center"
+              }}><COFACertComp /></div> : <div  css={{
     display: "grid",
      gridTemplateColumns: `repeat(2, 1fr)`,
      alignItems:"top",
@@ -246,7 +256,12 @@ const SingleCofaComp = () => {
                     >
                       Certificate of Authorization on Regulation
                     </div>
-                    <div
+                    
+                   
+                  </div>
+
+                  
+                   <div
                       css={(theme) =>
                         mq({
                           marginTop: 12,
@@ -258,7 +273,6 @@ const SingleCofaComp = () => {
                     >
                       {single_cofa?.data?.certification?.certificate_of_authorization_on_regulation}
                     </div>
-                  </div>
                   <div>
                     <div
                       css={(theme) =>
@@ -518,27 +532,89 @@ const SingleCofaComp = () => {
                   </div>
           
 </div>
+            }
+
           </div>
           }
 
 
             <div
           css={{
+          
             marginTop: 64,
-            paddingBottom: 64,
+            paddingBottom: 100,
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <div css={{
-            width:"30%"
-          }}>
-          <button
+          <div css={mq({
+            width:"30%",
+            display: "flex",
+            justifyContent: "left",
+          })}>
+            {
+              show_cert ?   <button
             css={(theme) =>
               mq({
                 height: [40, 40, 56],
                 borderRadius: 30,
-                width: ["auto", "auto", "100%"],
+                width: ["100%", "100%", "100%"],
+                //   padding: ["10px 16px", "10px 16px", "16px 24px"],
+                padding: ["12px 16px", "12px 16px", "16px 24px"],
+                fontSize: [12, 12, 20],
+                cursor: "pointer",
+                marginRight: 20,
+                fontWeight: 600,
+                lineHeight: "17px",
+                border: "none",
+                display: "flex",
+                justifyContent: "center",
+                color: "#fff",
+                backgroundColor: theme.colors.Primary_500,
+              })
+            }
+            type="submit"
+            onClick={() => {
+              
+                setShow_cert(!show_cert)
+             
+            
+            }}
+          >
+            {loading ? (
+              <div
+                css={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {" "}
+                <div
+                  css={mq({
+                    width: [16, 16, 24],
+                    height: [16, 16, 24],
+                  })}
+                >
+                  <img src="/svg/loader/loader.svg" />
+                </div>
+              </div>
+            ) : (
+              <div
+                css={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <div>Back</div>
+                
+              </div>
+            )}
+          </button> :  <button
+            css={(theme) =>
+              mq({
+                height: [40, 40, 56],
+                borderRadius: 30,
+                width: ["50%", "50%", "100%"],
                 //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                 padding: ["12px 16px", "12px 16px", "16px 24px"],
                 fontSize: [12, 12, 20],
@@ -587,16 +663,20 @@ const SingleCofaComp = () => {
                 
               </div>
             )}
-          </button></div>
+          </button>
+            }
+         </div>
           <div css={{
-            width:"60%"
+            width:"60%",
+             display: "flex",
+            justifyContent: "right",
           }}>
           <button
             css={(theme) =>
               mq({
                 height: [40, 40, 56],
                 borderRadius: 30,
-                width: ["auto", "auto", "100%"],
+                width: ["100%", "100%", "100%"],
                 //   padding: ["10px 16px", "10px 16px", "16px 24px"],
                 padding: ["12px 16px", "12px 16px", "16px 24px"],
                 fontSize: [12, 12, 20],
@@ -613,7 +693,12 @@ const SingleCofaComp = () => {
             }
             type="submit"
             onClick={() => {
-              setWillAmmend(true);
+              if(show_cert){
+  setWillAmmend(true);
+              } else{
+                setShow_cert(!show_cert)
+              }
+            
             }}
           >
             {loading ? (
@@ -640,7 +725,7 @@ const SingleCofaComp = () => {
                   alignItems: "center",
                 }}
               >
-                <div>Approve certificate</div>
+                <div>{ show_cert ? "Approve certificate" : "Next"}</div>
                 
               </div>
             )}
