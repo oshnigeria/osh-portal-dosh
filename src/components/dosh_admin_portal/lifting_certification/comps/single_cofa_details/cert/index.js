@@ -557,7 +557,14 @@ fontSize:14
  
                   })}>
                                                    
-                                 SEAL NO                   </div>
+                                 <div>
+                                  {/* <div css={{
+                                    textAlign:"center"
+                                  }}>
+                                  SEAL NO </div> */}
+                                   <div css={{
+                                    textAlign:"center"
+                                  }}>{single_cofa?.data?.certification?.seal_no}</div> </div>                 </div>
 
                               </div>
                       <div>
