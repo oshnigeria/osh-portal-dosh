@@ -493,7 +493,7 @@ error: single_cofa_error,
                           fontWeight: 700,
                         })}
                       >
-                        Area of specialisation in restpect of which certificate of authorization has been issued: <span
+                        Area of specialisation in respect of which certificate of authorization has been issued: <span
                           css={(theme) => ({
                             fontWeight: 700,
                              color: theme.colors.Primary_500,
