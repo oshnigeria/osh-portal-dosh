@@ -205,7 +205,7 @@ props.close()
       <div
         css={(theme) =>
           mq({
-            marginTop: [0, 0, 82],
+            marginTop: [0, 0, 32],
             // border: [0, 0, `1px solid ${theme.colors.Gray_200}`],
             //   padding: "42px 66px",
             borderRadius: 8,
