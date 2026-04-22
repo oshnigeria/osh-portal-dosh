@@ -269,12 +269,12 @@ error: single_cofa_error,
                           color: theme.colors.Primary_500,
                           fontSize: [12, 12, 12],
                           fontWeight: 700,
-                        
+                        textTransform:"uppercase"
                           
                         })
                       }
                     >
-                    REGULATION 34 OF THE LIFTING AND ALLIED WORK EQUIPMENT (SAFETY) REGULATION, 2018
+                   {single_cofa?.data?.certification?.certificate_of_authorization_on_regulation}
                     </div>
                                         </div>
                     <div
@@ -523,7 +523,8 @@ error: single_cofa_error,
                           })}
                         >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.end_date).format("MMMM YYYY")}</span>
                       </div>
-                    <div
+
+                      {single_cofa?.data?.certification?.seal_no && <div
                       css={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -604,7 +605,8 @@ fontSize:14
                           Director of Factories of the Federation
                         </div>
                       </div>
-                    </div>
+                    </div> }
+                    
 
                      <div
                         css={{
