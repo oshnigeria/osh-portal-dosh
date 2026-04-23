@@ -274,7 +274,7 @@ error: single_cofa_error,
                         })
                       }
                     >
-                   {single_cofa?.data?.certification?.certificate_of_authorization_on_regulation}
+                   {single_cofa?.data?.certification?.compliance_with}
                     </div>
                                         </div>
                     <div
@@ -431,7 +431,7 @@ error: single_cofa_error,
                           fontWeight: 700,
                         })}
                       >
-                        has demonstraded compliance with <span
+                        has demonstrated compliance with <span
                           css={(theme) => ({
                             fontWeight: 700,
                             color: theme.colors.Primary_500,
@@ -521,7 +521,7 @@ error: single_cofa_error,
                             textTransform:"uppercase",
                              fontSize: 14,
                           })}
-                        >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.end_date).format("MMMM YYYY")}</span>
+                        >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).add(3, "years").format("MMMM YYYY")}</span>
                       </div>
 
                       {single_cofa?.data?.certification?.seal_no && <div

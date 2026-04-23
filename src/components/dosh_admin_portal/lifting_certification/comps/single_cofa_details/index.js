@@ -245,7 +245,7 @@ props.close()
          gap: 24,
 
   }}>
-     <div>
+     {/* <div>
                     <div
                       css={(theme) =>
                         mq({
@@ -273,7 +273,7 @@ props.close()
                       }
                     >
                       {single_cofa?.data?.certification?.certificate_of_authorization_on_regulation}
-                    </div>
+                    </div> */}
                   <div>
                     <div
                       css={(theme) =>
