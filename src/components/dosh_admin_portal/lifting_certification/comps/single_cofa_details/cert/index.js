@@ -521,7 +521,7 @@ error: single_cofa_error,
                             textTransform:"uppercase",
                              fontSize: 14,
                           })}
-                        >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).add(3, "years").format("MMMM YYYY")}</span>
+                        >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.end_date).format("MMMM YYYY")}</span>
                       </div>
 
                       {single_cofa?.data?.certification?.seal_no && <div
