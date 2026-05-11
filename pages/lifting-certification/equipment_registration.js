@@ -1,0 +1,3 @@
+import EquipmentRegistrationLicenceComp from "@/src/components/dosh_admin_portal/lifting_certification/certifications/equipment_registration_certification";
+
+export default  EquipmentRegistrationLicenceComp
