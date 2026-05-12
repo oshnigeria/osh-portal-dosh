@@ -54,7 +54,7 @@ const SingleCofaComp = (props) => {
     data: single_cofa,
 
     isLoading: single_cofa_loading,
-  } = useSWR(router.query.single_id ? `${main_url}/lifting/equipment/dosh/certificate/${router.query.single_id}`: null, fetcher);
+  } = useSWR(router.query.single_id ? `${main_url}/lifting/competency/dosh/certificate/${router.query.single_id}`: null, fetcher);
 
   
   console.log(single_cofa);
@@ -284,9 +284,17 @@ props.close()
                         })
                       }
                     >
-                    Equipment Registration Licence on (Regulation)
+                    {/* Equipment Registration Licence on (Regulation) */}
+                     <img 
+              css={{
+                width: 123.9554672241211,
+                height: 154.9443359375,
+                borderRadius:4.47
+              }}
+              src={single_cofa?.data?.certification?.passport_photograph}
+            />
                     </div>
-                    <div
+                    {/* <div
                       css={(theme) =>
                         mq({
                           marginTop: 12,
@@ -297,7 +305,7 @@ props.close()
                       }
                     >
                       {single_cofa?.data?.certification?.equipment_registration_licence}
-                    </div>
+                    </div> */}
                   </div>
                   <div>
                     <div
@@ -309,7 +317,58 @@ props.close()
                         })
                       }
                     >
-                     Treasury Receipt no
+                     Certificate of Competence on (Regulation)
+                    </div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
+                    >
+                      {single_cofa?.data?.certification?.certificate_of_competence_on_regulation}
+                    </div>
+                  </div>
+                   <div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
+                    >
+                   Categorization
+                    </div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
+                    >
+                      {single_cofa?.data?.certification?.categorization
+}
+                    </div>
+                  </div>
+                    <div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
+                    >
+                    Treasury receipt no
                     </div>
                     <div
                       css={(theme) =>
@@ -334,7 +393,7 @@ props.close()
                         })
                       }
                     >
-                    Equipment Type
+               In pursuance of section
                     </div>
                     <div
                       css={(theme) =>
@@ -346,8 +405,7 @@ props.close()
                         })
                       }
                     >
-                      {single_cofa?.data?.certification?.equipment_type
-}
+                      {single_cofa?.data?.certification?.in_pursuance_of_section}
                     </div>
                   </div>
                     <div>
@@ -360,7 +418,7 @@ props.close()
                         })
                       }
                     >
-                    Manufacturer
+                  Name of the competent person
                     </div>
                     <div
                       css={(theme) =>
@@ -372,32 +430,7 @@ props.close()
                         })
                       }
                     >
-                      {single_cofa?.data?.certification?.manufacturer}
-                    </div>
-                  </div>
-                   <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                Year of manufacturing
-                    </div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.year_of_manufacturing}
+                      {single_cofa?.data?.certification?.name_of_the_competent_person}
                     </div>
                   </div>
                     <div>
@@ -410,7 +443,7 @@ props.close()
                         })
                       }
                     >
-                  Design Capacity or pressure
+                 Identification no
                     </div>
                     <div
                       css={(theme) =>
@@ -422,7 +455,32 @@ props.close()
                         })
                       }
                     >
-                      {single_cofa?.data?.certification?.design_capacity_or_pressure}
+                      {single_cofa?.data?.certification?.identification_no}
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          color: theme.colors.Gray_400,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
+                    >
+               Address of the person (Company)
+                    </div>
+                    <div
+                      css={(theme) =>
+                        mq({
+                          marginTop: 12,
+                          color: theme.colors.Gray_700,
+                          lineHeight: "20px",
+                          fontSize: [14, 14, 20],
+                        })
+                      }
+                    >
+                      {single_cofa?.data?.certification?.address_of_the_person_company}
                     </div>
                   </div>
                     <div>
@@ -435,7 +493,7 @@ props.close()
                         })
                       }
                     >
-                  Tested Capacity or pressure
+                Area of specialization
                     </div>
                     <div
                       css={(theme) =>
@@ -447,57 +505,7 @@ props.close()
                         })
                       }
                     >
-                      {single_cofa?.data?.certification?.tested_capacity_or_pressure}
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                 Code of Construction
-                    </div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.code_of_construction}
-                    </div>
-                  </div>
-                    <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                 Use of Equipment
-                    </div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.use_of_equipment}
+                      {single_cofa?.data?.certification?.area_of_specialization}
                     </div>
                   </div>
 
@@ -511,7 +519,7 @@ props.close()
                         })
                       }
                     >
-                 Equipment Category
+               Period of validity of certificate
                     </div>
                     <div
                       css={(theme) =>
@@ -523,197 +531,20 @@ props.close()
                         })
                       }
                     >
-                      {single_cofa?.data?.certification?.equipment_category}
+                      {single_cofa?.data?.certification?.period_of_validity_of_certificate}
                     </div>
                   </div>
-                  <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                 Equipment Sub- Category
-                    </div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.equipment_sub_category}
-                    </div>
-                  </div>
-                     <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                 Equipment Classification
-                    </div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.equipment_classification}
-                    </div>
-                  </div>
+
+
+
+                
+                     
+                   
+                   
+                 
+                  
+                   
                    <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                 Equipment Operating Medium
-                    </div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.equipment_operating_medium}
-                    </div>
-                  </div>
-                   <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                 Equipment owner’s name
-                    </div>
-
-                    
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.equipment_owner_name
-}
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                Facility Location
-                    </div>
-
-                    
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.facility_location
-}
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                Identification no
-                    </div>
-
-                    
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.identification_no
-}
-                    </div>
-                  </div>
-                   <div>
-                    <div
-                      css={(theme) =>
-                        mq({
-                          color: theme.colors.Gray_400,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                Period of validity of Authorisation
-                    </div>
-
-                    
-                    <div
-                      css={(theme) =>
-                        mq({
-                          marginTop: 12,
-                          color: theme.colors.Gray_700,
-                          lineHeight: "20px",
-                          fontSize: [14, 14, 20],
-                        })
-                      }
-                    >
-                      {single_cofa?.data?.certification?.period_of_validity_of_authorisation
-}
-                    </div>
-                  </div>
-                   {/* <div>
                     <div
                       css={(theme) =>
                         mq({
@@ -769,7 +600,7 @@ props.close()
                       ))
                     }
                     </div>
-                  </div> */}
+                  </div>
           
 </div>
             }

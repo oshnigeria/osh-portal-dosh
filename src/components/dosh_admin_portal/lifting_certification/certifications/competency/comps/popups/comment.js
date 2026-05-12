@@ -127,7 +127,7 @@ const uploadFiles = async (url, files) => {
 
     axios
       .post(
-        `${main_url}/lifting/dosh/comment`,
+        `${main_url}/lifting/competency/dosh/comment`,
         {
 
   

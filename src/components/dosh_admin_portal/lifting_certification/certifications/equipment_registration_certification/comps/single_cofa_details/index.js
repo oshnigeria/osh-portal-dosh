@@ -713,7 +713,7 @@ props.close()
 }
                     </div>
                   </div>
-                   {/* <div>
+                   <div>
                     <div
                       css={(theme) =>
                         mq({
@@ -769,7 +769,7 @@ props.close()
                       ))
                     }
                     </div>
-                  </div> */}
+                  </div>
           
 </div>
             }

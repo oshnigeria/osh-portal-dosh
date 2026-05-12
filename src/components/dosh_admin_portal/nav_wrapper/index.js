@@ -166,13 +166,13 @@ const handleToggleLiftingMenu = () => {
       icon: "incident",
       active_icon: "incident_active",
     },
-    // {
-    //   title: "Certificate of Competency",
-    //   route: "/lifting-certification/competency",
-    //   path: "lifting-certification/competency",
-    //  icon: "incident",
-    //   active_icon: "incident_active",
-    // },
+    {
+      title: "Certificate of Competency",
+      route: "/lifting-certification/competency",
+      path: "lifting-certification/competency",
+     icon: "incident",
+      active_icon: "incident_active",
+    },
    
   ];
   return (
