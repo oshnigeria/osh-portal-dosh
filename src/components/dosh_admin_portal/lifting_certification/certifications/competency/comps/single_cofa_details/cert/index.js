@@ -51,7 +51,7 @@ const COFACertComp = (props) => {
     data: single_cofa,
 error: single_cofa_error,
     isLoading: single_cofa_loading,
-  } = useSWR(router.query.single_id ? `${main_url}/lifting/equipment/dosh/certificate/${router.query.single_id}`: null, fetcher);
+  } = useSWR(router.query.single_id ? `${main_url}/lifting/competency/dosh/certificate/${router.query.single_id}`: null, fetcher);
 
   console.log(single_cofa)
   console.log(single_factory)
@@ -135,7 +135,7 @@ error: single_cofa_error,
   alignItems: "center",
   // fontFamily: "Times New Roman",
 
-  backgroundImage: "url(/cert/background.png)",
+  backgroundImage: "url(/cert/bg_competency.png)",
   backgroundSize: "100% 100%", // ✅ stretches to fill
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
@@ -191,7 +191,32 @@ error: single_cofa_error,
                           fontWeight: 500,
                           color: "#000",
                         })
-                      }>Form Lab/F/27</div>
+                      }>Form Lab/F/27
+                        <div
+                      css={(theme) =>
+                        mq({
+                       
+                       position:"relative"
+                        })
+                      }
+                    >
+                    {/* Equipment Registration Licence on (Regulation) */}
+                     <img 
+              css={{
+                width: 100,
+                height: 130,
+                // borderRadius:4.47,
+                objectFit:"contain",
+                objectPosition:"top center",
+                 position:"absolute",
+                 right:-8,
+                 top:8,
+              }}
+              src={`https://media.osh.gov.ng/osh-bucket/${single_cofa?.data?.certification?.passport_photograph}`}
+            />
+                    </div>
+                       </div>
+                     
                               </div>
                               <div css={theme => ({
                                 textAlign:"center",
@@ -249,7 +274,7 @@ error: single_cofa_error,
                         mq({
                           textAlign: "center",
                           marginTop: [14, 14, 18],
-                          fontFamily: "Times New Roman",
+                          fontFamily: "Almendra",
                           color: "#bf1e2e",
                           fontSize: [20, 20, 20],
                           fontWeight: 700,
@@ -258,7 +283,7 @@ error: single_cofa_error,
                         })
                       }
                     >
-                     CERTIFICATE OF AUTHORIZATION
+                     CERTIFICATE OF COMPETENCE
                     </div>
                     <div
                       css={(theme) =>
@@ -345,242 +370,22 @@ error: single_cofa_error,
 </div>
 
 
-<div  css={theme =>( {
-  marginTop:24,
+
+
+
+                      <div
+                        css={theme =>( {
                           marginBottom: 16,
                           fontSize: 14,
-                          textAlign: "center",
+                          textAlign: "left",
                          
-                          fontWeight: 700,
+                          fontWeight: 500,
                             // color:"#000"
-                              color: theme.colors.Primary_800,
-                              textTransform:"uppercase"
-                        })}>
-  Equipment Information
-</div>
-
-<div  css={{
-    display: "grid",
-     gridTemplateColumns: `repeat(2, 1fr)`,
-     alignItems:"top",
-         gap: 16,
-         marginBottom:24
-
-  }}>
-     <div
-                        css={{
-                      
-                          fontSize: 12,
-                        
-                        
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
+                               color: theme.colors.Gray_900,
+                        })}
                       >
-                        Equipment Type:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                             fontSize: 12,
-                          })}
-                        >{single_cofa?.data?.certification?.equipment_type}</span>
+                        I hereby certify that the person whose name appears below has beed duly authorized to carry out inspection ( examination and testing ) of the equipment listed above in pursuance of section 
                       </div>
-                      <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Manufacturer:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.manufacturer}</span>
-                      </div>
-                       <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Place:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.place_of_manufacturing}</span>
-                      </div>
-                       <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Year:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.year_of_manufacturing}</span>
-                      </div>
-                         <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Design Capacity/Pressure:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.design_capacity_or_pressure
-}</span>
-                      </div>
-                        <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Tested Capacity/Pressure:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.tested_capacity_or_pressure
-}</span>
-                      </div>
-                       <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Code of Construction:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.code_of_construction
-}</span>
-                      </div>
-                      <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Use of Equipment:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.use_of_equipment
-}</span>
-                      </div>
-                      <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Equipment Category:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.equipment_category
-}</span>
-                      </div>
-                       <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Equipment Sub Category:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.equipment_sub_category
-}</span>
-                      </div>
-                       <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Equipment Classification:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.equipment_classification
-}</span>
-                      </div>
-                       <div
-                        css={{
-                        
-                          fontSize: 12,
-                       
-                       
-                          color:"#000"
-                          // fontWeight: 700,
-                        }}
-                      >
-                        Operating Medium:  <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                          })}
-                        > {single_cofa?.data?.certification?.equipment_operating_medium
-}</span>
-                      </div>
-  </div>
 
   
                       
@@ -595,35 +400,17 @@ error: single_cofa_error,
                           fontWeight: 700,
                         })}
                       >
-                        Equipment Owner’s Name: <span
+                        Name of Competent person: <span
                           css={(theme) => ({
                             fontWeight: 700,
                             color: theme.colors.Primary_500,
                              textTransform:"uppercase",
                              fontSize: 14,
                           })}
-                        >{single_cofa?.data?.certification?.equipment_owner_name}</span>
+                        >{single_cofa?.data?.certification?.name_of_the_competent_person}</span>
                       </div>
 
-                     <div
-                        css={(theme) => ({
-                          marginBottom: 44,
-                          fontSize: 14,
-                          textAlign: "left",
-                         color: theme.colors.Primary_800,
-                          //  color:"#000"
-                          fontWeight: 700,
-                        })}
-                      >
-                        Facility Location: <span
-                          css={(theme) => ({
-                            fontWeight: 700,
-                            color: theme.colors.Primary_500,
-                             textTransform:"uppercase",
-                             fontSize: 14,
-                          })}
-                        >{single_cofa?.data?.certification?.facility_location}</span>
-                      </div>
+                   
                       <div
                         css={(theme) => ({
                           marginBottom: 16,
@@ -643,12 +430,54 @@ error: single_cofa_error,
                           })}
                         >{single_cofa?.data?.certification?.identification_no}</span>
                       </div>
+
+                         <div
+                        css={(theme) => ({
+                          marginBottom: 44,
+                          fontSize: 14,
+                          textAlign: "left",
+                         color: theme.colors.Primary_800,
+                          //  color:"#000"
+                          fontWeight: 700,
+                        })}
+                      >
+                        Postal address of compentent person: <span
+                          css={(theme) => ({
+                            fontWeight: 700,
+                            color: theme.colors.Primary_500,
+                             textTransform:"uppercase",
+                             fontSize: 14,
+                          })}
+                        >{single_cofa?.data?.certification?.address_of_the_person_company}</span>
+                      </div>
+
+                       <div
+                        css={(theme) => ({
+                          marginBottom: 44,
+                          fontSize: 14,
+                          textAlign: "left",
+                         color: theme.colors.Primary_800,
+                          //  color:"#000"
+                          fontWeight: 700,
+                        })}
+                      >
+                        Area of specialization in respect of which certificate of authorization has been issued: <span
+                          css={(theme) => ({
+                            fontWeight: 700,
+                            color: theme.colors.Primary_500,
+                             textTransform:"uppercase",
+                             fontSize: 14,
+                          })}
+                        >{single_cofa?.data?.certification?.area_of_specialization}</span>
+                      </div>
+
+                    
                     </div>        
 
 <div
                        css={(theme) => ({
                         marginTop:16,
-                          marginBottom: 8,
+                          marginBottom: 44,
                           fontSize: 14,
                           textAlign: "left",
                          color: theme.colors.Primary_800,
@@ -663,7 +492,7 @@ error: single_cofa_error,
                             textTransform:"uppercase",
                              fontSize: 14,
                           })}
-                        >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.end_date).format("MMMM YYYY")}</span>
+                        >{single_cofa?.data?.certification?.period_of_validity_of_certificate}</span>
                       </div>
 
                       {single_cofa?.data?.certification?.seal_no && <div

@@ -135,7 +135,7 @@ error: single_cofa_error,
   alignItems: "center",
   // fontFamily: "Times New Roman",
 
-  backgroundImage: "url(/cert/background.png)",
+  backgroundImage: "url(/cert/bg_equipment.png)",
   backgroundSize: "100% 100%", // ✅ stretches to fill
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
@@ -258,9 +258,9 @@ error: single_cofa_error,
                         })
                       }
                     >
-                     CERTIFICATE OF AUTHORIZATION
+                    EQUIPMENT REGISTRATION LICENCE
                     </div>
-                    <div
+                    {/* <div
                       css={(theme) =>
                         mq({
                           textAlign: "center",
@@ -275,7 +275,7 @@ error: single_cofa_error,
                       }
                     >
                    {single_cofa?.data?.certification?.equipment_registration_licence}
-                    </div>
+                    </div> */}
                                         </div>
                     <div
                       css={{
@@ -663,7 +663,7 @@ error: single_cofa_error,
                             textTransform:"uppercase",
                              fontSize: 14,
                           })}
-                        >{moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.start_date).format("MMMM YYYY")} - {moment(single_cofa?.data?.certification?.period_of_validity_of_authorisation?.end_date).format("MMMM YYYY")}</span>
+                        >{single_cofa?.data?.certification?.period_of_validity_of_authorisation}</span>
                       </div>
 
                       {single_cofa?.data?.certification?.seal_no && <div

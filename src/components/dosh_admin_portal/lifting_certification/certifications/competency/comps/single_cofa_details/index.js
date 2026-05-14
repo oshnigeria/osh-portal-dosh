@@ -124,7 +124,7 @@ const SingleCofaComp = (props) => {
   const approveCertificate = async () => {
   try {
     const res = await axios.post(
-      `${main_url}/lifting/equipment/dosh/approve/${router.query.single_id}`,
+      `${main_url}/lifting/competency/dosh/approve/${router.query.single_id}`,
      {},
       {
         headers: {
@@ -287,11 +287,13 @@ props.close()
                     {/* Equipment Registration Licence on (Regulation) */}
                      <img 
               css={{
-                width: 123.9554672241211,
-                height: 154.9443359375,
-                borderRadius:4.47
+                width: 200,
+                height: 230,
+                borderRadius:4.47,
+                objectFit:"contain",
+                objectPosition:"top center"
               }}
-              src={single_cofa?.data?.certification?.passport_photograph}
+              src={`https://media.osh.gov.ng/osh-bucket/${single_cofa?.data?.certification?.passport_photograph}`}
             />
                     </div>
                     {/* <div
