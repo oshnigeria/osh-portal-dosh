@@ -17,7 +17,7 @@ const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const DashboadWrapperComp = (props) => {
 
   const router = useRouter();
-     const [show_lifting_menu, setShowLiftingMenu] = useState(true);
+     const [show_lifting_menu, setShowLiftingMenu] = useState(false);
 
 
      
@@ -152,7 +152,15 @@ const handleToggleLiftingMenu = () => {
   ];
 
   const lifting_tabs = [
+  
     {
+      title: "Certificate of Competency",
+      route: "/lifting-certification/competency",
+      path: "lifting-certification/competency",
+     icon: "incident",
+      active_icon: "incident_active",
+    },
+      {
       title: "Certificate of Authorization",
       route: "/lifting-certification/authorization",
       path: "lifting-certification/authorization",
@@ -166,15 +174,22 @@ const handleToggleLiftingMenu = () => {
       icon: "incident",
       active_icon: "incident_active",
     },
-    {
-      title: "Certificate of Competency",
-      route: "/lifting-certification/competency",
-      path: "lifting-certification/competency",
-     icon: "incident",
-      active_icon: "incident_active",
-    },
    
   ];
+
+
+  useEffect(() => {
+  if (
+    router.pathname === "/lifting-certification/competency" ||
+    router.pathname === "/lifting-certification/authorization" ||
+    router.pathname === "/lifting-certification/equipment_registration"
+  ) {
+    setShowLiftingMenu(true);
+  } else {
+    setShowLiftingMenu(false);
+  }
+}, [router.pathname]);
+
   return (
     <div>
       <div

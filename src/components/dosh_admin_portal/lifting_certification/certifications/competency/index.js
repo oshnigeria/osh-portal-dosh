@@ -15,10 +15,8 @@ import toast, { Toaster } from "react-hot-toast";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const CompetencyComp = () => {
-  const [progress, setProgress] = useState({
-    min: 0,
-    max: 50,
-  });
+   const [progress, setProgress] = useState("ongoing");
+ 
     const [search, setSearch] = useState("");
   const [willCheck, setWillcheck] = useState(false);
   const [willAmmend, setWillAmmend] = useState(false);
@@ -52,25 +50,19 @@ const CompetencyComp = () => {
   }
   // const handleToggleSingleCofa = () => {
   // }
-  const tabs = [
+ const tabs = [
        {
       title: "Ongoing",
       route: "ongoing",
       state: () => {
-        setProgress({
-          min: 50,
-          max: 60,
-        });
+        setProgress("ongoing");
       },
     },
     {
       title: "Rejected",
       route: "rejected",
       state: () => {
-        setProgress({
-          min: 0,
-          max: 50,
-        });
+        setProgress("rejected");
       },
     },
  
@@ -78,10 +70,7 @@ const CompetencyComp = () => {
       title: "Completed",
       route: "completed",
       state: () => {
-        setProgress({
-          min: 60,
-          max: 101,
-        });
+        setProgress("completed");
       },
     },
   ];
@@ -413,8 +402,119 @@ const handleCloseSingleCofa = () => {
          gap: 24,
 
   }}>
-    {
-      factory?.data?.map((data, index) => (
+    { progress === "ongoing" &&
+      factory?.data?.filter((item) => item.name_of_the_competent_person.toLowerCase().includes(search) && item.is_approved === false)?.map((data, index) => (
+          <div key={index} css={ (theme) => ({
+            backgroundColor:theme.colors.Primary_50,
+            padding:"16px 12px",
+            borderRadius:10
+          })}
+          onClick={() => {
+            handleSingleCofa(data?._id)
+          }}
+          >
+            <div css={{
+              display:"flex",
+              justifyContent:"space-between",
+              alignItems:"center"
+            }}>
+            <div>
+            <div css={(theme) =>
+                    mq({
+                      fontSize: [10, 10, 16],
+                      fontWeight: 500,
+                    
+                      color: theme.colors.Gray_900
+                          
+                    })
+                  }>
+              {data.name_of_the_competent_person
+}
+              </div>
+               <div  css={(theme) =>
+                    mq({
+                      marginTop:8,
+                      fontSize: [10, 10, 14],
+                      fontWeight: 600,
+                    
+                      color: theme.colors.Primary_500
+                          
+                    })
+                  }>
+              {data.in_pursuance_of_section}
+              </div></div>
+              
+              
+              <div><img
+            css={{
+              width: 24,
+              height: 24,
+              
+            }}
+            src="/svg/lifting/circle-right-arrow.svg"
+          /></div>
+              </div>
+              </div>
+      ))
+    }
+     { progress === "rejected" &&
+      factory?.data?.filter((item) => item.name_of_the_competent_person.toLowerCase().includes(search) && item.is_approved === false)?.map((data, index) => (
+          <div key={index} css={ (theme) => ({
+            backgroundColor:theme.colors.Primary_50,
+            padding:"16px 12px",
+            borderRadius:10
+          })}
+          onClick={() => {
+            handleSingleCofa(data?._id)
+          }}
+          >
+            <div css={{
+              display:"flex",
+              justifyContent:"space-between",
+              alignItems:"center"
+            }}>
+            <div>
+            <div css={(theme) =>
+                    mq({
+                      fontSize: [10, 10, 16],
+                      fontWeight: 500,
+                    
+                      color: theme.colors.Gray_900
+                          
+                    })
+                  }>
+              {data.name_of_the_competent_person
+}
+              </div>
+               <div  css={(theme) =>
+                    mq({
+                      marginTop:8,
+                      fontSize: [10, 10, 14],
+                      fontWeight: 600,
+                    
+                      color: theme.colors.Primary_500
+                          
+                    })
+                  }>
+              {data.in_pursuance_of_section}
+              </div></div>
+              
+              
+              <div><img
+            css={{
+              width: 24,
+              height: 24,
+              
+            }}
+            src="/svg/lifting/circle-right-arrow.svg"
+          /></div>
+              </div>
+              </div>
+      ))
+    }
+
+     { progress === "completed" &&
+      factory?.data?.filter((item) => item.name_of_the_competent_person.toLowerCase().includes(search) && item.is_approved === true)?.map((data, index) => (
           <div key={index} css={ (theme) => ({
             backgroundColor:theme.colors.Primary_50,
             padding:"16px 12px",

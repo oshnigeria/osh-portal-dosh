@@ -191,7 +191,7 @@ error: single_cofa_error,
                           fontWeight: 500,
                           color: "#000",
                         })
-                      }>Form Lab/F/27
+                      }>Form Lab/F/25
                         <div
                       css={(theme) =>
                         mq({
@@ -384,7 +384,7 @@ error: single_cofa_error,
                                color: theme.colors.Gray_900,
                         })}
                       >
-                        I hereby certify that the person whose name appears below has beed duly authorized to carry out inspection ( examination and testing ) of the equipment listed above in pursuance of section 
+                        I hereby certify that the person whose name appears below has been duly authorized to carry out inspection ( examination and testing ) of the equipment listed above in pursuance of section 
                       </div>
 
   
@@ -441,7 +441,7 @@ error: single_cofa_error,
                           fontWeight: 700,
                         })}
                       >
-                        Postal address of compentent person: <span
+                        Postal address of competent person: <span
                           css={(theme) => ({
                             fontWeight: 700,
                             color: theme.colors.Primary_500,

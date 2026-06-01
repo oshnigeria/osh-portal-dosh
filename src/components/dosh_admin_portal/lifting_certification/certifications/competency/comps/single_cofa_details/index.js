@@ -197,7 +197,8 @@ props.close()
 
               
             >
-              Equipment Registration Licence
+              Certificate of Competency
+
             </div>
             <div></div>
           </div>
