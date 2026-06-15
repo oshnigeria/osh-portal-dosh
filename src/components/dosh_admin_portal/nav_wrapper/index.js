@@ -291,7 +291,7 @@ const handleToggleLiftingMenu = () => {
                     fontSize: 16,
                     textTransform: "capitalize",
                   })}>
-                Lifting Certifications
+                LAWE & BPV certification
               </div>
                <div>
             <motion.img
@@ -359,10 +359,9 @@ const handleToggleLiftingMenu = () => {
 
           <div
             // css={{
-            //   position: "fixed",
-            //   bottom: 20,
-            //   left: 60,
+            //  marginTop:24
             // }}
+          
           >
             {isLoading ? null : (
               <div
