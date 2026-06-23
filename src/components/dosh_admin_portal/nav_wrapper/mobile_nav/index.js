@@ -15,8 +15,43 @@ const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 const MobileNav = () => {
   const [options, setOptions] = useState(false);
-  const router = useRouter();
+   const router = useRouter();
+     const [show_lifting_menu, setShowLiftingMenu] = useState(false);
   const auth = useContext(AuthContext);
+
+  const handleToggleLiftingMenu = () => {
+    setShowLiftingMenu(!show_lifting_menu)
+   }
+
+     const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.09, // controls delay between items
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 10,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 10,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
   const menu = [
     {
       title: "Settings",
@@ -34,6 +69,112 @@ const MobileNav = () => {
       },
     },
   ];
+
+   const tabs = [
+      {
+        title: "New Registration",
+        route: "/",
+        path: "",
+        icon: "register",
+        active_icon: "register_active",
+      },
+      {
+        title: "Renewal",
+        route: "/renewal",
+        path: "renewal",
+        icon: "renewal",
+        active_icon: "renewal_active",
+      },
+      {
+        title: "Amendment",
+        route: "/amendment",
+        path: "amendment",
+        icon: "ammendments",
+        active_icon: "ammendments_active",
+      },
+      {
+        title: "Replacement",
+        route: "/replacement",
+        path: "replacement",
+        icon: "replacement",
+        active_icon: "replacement_active",
+      },
+      {
+        title: "Incident",
+        route: "/incident",
+        path: "incident",
+        icon: "incident",
+        active_icon: "incident_active",
+      },
+      {
+        title: "Routine inspection",
+        route: "routine-inspections",
+        path: "routine-inspections",
+        icon: "incident",
+        active_icon: "incident_active",
+      },
+      {
+        title: "Settings",
+        route: "/settings",
+        path: "settings",
+        icon: "settings",
+        active_icon: "settings_active",
+      },
+      {
+        title: "State reports",
+        route: "/analytics/state-reports",
+        path: "analytics/state-reports",
+        icon: "incident",
+        active_icon: "incident_active",
+      },
+      {
+        title: "System Analytics",
+        route: "/analytics/system-analytics",
+        path: "analytics/system-analytics",
+        icon: "incident",
+        active_icon: "incident_active",
+      },
+    ];
+  
+    const lifting_tabs = [
+    
+      {
+        title: "Certificate of Competency",
+        route: "/lifting-certification/competency",
+        path: "lifting-certification/competency",
+       icon: "incident",
+        active_icon: "incident_active",
+      },
+        {
+        title: "Certificate of Authorization",
+        route: "/lifting-certification/authorization",
+        path: "lifting-certification/authorization",
+       icon: "incident",
+        active_icon: "incident_active",
+      },
+      {
+        title: "Equipment Registration Licence",
+        route: "/lifting-certification/equipment_registration",
+        path: "lifting-certification/equipment_registration",
+        icon: "incident",
+        active_icon: "incident_active",
+      },
+     
+    ];
+  
+  
+    useEffect(() => {
+    if (
+      router.pathname === "/lifting-certification/competency" ||
+      router.pathname === "/lifting-certification/authorization" ||
+      router.pathname === "/lifting-certification/equipment_registration"
+    ) {
+      setShowLiftingMenu(true);
+    } else {
+      setShowLiftingMenu(false);
+    }
+  }, [router.pathname]);
+  
   return (
     <div
       css={(theme) =>
@@ -142,7 +283,7 @@ const MobileNav = () => {
                 >
                   <div
                     css={{
-                      padding: "24px 44px",
+                       padding: "16px 16px",
                       cursor: "pointer",
                       display: "flex",
                     }}
@@ -162,7 +303,7 @@ const MobileNav = () => {
                       />
                     </div>
                     <div>
-                      <div
+                      {/* <div
                         css={(theme) => ({
                           fontSize: 12,
                           fontWeight: 500,
@@ -170,24 +311,125 @@ const MobileNav = () => {
                         })}
                       >
                         John Doe
-                      </div>
-                      <div
+                      </div> */}
+                       <div
                         css={(theme) => ({
-                          fontSize: 10,
+                          fontSize: 12,
                           fontWeight: 500,
                           color: theme.colors.Gray_500,
                           lineHeight: "18px",
+                           overflowWrap: "break-word",
+    wordBreak: "break-word",
                         })}
                       >
-                        jogndoe@gmail.com
+                       {auth.dec_token?.email}
                       </div>
                     </div>
                   </div>
 
+                    {
+                    tabs.map((menu_items, index) => (
+                        <div
+                        key={{index}}
+                      css={{
+                        padding: "16px 16px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        border:"none",
+                        borderBottom:"1px solid #f5f5f5"
+                      }}
+                      onClick={() => router.push(`/${menu_items.path}`)}
+                    >
+                      
+                      <div css={(theme) => ({
+                    color:
+                      router.pathname == `/${menu_items.path}`
+                        ? theme.colors.Primary_500
+                        : theme.colors.Gray_900,
+                    fontWeight: router.pathname == `/${menu_items.path}` ? 600 : 500,
+                    fontSize: 16,
+                    textTransform: "capitalize",
+                  })}> {menu_items.title}</div>
+                    </div>
+                    ))
+                  }
+
+                  <div>
+                  <div>
+              <div css={{
+                 padding: "16px 16px",
+                 display:"flex",
+                 justifyContent:"space-between"
+              }}>
+              <div  css={(theme) => ({
+                   
+                  })}>
+              LAWE & BPV certification
+              </div>
+               <div onClick={() => handleToggleLiftingMenu()}>
+            <motion.img
+            animate={{
+      rotate: show_lifting_menu ? 180 : 0, // flips up when open
+    }}
+    transition={{
+      duration: 0.25,
+      ease: "easeInOut",
+    }}
+              css={{
+                width: 24,
+                height: 24,
+              }}
+              src="/svg/nav/drop_down_arrow_black.svg"
+            />
+          </div>
+              </div>
+            </div>
+<AnimatePresence>
+  {show_lifting_menu && (
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
+            {lifting_tabs.map((tab) => (
+              <motion.div
+               key={tab.path}
+          variants={itemVariants}
+                css={{
+                  
+ padding: "16px 16px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        border:"none",
+                        borderBottom:"1px solid #f5f5f5"
+                 
+                }}
+                onClick={() => router.push(`/${tab.path}`)}
+              >
+                <div
+                  css={(theme) => ({
+                    color:
+                      router.pathname == `/${tab.path}`
+                        ? theme.colors.Primary_500
+                        : theme.colors.Gray_900,
+                    fontWeight: router.pathname == `/${tab.path}` ? 600 : 500,
+                    fontSize: 16,
+                    textTransform: "capitalize",
+                  })}
+                >
+                  {tab.title}
+                </div>
+              </motion.div>
+            ))}</motion.div>)}
+            </AnimatePresence></div>
+
                   {menu.map((menu_option) => (
                     <div
                       css={{
-                        padding: "24px 44px",
+                       padding: "16px 16px",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",

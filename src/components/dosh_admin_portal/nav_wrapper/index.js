@@ -444,7 +444,7 @@ const handleToggleLiftingMenu = () => {
         {props.children}
       </div>
 
-      {!router.query.type && (
+      {/* {!router.query.type && (
         <div
           css={(theme) =>
             mq({
@@ -484,7 +484,7 @@ const handleToggleLiftingMenu = () => {
               )
           )}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

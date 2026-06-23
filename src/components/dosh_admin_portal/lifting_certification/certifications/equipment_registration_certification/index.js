@@ -114,12 +114,14 @@ const handleCloseSingleCofa = () => {
   }, []);
   return (
     <DashboadWrapperComp>
+      <div css={{
+        overflow:"hidden"
+      }}>
       <div
         css={{
           display: "flex",
           alignItems: "center",
-          marginTop: [22, 22, 0],
-          marginLeft: [22, 22, 0],
+          
         }}
       >
          <Toaster
@@ -131,6 +133,8 @@ const handleCloseSingleCofa = () => {
         <div
           css={(theme) =>
             mq({
+                marginTop: [16, 16, 0],
+              marginLeft: [16, 16, 0],
               color: theme.colors.Gray_700,
               fontSize: [16, 16, 32],
               lineHeight: "28px",
@@ -147,7 +151,7 @@ const handleCloseSingleCofa = () => {
       </div>
  <div
         css={mq({
-          marginTop: 50,
+           marginTop: [16,16,50],
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -160,7 +164,7 @@ const handleCloseSingleCofa = () => {
             display: "flex",
           }}
         >
-          <div
+          {/* <div
             css={mq({
               width: 38,
               height: 38,
@@ -198,19 +202,19 @@ const handleCloseSingleCofa = () => {
               }}
               src="/svg/dashboard/filter.svg"
             />
-          </div>
+          </div> */}
           <div
             css={mq({
               position: "relative",
-              display: ["none", "none", "block"],
+             display: ["block", "block", "block"],
             })}
           >
             <input
-              css={(theme) => ({
+              css={(theme) => mq({
                 padding: "16px 16px",
                 paddingLeft: 42,
                 marginRight: 32,
-                width: 252,
+                 width: ["70%",252,252],
                 fontSize: 16,
                 color: theme.colors.Primary_500,
                 backgroundColor: "transparent",
@@ -303,20 +307,20 @@ const handleCloseSingleCofa = () => {
               marginTop: [28, 28, 62],
               border: "none",
               borderBottom: [0, 0, `1px solid ${theme.colors.Gray_200}`],
-              padding: "0px 66px",
+               padding: ["0px 16px","16px 66px","16px 66px"],
               paddingBottom: 16,
             })
           }
         >
           <div
-            css={{
+            css={mq({
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
               rowGap: 0,
               columnGap: 64,
-              width: "60%",
+               width: ["100%","60%","60%"],
               height: "auto",
-            }}
+            })}
           >
             {tabs.map((tab) => (
               <div
@@ -335,7 +339,7 @@ const handleCloseSingleCofa = () => {
                 <div
                   css={(theme) =>
                     mq({
-                      fontSize: [10, 10, 20],
+                      fontSize: [14, 14, 20],
                       fontWeight: 600,
                       display: "flex",
                       alignItems: "end",
@@ -392,16 +396,18 @@ const handleCloseSingleCofa = () => {
               }}
               src="/svg/loader/loader-green.svg"
             />
-          </div> : <div css={{
-            marginTop:24
-          }}>
-<div  css={{
+          </div> : <div css={mq({
+            marginTop:24,
+             padding:["0px 16px","0px 16px",0]
+          })}>
+<div  css={mq({
     display: "grid",
      gridTemplateColumns: `repeat(2, 1fr)`,
      alignItems:"top",
-         gap: 24,
+         gap: [16,20,24],
+         marginBottom:24
 
-  }}>
+  })}>
     { progress === "ongoing" &&
       factory?.data?.filter((item) => item.manufacturer.toLowerCase().includes(search) && item.is_approved === false).map((data, index) => (
           <div key={index} css={ (theme) => ({
@@ -421,7 +427,7 @@ const handleCloseSingleCofa = () => {
             <div>
             <div css={(theme) =>
                     mq({
-                      fontSize: [10, 10, 16],
+                      fontSize: [14, 14, 16],
                       fontWeight: 500,
                     
                       color: theme.colors.Gray_900
@@ -434,7 +440,7 @@ const handleCloseSingleCofa = () => {
                <div  css={(theme) =>
                     mq({
                       marginTop:8,
-                      fontSize: [10, 10, 14],
+                      fontSize: [12, 12, 14],
                       fontWeight: 600,
                     
                       color: theme.colors.Primary_500
@@ -476,7 +482,7 @@ const handleCloseSingleCofa = () => {
             <div>
             <div css={(theme) =>
                     mq({
-                      fontSize: [10, 10, 16],
+                      fontSize: [14, 14, 16],
                       fontWeight: 500,
                     
                       color: theme.colors.Gray_900
@@ -489,7 +495,7 @@ const handleCloseSingleCofa = () => {
                <div  css={(theme) =>
                     mq({
                       marginTop:8,
-                      fontSize: [10, 10, 14],
+                      fontSize: [12, 12, 14],
                       fontWeight: 600,
                     
                       color: theme.colors.Primary_500
@@ -531,7 +537,7 @@ const handleCloseSingleCofa = () => {
             <div>
             <div css={(theme) =>
                     mq({
-                      fontSize: [10, 10, 16],
+                      fontSize: [14, 14, 16],
                       fontWeight: 500,
                     
                       color: theme.colors.Gray_900
@@ -544,7 +550,7 @@ const handleCloseSingleCofa = () => {
                <div  css={(theme) =>
                     mq({
                       marginTop:8,
-                      fontSize: [10, 10, 14],
+                      fontSize: [12, 12, 14],
                       fontWeight: 600,
                     
                       color: theme.colors.Primary_500
@@ -644,6 +650,8 @@ const handleCloseSingleCofa = () => {
           </div>
         )}
       </AnimatePresence>
+
+      </div>
     </DashboadWrapperComp>
   );
 };
