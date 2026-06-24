@@ -152,9 +152,10 @@ const SystemAnalyticsComp = () => {
       </div>
 
       <div
-        css={{
-          marginTop: 48,
-        }}
+        css={mq({
+        marginTop:[24,24,48],
+        padding:["16px 16px","16px 16px",0]
+     })}
       >
         <div>
           <div
@@ -352,7 +353,7 @@ const SystemAnalyticsComp = () => {
                   css={(theme) =>
                     mq({
                       padding: "12px 14px",
-                      width: ["100%", "100%", "100%"],
+                      width: ["70%", "70%", "100%"],
                       fontSize: [14, 18],
                       color: theme.colors.Gray_400,
                       border: `1px solid ${theme.colors.Gray_200}`,

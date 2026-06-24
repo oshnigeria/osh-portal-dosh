@@ -293,7 +293,7 @@ const handleCloseSingleCofa = () => {
           mq({
             marginTop: [0, 0, 82],
             // border: [0, 0, `1px solid ${theme.colors.Gray_200}`],
-             padding: ["0px 10px","0px 10px",0], 
+             padding: ["0px 0px","0px 0px",0], 
             borderRadius: 8,
             width: "100%",
             marginBottom:100

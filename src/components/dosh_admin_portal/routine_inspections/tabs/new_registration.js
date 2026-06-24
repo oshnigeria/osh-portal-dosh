@@ -123,8 +123,9 @@ const NewRegistrationComp = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginTop: [22, 22, 0],
-          marginLeft: [22, 22, 0],
+          // marginTop: [22, 22, 0],
+          // marginLeft: [22, 22, 0],
+            padding: ["16px 16px", "16px 16px", 0],
         })}
       >
         <div
@@ -161,8 +162,8 @@ const NewRegistrationComp = () => {
         <div>
           <img
             css={mq({
-              width: [14, 14, 34],
-              height: [14, 14, 32],
+              width: [24, 24, 34],
+              height: [24, 24, 32],
 
               marginLeft: 8,
             })}
@@ -172,7 +173,8 @@ const NewRegistrationComp = () => {
       </div>
       <div
         css={mq({
-          marginTop: 50,
+          
+           marginTop: [0, 0, 50],
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -191,7 +193,7 @@ const NewRegistrationComp = () => {
               height: 38,
               border: "1px solid #1A7D65",
               borderRadius: 12,
-              display: ["flex", "flex", "none"],
+              display: ["none", "none", "none"],
               justifyContent: "center",
               alignItems: "center",
             })}
@@ -210,7 +212,7 @@ const NewRegistrationComp = () => {
               height: 38,
               border: "1px solid #1A7D65",
               borderRadius: 12,
-              display: ["flex", "flex", "none"],
+              display: ["none", "none", "none"],
               justifyContent: "center",
               alignItems: "center",
               marginLeft: 10,
@@ -227,7 +229,7 @@ const NewRegistrationComp = () => {
           <div
             css={mq({
               position: "relative",
-              display: ["none", "none", "block"],
+              display: ["block", "block", "block"],
             })}
           >
             <input
@@ -468,10 +470,10 @@ const NewRegistrationComp = () => {
                 {routine_checks?.data?.reports.length >= 1 ? (
                   <div>
                     <div
-                      css={{
-                        marginTop: 32,
-                        padding: "24px 40px",
-                      }}
+                      css={mq({
+                        marginTop: [0,0,32],
+                       padding: ["16px 16px","24px 40px","24px 40px"],
+                      })}
                     >
                       <div
                         css={{
@@ -506,14 +508,14 @@ const NewRegistrationComp = () => {
                         .map((factory) => (
                           <div
                             key={factory._id}
-                            css={(theme) => ({
+                            css={(theme) => mq({
                               display: "grid",
                               gridTemplateColumns: `repeat(${table.length}, 1fr)`,
                               cursor: "pointer",
                               rowGap: 0,
                               columnGap: 64,
                               borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                              padding: "24px 40px",
+                             padding: ["16px 16px","24px 40px","24px 40px"],
                             })}
                             onClick={() =>
                               router.push(`/routine_inspection/${factory._id}`)

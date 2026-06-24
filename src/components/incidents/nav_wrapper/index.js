@@ -9,7 +9,8 @@ import useSWR, { useSWRConfig } from "swr";
 import { useEffect, useContext } from "react";
 import facepaint from "facepaint";
 import { AuthContext } from "@/src/context/authContext";
-import MobileNav from "./mobile_nav";
+// import MobileNav from "./mobile_nav";
+import MobileNav from "../../dosh_admin_portal/nav_wrapper/mobile_nav";
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
 
@@ -262,7 +263,7 @@ const DashboadWrapperComp = (props) => {
           {props.children}
         </div>
       </div>
-      <div
+      {/* <div
         css={(theme) =>
           mq({
             display: ["flex", "flex", "none"],
@@ -293,11 +294,11 @@ const DashboadWrapperComp = (props) => {
                       : tab.icon
                   }.svg`}
                 />
-                {/* {tab.icon} */}
+              
               </div>
             )
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

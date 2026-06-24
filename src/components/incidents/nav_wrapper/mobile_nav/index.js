@@ -13,7 +13,7 @@ import { AuthContext } from "@/src/context/authContext";
 
 const breakpoints = [576, 768, 1200];
 const mq = facepaint(breakpoints.map((bp) => `@media (min-width: ${bp}px)`));
-const MobileNav = () => {
+const MobileNavs = () => {
   const [options, setOptions] = useState(false);
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -220,4 +220,4 @@ const MobileNav = () => {
   );
 };
 
-export default MobileNav;
+export default MobileNavs;

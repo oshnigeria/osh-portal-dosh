@@ -154,20 +154,20 @@ const IncidentsComp = () => {
               marginTop: [28, 28, 62],
               border: "none",
               borderBottom: [0, 0, `1px solid ${theme.colors.Gray_200}`],
-              padding: "0px 66px",
+               padding: ["0px 16px","16px 66px","16px 66px"],
               paddingBottom: 16,
             })
           }
         >
           <div
-            css={{
+            css={mq({
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
               rowGap: 0,
               columnGap: 64,
-              width: "60%",
+             width: ["100%","60%","60%"],
               height: "auto",
-            }}
+            })}
           >
             {tabs.map((tab) => (
               <div
@@ -186,7 +186,7 @@ const IncidentsComp = () => {
                 <div
                   css={(theme) =>
                     mq({
-                      fontSize: [10, 10, 20],
+                      fontSize: [14, 14, 20],
                       fontWeight: 600,
                       display: "flex",
                       alignItems: "end",
@@ -256,26 +256,26 @@ const IncidentsComp = () => {
                       .length >= 1 ? (
                       <div>
                         <div
-                          css={{
+                          css={mq({
                             marginTop: 32,
-                            padding: "24px 40px",
-                          }}
+                            padding: ["16px 16px","24px 40px","24px 40px"],
+                          })}
                         >
                           <div
-                            css={{
+                            css={mq({
                               display: "grid",
                               gridTemplateColumns: "repeat(3, 1fr)",
 
                               rowGap: 0,
-                              columnGap: 64,
-                            }}
+                              columnGap: [24,24,64],
+                            })}
                           >
                             {table.map((tab) => (
                               <div
                                 css={(theme) =>
                                   mq({
                                     color: theme.colors.Gray_500,
-                                    fontSize: [12, 12, 18],
+                                    fontSize: [14, 14, 18],
                                     lineHeight: ["14px", "14px", "22px"],
                                     fontWeight: [600, 600, 400],
                                   })
@@ -299,13 +299,13 @@ const IncidentsComp = () => {
                                     gridTemplateColumns: "repeat(3, 1fr)",
                                     cursor: "pointer",
                                     rowGap: 0,
-                                    columnGap: 64,
+                                    columnGap: [24,24,64],
                                     borderBottom: [
                                       0,
                                       0,
                                       `1px solid ${theme.colors.Gray_200}`,
                                     ],
-                                    padding: "24px 40px",
+                                    padding: ["16px 16px","24px 40px","24px 40px"],
                                   })
                                 }
                                 onClick={() =>
@@ -322,7 +322,7 @@ const IncidentsComp = () => {
 
                                       textTransform: "capitalize",
 
-                                      fontSize: [12, 12, 18],
+                                      fontSize: [14, 14, 18],
                                       lineHeight: ["14px", "14px", "22px"],
                                       fontWeight: [600, 600, 400],
                                     })
@@ -338,7 +338,7 @@ const IncidentsComp = () => {
 
                                       textTransform: "capitalize",
 
-                                      fontSize: [12, 12, 18],
+                                      fontSize: [14, 14, 18],
                                       lineHeight: ["14px", "14px", "22px"],
                                       fontWeight: [600, 600, 400],
                                     })
@@ -350,7 +350,7 @@ const IncidentsComp = () => {
                                   css={(theme) =>
                                     mq({
                                       color: theme.colors.Gray_500,
-                                      fontSize: [12, 12, 18],
+                                      fontSize: [14, 14, 18],
                                       lineHeight: ["14px", "14px", "22px"],
                                       fontWeight: [600, 600, 400],
                                     })
@@ -394,26 +394,26 @@ const IncidentsComp = () => {
                       ?.length >= 1 ? (
                       <div>
                         <div
-                          css={{
+                          css={mq({
                             marginTop: 32,
-                            padding: "24px 40px",
-                          }}
+                             padding: ["16px 16px","24px 40px","24px 40px"],
+                          })}
                         >
                           <div
-                            css={{
+                            css={mq({
                               display: "grid",
                               gridTemplateColumns: "repeat(3, 1fr)",
 
                               rowGap: 0,
-                              columnGap: 64,
-                            }}
+                              columnGap: [24,24,64],
+                            })}
                           >
                             {table.map((tab) => (
                               <div
                                 css={(theme) =>
                                   mq({
                                     color: theme.colors.Gray_500,
-                                    fontSize: [12, 12, 18],
+                                    fontSize: [14, 14, 18],
                                     lineHeight: ["14px", "14px", "22px"],
                                     fontWeight: [600, 600, 400],
                                   })
@@ -443,7 +443,7 @@ const IncidentsComp = () => {
                                       0,
                                       `1px solid ${theme.colors.Gray_200}`,
                                     ],
-                                    padding: "24px 40px",
+                                     padding: ["16px 16px","24px 40px","24px 40px"],
                                   })
                                 }
                                 onClick={() =>
@@ -460,7 +460,7 @@ const IncidentsComp = () => {
 
                                       textTransform: "capitalize",
 
-                                      fontSize: [12, 12, 18],
+                                      fontSize: [14, 14, 18],
                                       lineHeight: ["14px", "14px", "22px"],
                                       fontWeight: [600, 600, 400],
                                     })
@@ -476,7 +476,7 @@ const IncidentsComp = () => {
 
                                       textTransform: "capitalize",
 
-                                      fontSize: [12, 12, 18],
+                                      fontSize: [14, 14, 18],
                                       lineHeight: ["14px", "14px", "22px"],
                                       fontWeight: [600, 600, 400],
                                     })
@@ -488,7 +488,7 @@ const IncidentsComp = () => {
                                   css={(theme) =>
                                     mq({
                                       color: theme.colors.Gray_500,
-                                      fontSize: [12, 12, 18],
+                                      fontSize: [14, 14, 18],
                                       lineHeight: ["14px", "14px", "22px"],
                                       fontWeight: [600, 600, 400],
                                     })

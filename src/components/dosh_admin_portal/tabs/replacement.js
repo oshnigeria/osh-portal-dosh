@@ -122,6 +122,7 @@ const ReplacementComp = () => {
               fontSize: [16, 16, 32],
               lineHeight: "28px",
               fontWeight: 700,
+              
             })
           }
         >
@@ -155,7 +156,7 @@ const ReplacementComp = () => {
               marginTop: [28, 28, 62],
               border: "none",
               borderBottom: [0, 0, `1px solid ${theme.colors.Gray_200}`],
-              padding: "0px 66px",
+                padding: ["0px 16px","16px 66px","16px 66px"],
               paddingBottom: 16,
             })
           }
@@ -166,7 +167,7 @@ const ReplacementComp = () => {
               gridTemplateColumns: "repeat(3, 1fr)",
               rowGap: 0,
               columnGap: 64,
-              width: "60%",
+              width: ["100%","60%","60%"],
               height: "auto",
             }}
           >
@@ -187,7 +188,7 @@ const ReplacementComp = () => {
                 <div
                   css={(theme) =>
                     mq({
-                      fontSize: [10, 10, 20],
+                      fontSize: [14, 14, 20],
                       fontWeight: 600,
                       display: "flex",
                       alignItems: "end",
@@ -256,10 +257,10 @@ const ReplacementComp = () => {
                     {completed?.data?.replacements?.length >= 1 ? (
                       <div>
                         <div
-                          css={{
+                          css={mq({
                             marginTop: 32,
-                            padding: "24px 40px",
-                          }}
+                            padding: ["16px 16px","24px 40px","24px 40px"],
+                          })}
                         >
                           <div
                             css={{
@@ -291,14 +292,14 @@ const ReplacementComp = () => {
                           {completed?.data?.replacements?.map((factory) => (
                             <div
                               key={factory.factory._id}
-                              css={(theme) => ({
+                              css={(theme) => mq({
                                 display: "grid",
                                 gridTemplateColumns: "repeat(3, 1fr)",
                                 cursor: "pointer",
                                 rowGap: 0,
                                 columnGap: 64,
                                 borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                                padding: "24px 40px",
+                                 padding: ["16px 16px","24px 40px","24px 40px"],
                               })}
                               onClick={() =>
                                 router.push(
@@ -384,10 +385,10 @@ const ReplacementComp = () => {
                     {factory?.data?.replacements?.length >= 1 ? (
                       <div>
                         <div
-                          css={{
+                          css={mq({
                             marginTop: 32,
-                            padding: "24px 40px",
-                          }}
+                           padding: ["16px 16px","24px 40px","24px 40px"],
+                          })}
                         >
                           <div
                             css={{
@@ -419,14 +420,14 @@ const ReplacementComp = () => {
                           {factory?.data?.replacements?.map((factory) => (
                             <div
                               key={factory._id}
-                              css={(theme) => ({
+                              css={(theme) => mq({
                                 display: "grid",
                                 gridTemplateColumns: "repeat(3, 1fr)",
                                 cursor: "pointer",
                                 rowGap: 0,
                                 columnGap: 64,
                                 borderBottom: `1px solid ${theme.colors.Gray_200}`,
-                                padding: "24px 40px",
+                                 padding: ["16px 16px","24px 40px","24px 40px"],
                               })}
                               onClick={() =>
                                 router.push(

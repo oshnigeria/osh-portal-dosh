@@ -140,7 +140,7 @@ const AccountComp = () => {
           css={mq({
             marginTop: 64,
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: ["space-around","space-between","space-between"],
             alignItems: "center",
             width: "100%",
             padding: ["0px 16px", "0px 16px", 0],
@@ -148,7 +148,7 @@ const AccountComp = () => {
         >
           <div
             css={mq({
-              display: ["none", "none", "flex"],
+              display: ["flex", "flex", "flex"],
             })}
           >
             <div
@@ -157,11 +157,11 @@ const AccountComp = () => {
               }}
             >
               <input
-                css={(theme) => ({
+                css={(theme) => mq({
                   padding: "16px 16px",
                   paddingLeft: 42,
                   marginRight: 32,
-                  width: 252,
+                  width: ["50%","50%",252],
                   fontSize: 16,
                   color: theme.colors.Primary_500,
                   backgroundColor: "transparent",
@@ -209,7 +209,7 @@ const AccountComp = () => {
 
                 width: 38,
                 height: 38,
-                display: ["flex", "flex", "none"],
+                display: ["none", "none", "none"],
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 12,
@@ -260,7 +260,8 @@ const AccountComp = () => {
               src="/svg/dashboard/plus.svg"
             />
             <div> Add new account</div>
-          </button></div>
+          </button>
+          </div>
         </div>
         <div
           css={{
@@ -322,7 +323,7 @@ const AccountComp = () => {
                     <div
                       css={(theme) =>
                         mq({
-                          fontSize: [12, 12, 16],
+                          fontSize: [14, 14, 16],
                           fontWeight: theme.font_weight.size_500,
                           color: theme.colors.Gray_800,
                           // textTransform: "capitalize",
@@ -348,7 +349,7 @@ const AccountComp = () => {
                         css={(theme) =>
                           mq({
                             textAlign: "center",
-                            fontSize: [12, 12, 16],
+                            fontSize: [14, 14, 16],
                             fontWeight: 500,
                             color: theme.colors.Primary_500,
                             backgroundColor: theme.colors.Primary_50,
@@ -372,7 +373,7 @@ const AccountComp = () => {
                           color: factory.is_disabled
                             ? theme.colors.Primary_500
                             : theme.colors.Error_500,
-                          fontSize: [12, 12, 16],
+                          fontSize: [14, 14, 16],
                           fontWeight: 500,
                           fontWeight: theme.font_weight.size_500,
                           lineHeight: "24px",
@@ -448,7 +449,7 @@ const AccountComp = () => {
                     <div
                       css={(theme) =>
                         mq({
-                          fontSize: [12, 12, 16],
+                          fontSize: [14, 14, 16],
                           fontWeight: theme.font_weight.size_500,
                           color: theme.colors.Gray_800,
                           // textTransform: "capitalize",
@@ -473,7 +474,7 @@ const AccountComp = () => {
                         css={(theme) =>
                           mq({
                             textAlign: "center",
-                            fontSize: [12, 12, 16],
+                            fontSize: [14, 14, 16],
                             fontWeight: 500,
                             color: theme.colors.Primary_500,
                             backgroundColor: theme.colors.Primary_50,
@@ -497,7 +498,7 @@ const AccountComp = () => {
                           color: factory.is_disabled
                             ? theme.colors.Primary_500
                             : theme.colors.Error_500,
-                          fontSize: [12, 12, 16],
+                          fontSize: [14, 14, 16],
                           fontWeight: 500,
                           fontWeight: theme.font_weight.size_500,
                           lineHeight: "24px",
@@ -573,7 +574,7 @@ const AccountComp = () => {
                     <div
                       css={(theme) =>
                         mq({
-                          fontSize: [12, 12, 16],
+                          fontSize: [14, 14, 16],
                           fontWeight: theme.font_weight.size_500,
                           color: theme.colors.Gray_800,
                           // textTransform: "capitalize",
@@ -598,7 +599,7 @@ const AccountComp = () => {
                         css={(theme) =>
                           mq({
                             textAlign: "center",
-                            fontSize: [12, 12, 16],
+                            fontSize: [14, 14, 16],
                             fontWeight: 500,
                             color: theme.colors.Primary_500,
                             backgroundColor: theme.colors.Primary_50,
@@ -622,7 +623,7 @@ const AccountComp = () => {
                           color: factory.is_disabled
                             ? theme.colors.Primary_500
                             : theme.colors.Error_500,
-                          fontSize: [12, 12, 16],
+                          fontSize: [14, 14, 16],
                           fontWeight: 500,
                           fontWeight: theme.font_weight.size_500,
                           lineHeight: "24px",

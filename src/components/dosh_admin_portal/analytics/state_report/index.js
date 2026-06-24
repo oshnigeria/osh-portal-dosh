@@ -155,15 +155,16 @@ const StateReportComp = () => {
         </div> */}
       </div>
 
-     <div css={{
-        marginTop:48
-     }}>
-        <div css={{
-            display: "grid",
+     <div css={mq({
+          marginTop:[24,24,48],
+        padding:["16px 16px","16px 16px",0]
+     })}>
+        <div css={mq({
+            display: ["block","block","grid"],
              gridTemplateColumns: "repeat(2, 30% 70%)",
               rowGap: 0,
               columnGap: 24,
-        }}>
+        })}>
             <div
             css={{
               // display: "grid",
@@ -368,7 +369,7 @@ const StateReportComp = () => {
                   css={(theme) =>
                     mq({
                       padding: "12px 14px",
-                      width: ["100%", "100%", "90%"],
+                      width: ["90%", "90%", "90%"],
                       fontSize: [14, 18],
                       color: theme.colors.Gray_400,
                       border: `1px solid ${theme.colors.Gray_200}`,
@@ -431,10 +432,11 @@ const StateReportComp = () => {
                   </button></div>
 </div>
             </div>
-            <div css={{
+            <div css={mq({
+              marginTop:[24,24,0],
               border:"1px solid #B3D4CC",
               borderRadius:16
-            }}>
+            })}>
               
               {
                 analy_data ? null :  <div  css={(theme) => ({
